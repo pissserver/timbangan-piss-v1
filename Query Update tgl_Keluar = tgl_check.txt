@@ -1,0 +1,4 @@
+Query Update tgl_Keluar = tgl_check
+update weighing set date_check = date_out 
+where (date_out between '2016-10-01' and '2017-01-03') and
+(weighing_sts != 'Masuk' || weighing_sts != 'Batal')
