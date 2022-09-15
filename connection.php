@@ -2,7 +2,7 @@
 	$server 	= "localhost";
 	$username 	= "root";
 	$password 	= "";
-	$database 	= "pios2";
+	$database 	= "db_piss";
 	
 	// $server 	= "192.168.1.46";
 	// $username 	= "edo";
