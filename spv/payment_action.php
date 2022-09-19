@@ -14,7 +14,7 @@
 	
 	$task	= $_GET['task'];
 	// Input 
-	if ($task == 'insert'&&$_SESSION['checker']!=''){
+	if ($task == 'insert'){
 		$insert = mysql_query("INSERT INTO `payment` (`pay_id`, `pay_name`, `pay_total`) 
 		VALUES ('', '".$_POST['name']."', '".$_POST['pay']."')");
 		

@@ -2,23 +2,23 @@
     function dataTabel()
     {
 		require_once('ssp.class.customize.php');
-        $date_now=date('Y-m-d');
-        $date_plus  = strtotime('-30 day', strtotime($date_now));
-        $week  = date('Y-m-j' , $date_plus);
-        $sql_details = array(
-            /*'user' => 'root',
+        $date_now       = date('Y-m-d');
+        $date_plus      = strtotime('-30 day', strtotime($date_now));
+        $week           = date('Y-m-j' , $date_plus);
+        $sql_details    = array(
+            'user' => 'root',
             'pass' => '',
-            'db'   => 'pios2',
-            'host' => 'localhost'*/
-			'user' => 'edo',
-            'pass' => 'edocakep@007',
-            'db'   => 'pios2',
-            'host' => '192.168.1.46'
+            'db'   => 'db_piss',
+            'host' => 'localhost'
+			// 'user' => 'edo',
+            // 'pass' => 'edocakep@007',
+            // 'db'   => 'pios2',
+            // 'host' => '192.168.1.46'
         );
 
-        $table = 'weighing';
+        $table      = 'weighing';
         $primaryKey = 'weighing_id';
-        $columns = array(
+        $columns    = array(
                 array( 'db' => 'a.weighing_id', 'dt' => 0 , 'field' => 'weighing_id', 'as' => 'weighing_id'),
                 array( 'db' => 'a.nopol', 'dt' => 1 , 'field' => 'nopol', 'as' => 'nopol'),
                 array( 'db' => 'b.merchant_name', 'dt' => 2 , 'field' => 'merchant_name', 'as' => 'merchant_name'),
@@ -51,8 +51,8 @@
                     }
                 ),
             );
-        $join = "from weighing a left join merchant b on(a.merchant_id=b.merchant_id)";
-        $where = "(a.date_out between '".$week."' and '".$date_now."') and a.weighing_sts != 'Masuk'";
+        $join   = "from weighing a left join merchant b on(a.merchant_id=b.merchant_id)";
+        $where  = "(a.date_out between '".$week."' and '".$date_now."') and a.weighing_sts != 'Masuk'";
         $result = SSP::complex( $_GET, $sql_details, $table, $primaryKey,$columns,$join,$where,NULL);
         /*$start=$_REQUEST['start'];
         $idx=0;

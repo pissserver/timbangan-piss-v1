@@ -432,9 +432,9 @@
 			$jenis		= mb_substr($_POST['merchant'], 0, 1, 'utf-8');
 			if($jenis=='B'){
 				$tonase1 	= executeScalar("select pay_total from payment where pay_id = '8'");
-				if($_POST['merchant']=='B0072'&&$commodity==2){
-					$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
-				}
+				// if($_POST['merchant']=='B0072'&&$commodity==2){
+				// 	$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
+				// }
 			}
 			elseif($jenis=='S'){
 				$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
