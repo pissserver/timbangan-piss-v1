@@ -21,7 +21,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+    <title>Retail | PISS</title>
 	<?php echo headScript(); ?>
 </head>
 <body>

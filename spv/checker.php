@@ -22,7 +22,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+    <title>Kasir & Checker | PISS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PIOS</a>
+                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PISS</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -187,15 +187,15 @@
 								<fieldset>
 									<div class="form-group" style="padding:10px;">
 										<label>Kode Kasir / Checker</label>
-										<input type="text" class="form-control" id="code" name="code" placeholder="Ketik Kode.." autofocus="autofocus" required/>                  
+										<input type="text" class="form-control" id="code" name="code" placeholder="Masukkan kode" autofocus="autofocus" required/>                  
 									</div>
 									<div class="form-group" style="padding:10px;">
 										<label>Nama</label>
-										<input class="form-control" id="name" name="name" type="text" placeholder="Ketik Nama.." required/>
+										<input class="form-control" id="name" name="name" type="text" placeholder="Masukkan nama" required/>
 									</div>
 									<div class="form-group" style="padding:10px;">
 										<label>Password</label>
-										<input class="form-control" id="pass" name="pass" type="password" placeholder="Ketik Password.." required/>
+										<input class="form-control" id="pass" name="pass" type="password" placeholder="Masukkan password" required/>
 									</div>
 									<div class="form-group" style="padding:10px;">
 										<center><button type="submit" class="btn btn-outline btn-block btn-primary">Simpan</button></center>

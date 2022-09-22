@@ -14,7 +14,7 @@
 	
 	$task	= $_GET['task'];
 	// Input 
-	if ($task == 'insert'&&$_SESSION['checker']!=''){
+	if ($task == 'insert'){
 		$insert = mysql_query("INSERT INTO `noncommodity` (`noncommodity_id`, `noncommodity_name`, 
 		`noncommodity_weight`) VALUES ('', '".$_POST['name']."', '".$_POST['weight']."')");
 		
@@ -28,7 +28,7 @@
 	}
 
 	// Update
-	elseif ($task == 'update'&&$_SESSION['checker']!=''){
+	elseif ($task == 'update'){
 		$id		= $_GET['id'];
 		$update = mysql_query("update noncommodity set noncommodity_name 	= '".$_POST['name']."',
 													noncommodity_weight		= '".$_POST['weight']."'

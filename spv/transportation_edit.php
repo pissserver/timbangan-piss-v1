@@ -25,7 +25,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+    <title>Kir Kendaraan | PISS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +63,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PIOS</a>
+                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PISS</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -185,7 +185,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-4" style="padding:10px;">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-truck fa-fw"></i> Ubah Data Kir Kendaraan
                         </div>
@@ -197,7 +197,7 @@
 										<input type="text" class="form-control" id="trans" name="trans" value="<?php echo $r['transportation_nopol']; ?>" autofocus="autofocus" required>                  
 									</div>
 									<div class="form-group" style="padding:10px;">
-										<label>Berat Standar</label>
+										<label>Berat Standar </label><sup> ( Kg )</sup>
 										<input class="form-control" id="weight" name="weight" type="text" value="<?php echo $r['transportation_weight']; ?>" required/>
 										<script>
 											$("input[name='weight']").TouchSpin({

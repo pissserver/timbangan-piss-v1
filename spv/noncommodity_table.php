@@ -17,7 +17,7 @@
 		<tr>
 			<th style="width:10%;">No</th>
 			<th style="width:50%;">Non Komoditi</th>
-			<th style="width:20%;">Potongan</th>
+			<th style="width:20%;">Berat</th>
 			<th style="width:20%; text-align:center;">Aksi</th>
 		</tr>
 	</thead>

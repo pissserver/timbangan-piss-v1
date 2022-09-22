@@ -17,7 +17,7 @@
 		<tr>
 			<th style="width:10%;">No</th>
 			<th style="width:50%;">Jenis Tarif</th>
-			<th style="width:20%;">Jumlah Tarif</th>
+			<th style="width:20%;">Tarif</th>
 			<th style="width:20%; text-align:center;">Aksi</th>
 		</tr>
 	</thead>

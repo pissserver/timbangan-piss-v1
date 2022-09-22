@@ -18,7 +18,7 @@
 			<th style="width:10%; text-align:center;">No</th>
 			<th style="width:20%; text-align:center;">Kode Mitra</th>
 			<th style="width:30%;">Nama Mitra</th>
-			<th style="width:20%;">Status</th>
+			<!-- <th style="width:20%;">Status</th> -->
 			<th style="width:20%; text-align:center;">Aksi</th>
 		</tr>
 	</thead>
@@ -31,9 +31,9 @@
 		?>
 		<tr>
 			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td style="text-align:center;"><?php echo $data['laborer_id']; ?></td>
+			<td style="text-align:center;"><?php echo $data['laborer_code']; ?></td>
 			<td><?php echo $data['laborer_name']; ?></td>
-			<td><?php echo $data['laborer_status']; ?></td>
+			<!-- <td><?php echo $data['laborer_status']; ?></td> -->
 			<td>
 				<center><a href="laborer_edit.php?id=<?php echo $data['laborer_id']; ?>">
 				<button class="btn btn-outline btn-block btn-primary btn-xs">Ubah Data</button>

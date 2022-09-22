@@ -14,7 +14,7 @@
 	
 	$task	= $_GET['task'];
 	// Input 
-	if ($task == 'insert'&&$_SESSION['checker']!=''){
+	if ($task == 'insert'){
 		//$prcen	= $_POST['weight']*2/100;
 		$weight = $_POST['weight'];
 		$insert = mysql_query("INSERT INTO `transportation` (`transportation_id`, `transportation_nopol`, `transportation_weight`) 
@@ -30,7 +30,7 @@
 	}
 
 	// Update
-	elseif($task=='update'&&$_SESSION['checker']!=''){
+	elseif($task=='update'){
 		$id		= $_GET['id'];
 		$update = mysql_query("update transportation set transportation_nopol 	= '".$_POST['trans']."',
 													transportation_weight		= '".$_POST['weight']."'

@@ -22,7 +22,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../../images/icon.png">
     <link rel="shortcut icon" href="../../images/icon.png" />
-    <title>Admin</title>
+    <title>Barang Non Komoditi | PISS</title>
 	<!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -59,7 +59,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PIOS</a>
+                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PISS</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -179,18 +179,18 @@
                 <div class="col-lg-4" style="padding:10px;">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-plus fa-fw"></i> Tambah Data Non Komoditi
+                            <i class="fa fa-plus fa-fw"></i> Tambah Data Barang Non Komoditi
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal" id="formCommodity" name = "formCommodity" method="POST" action="noncommodity_action.php?task=insert">
 								<fieldset>
 									<div class="form-group" style="padding:10px;">
-										<label>Nama Jenis Non Komoditi</label>
-										<input type="text" class="form-control" id="name" name="name" placeholder="Ketik Barang Non Komoditi.." autofocus="autofocus" required>                  
+										<label>Nama Barang Non Komoditi</label>
+										<input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama barang" autofocus="autofocus" required>                  
 									</div>
 									<div class="form-group" style="padding:10px;">
-										<label>Potongan (Kg)</label>
-										<input class="form-control" id="weight" name="weight" type="number" step="0.01" value="0" required />
+										<label>Berat Barang </label><sup> ( Kg )</sup>
+										<input class="form-control" id="weight" name="weight" type="number" step="0.01" placeholder="Masukkan berat barang" required />
 									</div>
 									<div class="form-group" style="padding:10px;">
 										<center><button type="submit" class="btn btn-outline btn-block btn-primary">Simpan</button></center>

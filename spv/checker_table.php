@@ -18,6 +18,7 @@
 			<th style="width:10%;">No</th>
 			<th style="width:20%;">Kode</th>
 			<th style="width:50%;">Nama</th>
+			<th style="width:50%;">Posisi</th>
 			<th style="width:20%;">Aksi</th>
 		</tr>
 	</thead>
@@ -32,6 +33,7 @@
 			<td style="text-align:center;"><?php echo $no; ?></td>
 			<td><?php echo $data[1]; ?></td>
 			<td><?php echo $data[2]; ?></td>
+			<td><?php echo $data[4]; ?></td>
 			<td>
 				<center><a href="checker_edit.php?id=<?php echo $data[0]; ?>">
 				<button class="btn btn-outline btn-block btn-primary btn-xs">Ubah Data</button>

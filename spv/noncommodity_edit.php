@@ -22,7 +22,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../../images/icon.png">
     <link rel="shortcut icon" href="../../images/icon.png" />
-    <title>Admin</title>
+    <title>Barang Non Komoditi | PISS</title>
 	<!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -59,17 +59,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PIOS</a>
+                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PISS</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						<i class="fa fa-user fa-fw"></i>
-						<?php 
-							$admin 	= executeScalar("select checker_name from checker where checker_code = '".$_SESSION['checker']."'");
-							echo $admin;
-						?>
+						<?php echo $admin; ?>
 						<i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -184,7 +181,7 @@
                 <div class="col-lg-4" style="padding:10px;">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-pencil fa-fw"></i> Ubah Data Non Komoditi
+                            <i class="fa fa-pencil fa-fw"></i> Ubah Data Barang Non Komoditi
                         </div>
                         <div class="panel-body">
 							<?php
@@ -195,11 +192,11 @@
                             <form class="form-horizontal" id="formNonCommodity" name="formNonCommodity" method="POST" action="noncommodity_action.php?task=update&id=<?php echo $id; ?>">
 								<fieldset>
 									<div class="form-group" style="padding:10px;">
-										<label>Nama Jenis Non Komoditi</label>
+										<label>Nama Barang Non Komoditi</label>
 										<input type="text" class="form-control" id="name" name="name" value="<?php echo $r['noncommodity_name']; ?>" autofocus="autofocus" required>                  
 									</div>
 									<div class="form-group" style="padding:10px;">
-										<label>Potongan (Kg)</label>
+										<label>Potongan </label><sup> ( Kg )</sup>
 										<input class="form-control" id="weight" name="weight" type="number" step="0.01" value="<?php echo $r['noncommodity_weight']; ?>" required />
 									</div>
 									<div class="form-group" style="align: center; padding:10px;">

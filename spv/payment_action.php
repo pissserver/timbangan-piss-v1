@@ -28,7 +28,7 @@
 	}
 
 	// Update
-	elseif ($task == 'update'&&$_SESSION['checker']!=''){
+	elseif ($task == 'update'){
 		$id		= $_GET['id'];
 		$update = mysql_query("update payment set pay_name 	= '".$_POST['name']."',
 												pay_total	= '".$_POST['pay']."'

@@ -14,18 +14,18 @@
 	
 	$task	= $_GET['task'];
 	// Input 
-	if ($task == 'insert'&&$_SESSION['checker']!=''){
-		$exist 	= executeScalar("select count(laborers_code) from laborers where laborers_code='".$_POST['code']."'");
+	if ($task == 'insert'){
+		$exist 	= executeScalar("select count(laborer_code) from laborer where laborer_code='".$_POST['code']."'");
 		if($exist>0){
 			echo "<script>window.alert('Kode Sudah Ada, Ganti Dengan yg Lain');
 			window.location=('laborer.php')</script>";
 		}
 		else{
-			$insert = mysql_query("INSERT INTO `laborers` (`laborers_id`, `laborers_code`, `laborers_name`) 
-			VALUES ('', '".$_POST['code']."', '".$_POST['name']."')");
+			$insert = mysql_query("INSERT INTO `laborer` (`laborer_code`, `laborer_name`) 
+			VALUES ('".$_POST['code']."', '".$_POST['name']."')");
 			
 			if($insert){
-				echo "window.location=('laborer.php')</script>";
+				echo "<script>window.location=('laborer.php')</script>";
 			}
 			else{
 				echo "<script>window.alert('Data Gagal');
@@ -35,14 +35,14 @@
 	}
 
 	// Update
-	elseif ($task == 'update'&&$_SESSION['checker']!=''){
-		$id		= $_GET['id'];
-		$kodetetap = executeScalar("select laborers_code from laborers where laborers_code='".$_POST['code']."' and laborers_id='".$id."'");
+	elseif ($task == 'update'){
+		$id			= $_GET['id'];
+		$kodetetap 	= executeScalar("select laborer_code from laborer where laborer_code='".$_POST['code']."' and laborer_id='".$id."'");
 		//jika kode tetap
 		if($kodetetap){
-			$update1 = mysql_query("update laborers set laborers_code= '".$_POST['code']."',
-													laborers_name 	= '".$_POST['name']."'
-												where laborers_id 	= '".$id."'");
+			$update1 = mysql_query("update laborer set laborer_code= '".$_POST['code']."',
+													laborer_name 	= '".$_POST['name']."'
+												where laborer_id 	= '".$id."'");
 			if($update1){
 				echo "<script>window.location=('laborer.php')</script>";
 			}
@@ -53,15 +53,15 @@
 		}
 		else{
 			//jika kode berubah
-			$exist 	= executeScalar("select count(laborers_code) from laborers where laborers_code='".$_POST['code']."'");
+			$exist 	= executeScalar("select count(laborer_code) from laborer where laborer_code='".$_POST['code']."'");
 			if($exist>0){
 				echo "<script>window.alert('Kode Sudah Ada, Ganti Dengan yg Lain');
 				window.location=('laborer.php')</script>";
 			}
 			else{
-				$update2 = mysql_query("update laborers set laborers_code= '".$_POST['code']."',
-														laborers_name 	= '".$_POST['name']."'
-													where laborers_id 	= '".$id."'");
+				$update2 = mysql_query("update laborer set laborer_code= '".$_POST['code']."',
+														laborer_name 	= '".$_POST['name']."'
+													where laborer_id 	= '".$id."'");
 				if($update2){
 					echo "<script>window.location=('laborer.php')</script>";
 				}
@@ -74,7 +74,7 @@
 	}
 	
 	elseif ($task == 'delete'){
-		$delete = mysql_query("delete laborers where laborers_id = '".$id."'");
+		$delete = mysql_query("delete laborer where laborer_id = '".$id."'");
 		if($delete){
 			//Writes the photo to the server 
 			echo "<script>window.alert('Delete Success');
