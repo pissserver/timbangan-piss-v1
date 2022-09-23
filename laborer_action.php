@@ -19,7 +19,7 @@
 				VALUES ('".$_POST['code']."', '".$_POST['name']."')");
 				
 				if($insert){
-					echo "window.location=('laborer.php')</script>";
+					echo "<script>window.location=('laborer.php')</script>";
 				}
 				else{
 					echo "<script>window.alert('Data Gagal');

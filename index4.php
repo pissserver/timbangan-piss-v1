@@ -125,7 +125,7 @@
             <div class="row">
                 <div class="col-lg-12">
 					<br />
-                    <div class="panel panel-info">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-truck fa-fw"></i> Kendaraan Masuk
                         </div>
@@ -136,8 +136,8 @@
 									<div class="col-md-4">
 										<div class="form-group" style="padding:10px; margin-top:-10px;">
 											<label>Pedagang</label>
-											<select class="form-control" name="merchant" id="merchant" required>
-												<option value="">- Pilih Pedagang -</option>
+											<select class="form-control chzn-select" name="merchant" id="merchant" required>
+												<option value="">-- Pilih Pedagang --</option>
 												<?php 
 													$sql 	= mysql_query("select merchant_id, merchant_name, merchant_nick
 													from merchant where merchant_status = 'Aktif' and merchant_type != 'Buah' 
@@ -242,5 +242,8 @@
     <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
+	<script type="text/javascript">
+    	$(".chzn-select").chosen({"search_contains": true,"width":"100%", "no_results_text":"Nothing Found..!"});
+    </script>
 </body>
 </html>

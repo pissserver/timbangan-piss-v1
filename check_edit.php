@@ -46,7 +46,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+    <title>Detail Nota Tagihan | PISS</title>
 	<?php echo headScript(); ?>
 </head>
 <body>
@@ -148,7 +148,7 @@
 			<div class="row">
                 <div class="col-lg-12">
 					<br />
-                    <div class="panel panel-info">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-truck fa-fw"></i> Pengecekan Data Timbangan
 							(<?php 

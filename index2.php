@@ -132,7 +132,7 @@
             <div class="row">
                 <div class="col-lg-12">
 					<br />
-                    <div class="panel panel-info">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-truck fa-fw"></i> Kendaraan Keluar
                         </div>

@@ -30,7 +30,7 @@
 		?>
 		<tr>
 			<td style="text-align:center;"><?php echo $no; ?></td>
-			<td style="text-align:center;"><?php echo $data['laborer_id']; ?></td>
+			<td style="text-align:center;"><?php echo $data['laborer_code']; ?></td>
 			<td><?php echo $data['laborer_name']; ?></td>
 			<td>
 				<center><a href="laborer_edit.php?id=<?php echo $data['laborer_id']; ?>">

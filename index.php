@@ -132,57 +132,57 @@
                         <div class="panel-body">
 							<div class="row">
 								<form class="form-horizontal" id="formWeighingIn" name = "formWeighingIn" method="POST" action="weighing_action.php?task=masuk">
-								<fieldset>
-									<div class="col-md-4">
-										<div class="form-group" style="padding:10px; margin-top:-10px;">
-											<label>Nopol</label>
-											<input type="text" class="form-control" id="nopol" name="nopol" placeholder="Nopol Kendaraan" autofocus="autofocus" required>                  
+									<fieldset>
+										<div class="col-md-4">
+											<div class="form-group" style="padding:10px; margin-top:-10px;">
+												<label>Nomor Polisi</label>
+												<input type="text" class="form-control" id="nopol" name="nopol" placeholder="Nopol Kendaraan" autofocus="autofocus" required>                  
+											</div>
 										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group" style="padding:10px; margin-top:-10px;">
-											<label>Pedagang</label>
-											<select class="form-control chzn-select" name="merchant" id="merchant" required>
-												<option value="">- Pilih Pedagang -</option>
-												<?php 
-													$sql 	= mysql_query("select merchant_id, merchant_name, merchant_nick from merchant 
-													where merchant_status = 'Aktif' order by merchant_nick, merchant_name");
-													while($d1 = mysql_fetch_array($sql)){
-													$lpk 	= executeScalar("select l.lapak_name from rent r, lapak l 
-													where r.lapak_id = l.lapak_id and r.merchant_id = '".$d1['merchant_id']."'
-													and (r.rent_sts2 != 'Pindah' && r.rent_sts2 != 'Batal') limit 1");
-													$nick	= $d1['merchant_nick'];
-													if($nick!=''){
-														$nick = $nick.' / ';
-													}else{
-														$nick = '';
-													}
-												?>
-													<option value="<?php echo $d1['merchant_id'];?>"><?php echo $nick.$d1['merchant_name'].' / '.$d1['merchant_id'].' / '.$lpk;?></option>
-												<?php } ?>
-											</select>
+										<div class="col-md-4">
+											<div class="form-group" style="padding:10px; margin-top:-10px;">
+												<label>Pedagang</label>
+												<select class="form-control chzn-select" name="merchant" id="merchant" required>
+													<option value="" selected disabled>-- Pilih Pedagang --</option>
+													<?php 
+														$sql 	= mysql_query("select merchant_id, merchant_name, merchant_nick from merchant 
+														where merchant_status = 'Aktif' order by merchant_nick, merchant_name");
+														while($d1 = mysql_fetch_array($sql)){
+														$lpk 	= executeScalar("select l.lapak_name from rent r, lapak l 
+														where r.lapak_id = l.lapak_id and r.merchant_id = '".$d1['merchant_id']."'
+														and (r.rent_sts2 != 'Pindah' && r.rent_sts2 != 'Batal') limit 1");
+														$nick	= $d1['merchant_nick'];
+														if($nick!=''){
+															$nick = $nick.' / ';
+														}else{
+															$nick = '';
+														}
+													?>
+														<option value="<?php echo $d1['merchant_id'];?>"><?php echo $nick.$d1['merchant_name'].' / '.$d1['merchant_id'].' / '.$lpk;?></option>
+													<?php } ?>
+												</select>
+											</div>
 										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group" style="padding:10px; margin-top:-10px;">
-											<label>Barang</label>
-											<select class="form-control" name="goods" id="goods" required>
-												<option value="">- Pilih Barang -</option>
-												<?php 
-													$sql2 = mysql_query("select goods_id, goods_name from goods where goods_id != '1' 
-													and goods_id != '7' and goods_id != '96' and goods_id != '94' and goods_id != '95' 
-													order by goods_name");
-													while($d2 = mysql_fetch_array($sql2))
-												{?>
-													<option value="<?php echo $d2['goods_id'];?>"><?php echo $d2['goods_name'];?></option>
-												<?php } ?>
-											</select>
+										<div class="col-md-4">
+											<div class="form-group" style="padding:10px; margin-top:-10px;">
+												<label>Barang Komoditi</label>
+												<select class="form-control" name="goods" id="goods" required>
+													<option selected disabled>-- Pilih Barang --</option>
+													<?php 
+														$sql2 = mysql_query("select goods_id, goods_name from goods where goods_id != '1' 
+														and goods_id != '7' and goods_id != '96' and goods_id != '94' and goods_id != '95' 
+														order by goods_name");
+														while($d2 = mysql_fetch_array($sql2))
+													{?>
+														<option value="<?php echo $d2['goods_id'];?>"><?php echo $d2['goods_name'];?></option>
+													<?php } ?>
+												</select>
+											</div>
 										</div>
-									</div>
-									<div class="form-group" style="padding:10px; margin-top:30px; margin-left:5px; margin-right:5px;">
-										<center><button type="submit" class="btn btn-primary btn-block">Masuk <i class="fa fa-angle-double-right fa-lg"></i></button></center>
-									</div>
-								</fieldset>
+										<div class="form-group" style="padding:10px; margin-top:30px; margin-left:5px; margin-right:5px;">
+											<center><button type="submit" class="btn btn-primary btn-block">Masuk <i class="fa fa-angle-double-right fa-lg"></i></button></center>
+										</div>
+									</fieldset>
 								</form>
 							</div>
                         </div>
