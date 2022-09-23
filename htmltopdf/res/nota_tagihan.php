@@ -54,24 +54,44 @@
 					$tarif			= intval($tarif1+$tarif2);
 					$biayatonase 	= $r['netto'] * $tarif2;
 					$biayamitra 	= $r['netto'] * $tarif1;
+					$tarifminim	 	= executeScalar("select pay_total from payment where pay_id = '1'");
+				if ($biayatonase < $tarifminim) {
+					$biayatonase = $tarifminim;
+				}
 				}else{
-					$tarif	 		= executeScalar("select pay_total from payment where pay_id = '8'");
-					$biayamitra 	= 0;
+					$tarif2	 		= executeScalar("select pay_total from payment where pay_id = '8'");
+					$tarif1 		= 0;
+					$biayatonase 	= $r['netto'] * $tarif2;
+					$biayamitra 	= $r['netto'] * $tarif1;
+					$tarifminim	 	= executeScalar("select pay_total from payment where pay_id = '1'");
+				if ($biayatonase < $tarifminim) {
+					$biayatonase = $tarifminim;
+				}
 				}
 				// if($r['merchant_id']=='B0072'&&$r['goods_id']==2){
 				// 	$tarif 	= executeScalar("select pay_total from payment where pay_id = '2'");
 				// }
 			}
 			elseif($jenis=='S'&&$r['laborer_sts']=='Ya'){
-				$tarif1	 	= executeScalar("select pay_total from payment where pay_id = '3'");
-				$tarif2	 	= executeScalar("select pay_total from payment where pay_id = '2'");
-				$tarif		= intval($tarif1+$tarif2);
+				$tarif1	 		= executeScalar("select pay_total from payment where pay_id = '3'");
+				$tarif2	 		= executeScalar("select pay_total from payment where pay_id = '2'");
+				$tarif			= intval($tarif1+$tarif2);
 				$biayatonase 	= $r['netto'] * $tarif2;
 				$biayamitra 	= $r['netto'] * $tarif1;
+				$tarifminim	 	= executeScalar("select pay_total from payment where pay_id = '1'");
+				if ($biayatonase < $tarifminim) {
+					$biayatonase = $tarifminim;
+				}
 			}
 			elseif($jenis=='S'&&$r['laborer_sts']=='Tidak'){
-				$tarif	 	= executeScalar("select pay_total from payment where pay_id = '2'");
-				$biayamitra 	= 0;
+				$tarif2 		= executeScalar("select pay_total from payment where pay_id = '2'");
+				$tarif1 		= 0;
+				$biayatonase 	= $r['netto'] * $tarif2;
+				$biayamitra 	= $r['netto'] * $tarif1;
+				$tarifminim	 	= executeScalar("select pay_total from payment where pay_id = '1'");
+				if ($biayatonase < $tarifminim) {
+					$biayatonase = $tarifminim;
+				}
 			}
 			elseif($jenis=='L'&&$r['laborer_sts']=='Ya'){
 				$tarif1	 	= executeScalar("select pay_total from payment where pay_id = '3'");
@@ -79,10 +99,20 @@
 				$tarif		= intval($tarif1+$tarif2);
 				$biayatonase 	= $r['netto'] * $tarif2;
 				$biayamitra 	= $r['netto'] * $tarif1;
+				$tarifminim	 	= executeScalar("select pay_total from payment where pay_id = '1'");
+				if ($biayatonase < $tarifminim) {
+					$biayatonase = $tarifminim;
+				}
 			} 
 			elseif($jenis=='L'&&$r['laborer_sts']=='Tidak'){
-				$tarif	 	= executeScalar("select pay_total from payment where pay_id = '2'");
-				$biayamitra 	= 0;
+				$tarif2	 	= executeScalar("select pay_total from payment where pay_id = '2'");
+				$tarif1 		= 0;
+				$biayatonase 	= $r['netto'] * $tarif2;
+				$biayamitra 	= $r['netto'] * $tarif1;
+				$tarifminim	 	= executeScalar("select pay_total from payment where pay_id = '1'");
+				if ($biayatonase < $tarifminim) {
+					$biayatonase = $tarifminim;
+				}
 			} 
 		
 	?>
@@ -123,8 +153,8 @@
 		<tr><td>Berat NonKomoditi	</td><td> : <?php echo $nc_weight; ?></td></tr>
 		<tr><td>Rafaksi (Potongan) 	</td><td> : <?php echo $r['rafaksi']; ?></td></tr>
 		<tr><td>Berat Bersih		</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_no($r['netto']); ?></b></td></tr>
-		<tr><td>Tarif Tonase  		</td><td> : Rp. <?php echo intval($tarif2); ?> /kg   =  <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayatonase); ?></b></td></tr>
-		<tr><td>Tarif Bongkar  		</td><td> : Rp. <?php echo intval($tarif1); ?> /kg   =  <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b></td></tr>
+		<tr><td>Tarif Tonase  		</td><td> : <?php if ($biayatonase <= $tarifminim) { ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($tarifminim); ?></b><?php }else{ echo "Rp. ".intval($tarif2)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayatonase); ?></b><?php } ?></td></tr>
+		<tr><td>Tarif Bongkar  		</td><td> : <?php if ($r['laborer_sts'] != "Ya") { echo "-"; }else{ echo "Rp. ".intval($tarif1)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b><?php } ?></td></tr>
 		<!-- <tr><td>Total Biaya Tonase 	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayatonase); ?></b></td></tr>
 		<tr><td>Total Biaya Mitra	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b></td></tr> -->
 		<!-- <tr><td>Total Biaya 	 	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($r['cost']); ?></b></td></tr> -->
