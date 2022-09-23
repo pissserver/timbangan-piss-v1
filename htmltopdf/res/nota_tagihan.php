@@ -1,7 +1,7 @@
 <?php
 	include "../connection.php";
 ?>
-<page backtop="0mm" backbottom="0mm" backleft="7mm" backright="7mm">
+<page backtop="-2mm" backbottom="0mm" backleft="7mm" backright="7mm">
     <?php
 		$date 			= date("d-m-Y");
 		$jam 			= date("H:i");
@@ -227,13 +227,13 @@
 				if($x24>0){
 					$x24 = 'M04.';
 				}
-				echo '<tr><td>Kode Mitra	</td><td> : '.$x1.$x2.$x3.$x4.$x5.$x6.$x7.'<br> '.$x8.$x9.$x10.$x11.$x12.$x13.$x14.'<br>'.$x15.$x16.$x17.$x18.$x19.$x20.$x21.'<br>'.$x22.$x23.$x24.'</td></tr>';
+				echo '<tr><td>Kode Mitra	</td><td> : '.$x1.$x2.$x3.$x4.$x5.$x6.$x7.$x8.$x9.$x10.$x11.$x12.$x13.$x14.$x15.$x16.$x17.$x18.$x19.$x20.$x21.'<br>'.$x22.$x23.$x24.'</td></tr>';
 			}
 		?>
-	</table>
+	</table><br/>
 	<b>NB :</b> Nota tagihan ini harap disimpan sebagai bukti pembayaran. Mohon Dicek Kembali.
-	<br/><br/>
-	<table style="width: 100%; high: 50px; border: 0px black; margin-top:1px; font-size:9pt;">
+	<br/>
+	<table style="width: 100%; high: 50px; border: 0px black; margin-top:5px; font-size:9pt;">
 		<tr>
 			<td style="text-align: center;width: 33%; border: 1px solid black;">Checker<br><br><?php echo $checker; ?></td>
 			<td style="text-align: center;width: 34%; border: 1px solid black;">Pedagang<br><br>&nbsp;</td>
