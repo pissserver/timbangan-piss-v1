@@ -165,67 +165,67 @@
 				}
 				$x9 = executeScalar("select sum(B009) from laborer_fee where weighing_id = '".$id."' ");
 				if($x9>0){
-					$x9 = 'B009';
+					$x9 = 'B009, ';
 				}
 				$x10 = executeScalar("select sum(B010) from laborer_fee where weighing_id = '".$id."' ");
 				if($x10>0){
-					$x10 = 'B010';
+					$x10 = 'B010, ';
 				}
 				$x11 = executeScalar("select sum(S001) from laborer_fee where weighing_id = '".$id."' ");
 				if($x11>0){
-					$x11 = 'S001';
+					$x11 = 'S001, ';
 				}
 				$x12 = executeScalar("select sum(S002) from laborer_fee where weighing_id = '".$id."' ");
 				if($x12>0){
-					$x12 = 'S002';
+					$x12 = 'S002, ';
 				}
 				$x13 = executeScalar("select sum(S003) from laborer_fee where weighing_id = '".$id."' ");
 				if($x13>0){
-					$x13 = 'S003';
+					$x13 = 'S003, ';
 				}
 				$x14 = executeScalar("select sum(S004) from laborer_fee where weighing_id = '".$id."' ");
 				if($x14>0){
-					$x14 = 'S004';
+					$x14 = 'S004, ';
 				}
 				$x15 = executeScalar("select sum(S005) from laborer_fee where weighing_id = '".$id."' ");
 				if($x15>0){
-					$x15 = 'S005';
+					$x15 = 'S005, ';
 				}
 				$x16 = executeScalar("select sum(S006) from laborer_fee where weighing_id = '".$id."' ");
 				if($x16>0){
-					$x16 = 'S006';
+					$x16 = 'S006, ';
 				}
 				$x17 = executeScalar("select sum(S007) from laborer_fee where weighing_id = '".$id."' ");
 				if($x17>0){
-					$x17 = 'S007';
+					$x17 = 'S007, ';
 				}
 				$x18 = executeScalar("select sum(S008) from laborer_fee where weighing_id = '".$id."' ");
 				if($x18>0){
-					$x18 = 'S008';
+					$x18 = 'S008, ';
 				}
 				$x19 = executeScalar("select sum(S009) from laborer_fee where weighing_id = '".$id."' ");
 				if($x19>0){
-					$x19 = 'S009';
+					$x19 = 'S009, ';
 				}
 				$x20 = executeScalar("select sum(S010) from laborer_fee where weighing_id = '".$id."' ");
 				if($x20>0){
-					$x20 = 'S010';
+					$x20 = 'S010, ';
 				}
 				$x21 = executeScalar("select sum(M01) from laborer_fee where weighing_id = '".$id."' ");
 				if($x21>0){
-					$x21 = 'M01';
+					$x21 = 'M01, ';
 				}
 				$x22 = executeScalar("select sum(M02) from laborer_fee where weighing_id = '".$id."' ");
 				if($x22>0){
-					$x22 = 'M02';
+					$x22 = 'M02, ';
 				}
 				$x23 = executeScalar("select sum(M03) from laborer_fee where weighing_id = '".$id."' ");
 				if($x23>0){
-					$x23 = 'M03';
+					$x23 = 'M03, ';
 				}
 				$x24 = executeScalar("select sum(M04) from laborer_fee where weighing_id = '".$id."' ");
 				if($x24>0){
-					$x24 = 'M04';
+					$x24 = 'M04.';
 				}
 				echo '<tr><td>Kode Mitra	</td><td> : '.$x1.$x2.$x3.$x4.$x5.$x6.$x7.'<br> '.$x8.$x9.$x10.$x11.$x12.$x13.$x14.'<br>'.$x15.$x16.$x17.$x18.$x19.$x20.$x21.'<br>'.$x22.$x23.$x24.'</td></tr>';
 			}
