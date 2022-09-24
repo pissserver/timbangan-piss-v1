@@ -16,8 +16,8 @@
 	
 	//Kendaraan Masuk 
 	if($task=='masuk'){
-		if($_POST['merchant']==''||$_POST['goods']==''){
-			trigger_error("Data pedagang & jenis barang belum diisi", E_USER_ERROR);
+		if($_POST['merchant']==''|| $_POST['goods']==''){
+			trigger_error("Data pedagang atau jenis barang belum diisi", E_USER_ERROR);
 			exit();
 		}
 		//Validasi Nopol Jika tidak menggunakan huruf di akhir
@@ -40,7 +40,7 @@
 					order by date_check asc limit 1");
 		//Jika Blok B / E Makan Akan Melakukan Pengecekan Tagihan
 		//Blok yg blh diuji coba H, C, C6, GB
-		if($_POST['merchant']!=''){
+		if($_POST['merchant'] !='' && $_POST['goods'] !=''){
 			//$date2 	= date('Y-m-d', strtotime($date_now . "-3 days")); 
 			//Hitung Umur Tagihan
 			$date3 	= new DateTime(date("Y-m-d", strtotime($last_date)));
@@ -109,72 +109,74 @@
 			}
 		}
 		else{
-			$tagihan	= executeScalar("select count(weighing_id)from weighing where 
-				merchant_id = 'B0091' and
-				(date_check between '2016-10-01 00:00:00' and '".$date_now." 23:59:59') and
-				(date_pay > '".$date_now."' || date_pay is NULL) and
-				weighing_sts != 'Batal' and
-				(weighing_sts2 != 'Dipecah' || weighing_sts2 != 'Digabung')");
-			if($tagihan<5){
-				//cara mendapatkan data 1 menit yg lalu
-				$currentDate = strtotime($time_now);
-				$pastdate 	= $currentDate-(60*1);
-				$past 		= date("H:i:s", $pastdate);
-				//Menghindari kemasukan data double
-				$double 	= mysql_query("select nopol from weighing where nopol = '".$_POST['nopol']."'
-				and date_in = '".$date_now."' and (time_in between '".$past."' and '".$time_now."')");
-				//$triple 	= mysql_query("select nopol from weighing where nopol = '".$_POST['nopol']."'
-				//and weighing_sts = 'Masuk'");
-				$ketemu		= mysql_num_rows($double);
-				//$ketemu2	= mysql_num_rows($triple);
+			// $tagihan	= executeScalar("select count(weighing_id)from weighing where 
+			// 	merchant_id = 'B0091' and
+			// 	(date_check between '2016-10-01 00:00:00' and '".$date_now." 23:59:59') and
+			// 	(date_pay > '".$date_now."' || date_pay is NULL) and
+			// 	weighing_sts != 'Batal' and
+			// 	(weighing_sts2 != 'Dipecah' || weighing_sts2 != 'Digabung')");
+			// if($tagihan<5){
+			// 	//cara mendapatkan data 1 menit yg lalu
+			// 	$currentDate = strtotime($time_now);
+			// 	$pastdate 	= $currentDate-(60*1);
+			// 	$past 		= date("H:i:s", $pastdate);
+			// 	//Menghindari kemasukan data double
+			// 	$double 	= mysql_query("select nopol from weighing where nopol = '".$_POST['nopol']."'
+			// 	and date_in = '".$date_now."' and (time_in between '".$past."' and '".$time_now."')");
+			// 	//$triple 	= mysql_query("select nopol from weighing where nopol = '".$_POST['nopol']."'
+			// 	//and weighing_sts = 'Masuk'");
+			// 	$ketemu		= mysql_num_rows($double);
+			// 	//$ketemu2	= mysql_num_rows($triple);
 				
-				if($ketemu>=1){
-					echo "<script>window.alert('Data Double Atau Mobil Masih Berada Di Dalam Area');
-					window.location=('index.php')</script>";
-					exit();
-				}else{
-					$x 		= getWeight();
-					//$x 	= 1000;
-					//$x	= $_POST['weight_in'];
-					if($x!=0||$x!='0'){
-						//tahun 2018
-						$year 		= date("y");
-						$year2 		= date("Y");
+			// 	if($ketemu>=1){
+			// 		echo "<script>window.alert('Data Double Atau Mobil Masih Berada Di Dalam Area');
+			// 		window.location=('index.php')</script>";
+			// 		exit();
+			// 	}else{
+			// 		$x 		= getWeight();
+			// 		//$x 	= 1000;
+			// 		//$x	= $_POST['weight_in'];
+			// 		if($x!=0||$x!='0'){
+			// 			//tahun 2018
+			// 			$year 		= date("y");
+			// 			$year2 		= date("Y");
 						
-						$count_id 	= executeScalar("select count(weighing_id) from weighing where YEAR(date_in) = '".$year2."'");
-						$total_id	= $count_id+1;
-						$idx 		= sprintf("%07d", $total_id);
-						$id			= $year.''.$idx+4;//+3 Krn ada nota 2018 dipecah ke 2019
+			// 			$count_id 	= executeScalar("select count(weighing_id) from weighing where YEAR(date_in) = '".$year2."'");
+			// 			$total_id	= $count_id+1;
+			// 			$idx 		= sprintf("%07d", $total_id);
+			// 			$id			= $year.''.$idx+4;//+3 Krn ada nota 2018 dipecah ke 2019
 						
-						//Simpan data ke tabel timbangan
-						$insert = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `weight_in`, `weight_out`,  `noncommodity`, 
-						`checker_id`, `merchant_id`, `goods_id`, `date_in`, `time_in`, `laborer_sts`, `weighing_sts`, `weighing_sts2`) 
-						VALUES ('".$id."', '".$_POST['nopol']."', '".$x."', '0', '0', '".$checker."', '".$_POST['merchant']."', 
-						'".$_POST['goods']."', '".$date_now."', '".$time_now."', 'Tidak', 'Masuk', 'Normal')");
+			// 			//Simpan data ke tabel timbangan
+			// 			$insert = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `weight_in`, `weight_out`,  `noncommodity`, 
+			// 			`checker_id`, `merchant_id`, `goods_id`, `date_in`, `time_in`, `laborer_sts`, `weighing_sts`, `weighing_sts2`) 
+			// 			VALUES ('".$id."', '".$_POST['nopol']."', '".$x."', '0', '0', '".$checker."', '".$_POST['merchant']."', 
+			// 			'".$_POST['goods']."', '".$date_now."', '".$time_now."', 'Tidak', 'Masuk', 'Normal')");
 						
-						if($insert){
-							echo 'Berat Masuk '.$x;
-							HEADER("location: index.php");
-							exit();
-						}
-						else{
-							//echo 'Data Gagal Masuk';
-							trigger_error("Data gagal Masuk, Silahkan dicoba lagi", E_USER_ERROR);
-							HEADER("location: index.php");
-							exit();
-						}
-					}
-					else{
-						echo "<script>window.alert('Berat Masuk 0 - 100 Atau Belum Stabil, Tolong Diinputkan lagi')</script>;
-						<script>window.history.back()</script>";
-						exit();
-					}
-				}
-			}else{
-				echo "<script>window.alert('Pedagang Masih Mempunyai Tagihan 5 Nota Yg Belum Terbayar.');
-				window.location=('index.php')</script>";
-				exit();
-			}
+			// 			if($insert){
+			// 				echo 'Berat Masuk '.$x;
+			// 				HEADER("location: index.php");
+			// 				exit();
+			// 			}
+			// 			else{
+			// 				//echo 'Data Gagal Masuk';
+			// 				trigger_error("Data gagal Masuk, Silahkan dicoba lagi", E_USER_ERROR);
+			// 				HEADER("location: index.php");
+			// 				exit();
+			// 			}
+			// 		}
+			// 		else{
+			// 			echo "<script>window.alert('Berat Masuk 0 - 100 Atau Belum Stabil, Tolong Diinputkan lagi')</script>;
+			// 			<script>window.history.back()</script>";
+			// 			exit();
+			// 		}
+			// 	}
+			// }else{
+			// 	echo "<script>window.alert('Pedagang Masih Mempunyai Tagihan 5 Nota Yg Belum Terbayar.');
+			// 	window.location=('index.php')</script>";
+			// 	exit();
+			// }
+			trigger_error("Data pedagang atau jenis barang belum diisi", E_USER_ERROR);
+			exit();
 		}
 	}
 	
@@ -269,20 +271,22 @@
 			$jenis		= mb_substr($_POST['merchant'], 0, 1, 'utf-8');
 			if($jenis=='B'){
 				$tonase1 = executeScalar("select pay_total from payment where pay_id = '8'");
-				if($_POST['merchant']=='B0072'&&$_POST['goods']==2){
-					$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
-				}
+				$tonase2 = executeScalar("select pay_total from payment where pay_id = '9'");
+				// if($_POST['merchant']=='B0072'&&$_POST['goods']==2){
+				// 	$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
+				// }
 			}
 			elseif($jenis=='S'){
 				$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+				$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 			}
 			elseif($jenis=='L'){
 				$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+				$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 			}
 			
-			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
-			$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
-			$tonase3 	= $tonase1+$tonase2;
+			$tarifmin 		= executeScalar("select pay_total from payment where pay_id = '1'");
+			$tonase3 		= $tonase1 + $tonase2;
 			
 			$weight_in 	= executeScalar("select weight_in from weighing where weighing_id = '".$id."'");
 			
@@ -415,10 +419,10 @@
 	}
 	
 	//Kendaraan Keluar dengan kir
-	elseif($task=='kir'){
+	elseif($task =='kir'){
 		$id		= $_GET['id'];
 		$sts 	= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
-		if($sts=='Masuk'){
+		if($sts == 'Masuk'){
 			$netto	= 0;
 			$total1	= 0;
 			$total2	= 0;
@@ -432,21 +436,24 @@
 			$jenis		= mb_substr($_POST['merchant'], 0, 1, 'utf-8');
 			if($jenis=='B'){
 				$tonase1 	= executeScalar("select pay_total from payment where pay_id = '8'");
+				$tonase2 	= executeScalar("select pay_total from payment where pay_id = '9'");
 				// if($_POST['merchant']=='B0072'&&$commodity==2){
 				// 	$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
 				// }
 			}
 			elseif($jenis=='S'){
 				$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+				$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 			}
 			elseif($jenis=='L'){
 				$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+				$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 			}
-			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
-			$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
-			$tonase3 	= $tonase1+$tonase2;
 			
-			if($noncommodity!=0||$noncommodity!=''){
+			$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
+			$tonase3 	= $tonase1 + $tonase2;
+			
+			if($noncommodity!=0 || $noncommodity!=''){
 				$noncommodity = $noncommodity;
 			}
 			else{
@@ -545,17 +552,20 @@
 		$jenis		= mb_substr($_POST['merchant'], 0, 1, 'utf-8');
 		if($jenis=='B'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '8'");
-			if($_POST['merchant']=='B0072'&&$_POST['goods']==2){
-				$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
-			}
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '9'");
+			// if($_POST['merchant']=='B0072'&&$_POST['goods']==2){
+			// 	$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
+			// }
 		}
 		elseif($jenis=='S'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		}
 		elseif($jenis=='L'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		}
-		$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
+		
 		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
 		$tonase3 	= $tonase1+$tonase2;
 		
@@ -651,7 +661,7 @@
 			$total1	= $netto*$tonase3;
 			$total2	= $total1;
 		}
-		//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
+		//Jika total bayar dibawah 15.000, maka akan dikenakan tarin min (Rp 15.000)
 		if($total1>$tarifmin){
 			$total1 = $total1;
 		}
@@ -686,8 +696,8 @@
 	}
 	
 	//Input Detail Nonkomodity
-	elseif($task=='detail'){
-		$id		= $_GET['id'];
+	elseif($task == 'detail'){
+		$id	= $_GET['id'];
 		//Ambil Harga Tonase
 		$tonase1 	= 0;
 		$tonase2 	= 0;
@@ -709,19 +719,22 @@
 		$jenis		= mb_substr($merchant, 0, 1, 'utf-8');
 		if($jenis=='B'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '8'");
-			if($merchant=='B0072'&&$commodity==2){
-				$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
-			}
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '9'");
+			// if($merchant=='B0072'&&$commodity==2){
+			// 	$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
+			// }
 		}
 		elseif($jenis=='S'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		}
 		elseif($jenis=='L'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		}
 		
 		//ambil date tarif tonase yg ada di db
-		$tonase2 		= executeScalar("select pay_total from payment where pay_id = '3'");
+		
 		$tarifmin 		= executeScalar("select pay_total from payment where pay_id = '1'");
 		$tonase3 		= $tonase1+$tonase2;
 
@@ -746,7 +759,7 @@
 		
 		//cek jika berat nonkomodity >= berat netto
 		$netto		= executeScalar("select netto from weighing where weighing_id = '".$id."'");
-		if($noncommodity>=$netto){
+		if($noncommodity >= $netto){
 			echo "<script>window.alert('Berat Nonkomoditi lebih besar dari netto, Tolong Dicek lagi')</script>;
 			<script>window.history.back()</script>";
 			exit();
@@ -806,7 +819,7 @@
 				}
 				
 				//menghitung netto & total bayar
-				//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
+				//Jika total bayar dibawah 15.000, maka akan dikenakan tarin min (Rp 15.000)
 				if($total1>$tarifmin){
 					$total1 = $total1;
 				}
@@ -948,17 +961,19 @@
 		$jenis		= mb_substr($merchant, 0, 1, 'utf-8');
 		if($jenis=='B'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '8'");
-			if($merchant=='B0072'&&$goods==2){
-				$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
-			}
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '9'");
+			// if($merchant=='B0072'&&$goods==2){
+			// 	$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
+			// }
 		}
 		elseif($jenis=='S'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		}
 		elseif($jenis=='L'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		}
-		$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
 		$tonase3 	= $tonase1+$tonase2;
 		
@@ -1096,17 +1111,20 @@
 					$jenis			= mb_substr($merchant, 0, 1, 'utf-8');
 					if($jenis=='B'){
 						$tonase1 	= executeScalar("select pay_total from payment where pay_id = '8'");
-						if($merchant=='B0072'&&$commodity==2){
-							$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
-						}
+						$tonase2 	= executeScalar("select pay_total from payment where pay_id = '9'");
+						// if($merchant=='B0072'&&$commodity==2){
+						// 	$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
+						// }
 					}
 					elseif($jenis=='S'){
 						$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+						$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 					}
 					elseif($jenis=='L'){
 						$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
+						$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 					}
-					$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
+					
 					$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
 					$tonase3 	= $tonase1+$tonase2;
 					
@@ -1379,32 +1397,35 @@
 		$merchant 	= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
 		$jenis		= mb_substr($merchant, 0, 1, 'utf-8');
 		$commodity 	= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
+		
+		//Tarif 2 adlh tarif mitra sdgkan tarif1 adalah tarif normal tanpa mitra
 		if($jenis=='B'){
-			$tarif1 	= executeScalar("select pay_total from payment where pay_id = '8'");
+			$tarif1 = executeScalar("select pay_total from payment where pay_id = '8'");
+			$tarif2 = executeScalar("select pay_total from payment where pay_id = '9'");
 			// if($merchant=='B0072'&&$commodity==2){
 			// 	$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'");
 			// }
 		}
 		elseif($jenis=='S'){
 			$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'");
+			$tarif2 = executeScalar("select pay_total from payment where pay_id = '3'"); //Tarif Menggunakan Mitra Sayur
 		}
 		elseif($jenis=='L'){
 			$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'");
+			$tarif2 = executeScalar("select pay_total from payment where pay_id = '3'");
 		}
-		//Tarif 2 adlh tarif mitra sdgkan tarif1 adalah tarif normal tanpa mitra
-		$tarif2 			= executeScalar("select pay_total from payment where pay_id = '3'"); //Tarif Menggunakan Mitra Sayur
-		$tarifmitrabuah 	= executeScalar("select pay_total from payment where pay_id = '9'"); //Tarif Menggunakan Mitra Buah
+
 		//tarifmin adlh tarif minimal timbangan (Saat Ini 15.000)
-		$tarifmin 			= executeScalar("select pay_total from payment where pay_id = '1'");
+		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
+		
 		//tarif3 adlh tarif normal + mitra
-		$tarif3 			= $tarif1+$tarif2;
-		$tariftotalbuah 	= $tarif1+$tarifmitrabuah;
-		$netto 				= executeScalar("select netto from weighing where weighing_id = '".$id."'");
+		$tarif3 	= $tarif1 + $tarif2;
+		$netto 		= executeScalar("select netto from weighing where weighing_id = '".$id."'");
 		
 		//Jika total bayar dibawah 15.000, maka akan dikenakan tarin min (Rp 15.000)
 		if(empty($_POST['mitra'])&&empty($_POST['mandor'])){
 			$laborer 	= 'Tidak';
-			$total1		= $netto*$tarif1; //set lsg dgn tarik tanpa mitra
+			$total1		= $netto * $tarif1; //set lsg dgn tarik tanpa mitra
 			$total2		= $total1;
 			if($total1<$tarifmin){
 				$total1 = $tarifmin;
@@ -1415,7 +1436,7 @@
 														cost		= '".$total1."',
 														cost2		= '".$total2."' 
 												where weighing_id 	= '".$id."'");
-			if($update1&&$update2){
+			if($update1 && $update2){
 				echo "<script>window.alert('Mitra Tidak Ada');
 				window.location=('check_edit.php?id=$id')</script>";
 				exit();
@@ -1434,7 +1455,7 @@
 				$mitrasmpn 	= executeScalar("select pay_total from payment where pay_id = '11'"); //Tarif Mitra Disimpan Buah
 				$mandorbagi = executeScalar("select pay_total from payment where pay_id = '12'"); //Tarif Mandor DiBagi Buah
 				$mandorsmpn	= executeScalar("select pay_total from payment where pay_id = '13'"); //Tarif Mandor Disimpan Buah
-				$total1		= $netto*$tariftotalbuah;
+				$total1		= $netto*$tarif3;
 			}
 			elseif($jenis=='S'){
 				$mitrabagi 	= executeScalar("select pay_total from payment where pay_id = '4'"); //Tarif Mitra Dibagi Sayur
@@ -1453,7 +1474,7 @@
 						
 			$total2		= $total1;
 			//Ambil tarif mitra
-			$total4 	= $netto*$tarif2; //Total4 (Biaya Angkut) = Brt Bersih (Netto) x Tarif Mitra
+			$total4 	= $netto * $tarif2; //Total4 (Biaya Angkut) = Brt Bersih (Netto) x Tarif Mitra
 			$kuli 		= 0;
 			$k_dibagi 	= 0;
 			$k_disimpan = 0;
@@ -1532,13 +1553,15 @@
 					}
 				}elseif($i>0){//query db untuk data yg kedua dst
 					mysql_query("update laborer_fee set $mitra[$i] 	= '".$k_dibagi."',
-													$mitra[$i]_save	= '".$k_disimpan."'
+													$mitra[$i]_save	= '".$k_disimpan."',
+													$mandor[$i] 	= '".$m_dibagi."',
+													$mandor[$i]_save = '".$m_disimpan."'
 												where weighing_id 	= '".$id."'");
 				}
 			}
 		}
 		
-		//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
+		//Jika total bayar dibawah 15.000, maka akan dikenakan tarin min (Rp 15.000)
 		if($total1<$tarifmin){
 			$total1 = $tarifmin;
 		}
