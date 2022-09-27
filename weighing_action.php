@@ -3,6 +3,7 @@
 	include "connection.php";
 	date_default_timezone_set('Asia/Jakarta');
 	$date_now	= date("Y-m-d H:i:s");
+	$dt_now		= date("Y-m-d H:i:s");
 	include "dio.php";
 	
 	if($_SESSION['checker']==''){
@@ -1423,7 +1424,7 @@
 		$netto 		= executeScalar("select netto from weighing where weighing_id = '".$id."'");
 		
 		//Jika total bayar dibawah 15.000, maka akan dikenakan tarin min (Rp 15.000)
-		if(empty($_POST['mitra'])&&empty($_POST['mandor'])){
+		if(empty($_POST['mitra']) && empty($_POST['mandor'])){
 			$laborer 	= 'Tidak';
 			$total1		= $netto * $tarif1; //set lsg dgn tarik tanpa mitra
 			$total2		= $total1;
@@ -1515,9 +1516,9 @@
 						mysql_query("insert into laborer_fee (weighing_id, $mandor[$i], $mandor[$i]_save, pios_fee, laborer_fee_sts, laborer_fee_date) 
 						value ('".$id."', '".$m_dibagi."', '".$m_disimpan."', '".$pios."', 'Baru', '".$date_out.' '.$time_out."' )");
 					}elseif($i>0){
-						mysql_query("update laborer_fee set $mandor[$i] 	= '".$m_dibagi."',
+						mysql_query("update laborer_fee set $mandor[$i] 		= '".$m_dibagi."',
 															$mandor[$i]_save	= '".$m_disimpan."'
-													where weighing_id 	= '".$id."'");
+													where weighing_id 			= '".$id."'");
 					}
 				}
 			}
@@ -1532,10 +1533,9 @@
 				$m_disimpan = $mandor*$mandorsmpn;
 			}
 			
-			//BUat proses pengecekan apakah id sdh atau atau blm == NULL
+			//Buat proses pengecekan apakah id sdh atau atau blm == NULL
 			for($i=0; $i < $N; $i++){	
 				$mitra	= $_POST['mitra'];
-				$mandor	= $_POST['mandor'];
 				if($i==0){//query db untuk data yg pertama
 					$ada		= executeScalar("select count(weighing_id) from laborer_fee where weighing_id = '".$id."'");
 					//$ketemu	= mysql_num_rows($ada);
@@ -1548,16 +1548,29 @@
 						mysql_query("insert into laborer_fee (weighing_id, $mitra[$i], $mitra[$i]_save, pios_fee, laborer_fee_sts, laborer_fee_date) 
 						value ('".$id."', '".$k_dibagi."', '".$k_disimpan."', '".$pios."', 'Baru', '".$date_out.' '.$time_out."' )");
 					}else{//jika ada mandor
-						mysql_query("insert into laborer_fee (weighing_id, $mitra[$i], $mitra[$i]_save, $mandor[$i], $mandor[$i]_save, laborer_fee_sts, laborer_fee_date) 
-						value ('".$id."', '".$k_dibagi."', '".$k_disimpan."', '".$m_dibagi."', '".$m_disimpan."', 'Baru', '".$date_out.' '.$time_out."' )");
+						mysql_query("insert into laborer_fee (weighing_id, $mitra[$i], $mitra[$i]_save, laborer_fee_sts, laborer_fee_date) 
+						value ('".$id."', '".$k_dibagi."', '".$k_disimpan."', 'Baru', '".$date_out.' '.$time_out."' )");
 					}
 				}elseif($i>0){//query db untuk data yg kedua dst
 					mysql_query("update laborer_fee set $mitra[$i] 	= '".$k_dibagi."',
-													$mitra[$i]_save	= '".$k_disimpan."',
-													$mandor[$i] 	= '".$m_dibagi."',
-													$mandor[$i]_save = '".$m_disimpan."'
+													$mitra[$i]_save	= '".$k_disimpan."'
 												where weighing_id 	= '".$id."'");
 				}
+			}
+
+			// Input data mandor ke laborer_fee
+			// Cek apakah mandor ada atau tidak
+			if ($N2 > 0) {
+				for($i = 0; $i < $N2; $i++){	
+					$mandor	= $_POST['mandor'];
+					mysql_query("update laborer_fee set $mandor[$i] 	= '".$m_dibagi."',
+													$mandor[$i]_save 	= '".$m_disimpan."'
+													where weighing_id 	= '".$id."'");
+				}
+			}else{
+				echo "<script>window.alert('Mandor Tidak Ditemukan');
+					window.location=('check_edit.php?id=$id')</script>";
+					exit();
 			}
 		}
 		
