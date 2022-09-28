@@ -43,7 +43,22 @@
 							if($x>0){echo 'checked';}} ?>><label class="light">Moh. Muid Faruq (B009)</label><br>
 						<input type="checkbox" id="mitra[]" name="mitra[]" value="B010" <?php if($ada>=1){
 							$x 	= executeScalar("select sum(B010) from laborer_fee where weighing_id = '".$id."' ");
-							if($x>0){echo 'checked';}} ?>><label class="light">Didik Santoso (B010)</label>
+							if($x>0){echo 'checked';}} ?>><label class="light">Didik Santoso (B010)</label><br>
+						<input type="checkbox" id="mitra[]" name="mitra[]" value="B011"  <?php if($ada>=1){
+							$x 	= executeScalar("select sum(B011) from laborer_fee where weighing_id = '".$id."' ");
+							if($x>0){echo 'checked';}} ?>><label class="light">Ahmad Taufikul K. (B011)</label><br>
+						<input type="checkbox" id="mitra[]" name="mitra[]" value="B012" <?php if($ada>=1){
+							$x 	= executeScalar("select sum(B012) from laborer_fee where weighing_id = '".$id."' ");
+							if($x>0){echo 'checked';}} ?>><label class="light">Fathur Rosi (B012)</label><br>
+						<input type="checkbox" id="mitra[]" name="mitra[]" value="B013" <?php if($ada>=1){
+							$x 	= executeScalar("select sum(B013) from laborer_fee where weighing_id = '".$id."' ");
+							if($x>0){echo 'checked';}} ?>><label class="light">Mat Rizal (B013)</label><br>
+						<input type="checkbox" id="mitra[]" name="mitra[]" value="B014" <?php if($ada>=1){
+							$x 	= executeScalar("select sum(B014) from laborer_fee where weighing_id = '".$id."' ");
+							if($x>0){echo 'checked';}} ?>><label class="light">Slamet Pujianto (B014)</label><br>
+						<input type="checkbox" id="mitra[]" name="mitra[]" value="B015" <?php if($ada>=1){
+							$x 	= executeScalar("select sum(B015) from laborer_fee where weighing_id = '".$id."' ");
+							if($x>0){echo 'checked';}} ?>><label class="light">Muktarom (B015)</label>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -77,7 +92,22 @@
 							if($x>0){echo 'checked';}} ?>><label class="light">Marsono (S009)</label><br>
 						<input type="checkbox" id="mitra[]" name="mitra[]" value="S010" <?php if($ada>=1){
 							$x 	= executeScalar("select sum(S010) from laborer_fee where weighing_id = '".$id."' ");
-							if($x>0){echo 'checked';}} ?>><label class="light">Seukron (S010)</label>
+							if($x>0){echo 'checked';}} ?>><label class="light">Seukron (S010)</label><br>
+						<input type="checkbox" id="mitra[]" name="mitra[]" value="S011" <?php if($ada>=1){
+							$x 	= executeScalar("select sum(S011) from laborer_fee where weighing_id = '".$id."' ");
+							if($x>0){echo 'checked';}} ?>><label class="light">Rifai (S011)</label><br>
+						<input type="checkbox" id="mitra[]" name="mitra[]" value="S012" <?php if($ada>=1){
+							$x 	= executeScalar("select sum(S012) from laborer_fee where weighing_id = '".$id."' ");
+							if($x>0){echo 'checked';}} ?>><label class="light">Rofik (S012)</label><br>
+						<input type="checkbox" id="mitra[]" name="mitra[]" value="S013" <?php if($ada>=1){
+							$x 	= executeScalar("select sum(S013) from laborer_fee where weighing_id = '".$id."' ");
+							if($x>0){echo 'checked';}} ?>><label class="light">Durasid (S013)</label><br>
+						<input type="checkbox" id="mitra[]" name="mitra[]" value="S014" <?php if($ada>=1){
+							$x 	= executeScalar("select sum(S014) from laborer_fee where weighing_id = '".$id."' ");
+							if($x>0){echo 'checked';}} ?>><label class="light">Deni (S014)</label><br>
+						<input type="checkbox" id="mitra[]" name="mitra[]" value="S015" <?php if($ada>=1){
+							$x 	= executeScalar("select sum(S015) from laborer_fee where weighing_id = '".$id."' ");
+							if($x>0){echo 'checked';}} ?>><label class="light">Mahmud (S015)</label>
 					</div>
 				</div>
 				<div class="col-md-4">
