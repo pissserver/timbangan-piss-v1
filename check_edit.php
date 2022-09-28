@@ -13,13 +13,14 @@
 	$id			= $_GET['id'];
 	$edit		= mysql_query("select * from weighing where weighing_id = '".$id."'");
 	while ($r 	= mysql_fetch_array($edit)){
-		$merchant 	= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
-		$nick	 	= executeScalar("select merchant_nick from merchant where merchant_id = '".$r['merchant_id']."'");
-		$lid 		= executeScalar("select lapak_id from rent where merchant_id = '".$r['merchant_id']."'");
-		$lpk 		= executeScalar("select lapak_name from lapak where lapak_id = '".$lid."'");
-		$goods 		= executeScalar("select goods_name from goods where goods_id='".$r['goods_id']."'");
-		$status 	= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
-		$status2	= executeScalar("select weighing_sts2 from weighing where weighing_id = '".$id."'");
+		$merchant 		= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
+		$nick	 		= executeScalar("select merchant_nick from merchant where merchant_id = '".$r['merchant_id']."'");
+		$lid 			= executeScalar("select lapak_id from rent where merchant_id = '".$r['merchant_id']."'");
+		$lpk 			= executeScalar("select lapak_name from lapak where lapak_id = '".$lid."'");
+		$goods 			= executeScalar("select goods_name from goods where goods_id='".$r['goods_id']."'");
+		$status 		= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
+		$status2		= executeScalar("select weighing_sts2 from weighing where weighing_id = '".$id."'");
+		$laborer_sts	= executeScalar("select laborer_sts from weighing where weighing_id = '".$id."'");
 		if($r['noncommodity_id']!=0||$r['noncommodity_id']!=''){
 			$nc1	= $r['noncommodity_id'];
 			$nc2	= executeScalar("select noncommodity_name from noncommodity where noncommodity_id='".$nc1."'");
@@ -231,6 +232,24 @@
 													}
 												?>
 											</div>
+											<div class="form-group" style="padding:10px; margin-top:-10px; margin-left:5px;">
+												<?php
+													if ($laborer_sts == 'Ya' ) {
+														if($status=='Lunas'||$status=='Masuk'||$status2=='Digabung'||$status2=='Dipecah'||$c==NULL){
+															echo '';//Print Nota Tagihan Jasa Bongkar
+														}
+														else{
+															echo '<a href="htmltopdf/nota_tagihan_mitra.php?id='.$id.'&u='.$admin.'" target="_blank">
+																<button type="button" class="btn btn-block btn-outline btn-info">
+																	Print Nota Tagihan Jasa Bongkar
+																</button>
+															</a>';
+														}
+													}else {
+														echo '';
+													}
+												?>
+											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-group" style="padding:10px; margin-top:-10px;">
@@ -246,21 +265,28 @@
 												<input type="text" class="form-control" id="noncommodity" name="noncommodity" value="<?php echo $r['noncommodity'].' Kg'; ?>" disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-10px;">
-												<a href="htmltopdf/nota_timbangan.php?id=<?php echo $id;?>" target="_blank">
-													<button type="button" class="btn btn-block btn-outline btn-info">
-														Print Nota Timbangan
-													</button>
-												</a>
+												<select class="form-control" name="rafa" id="rafa" required>
+													<?php 
+														if($r['rafaksi']==''||$r['rafaksi']==0){
+															echo '<option value="Tidak">Tanpa Rafaksi</option>';
+															echo '<option value="Ya">Beri Rafaksi</option>';
+														}
+														elseif($r['rafaksi']!=''||$r['rafaksi']!=0){
+															echo '<option value="'.$r['rafaksi'].'">Rafaksi '.$r['rafaksi'].' Kg </option>';
+															echo '<option value="Tidak">Tanpa Rafaksi</option>';
+														}
+													?>
+												</select>
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-10px;">
 												<?php 
 													if($status=='Lunas'||$status=='Masuk'||$status2=='Digabung'||$status2=='Dipecah'||$c==NULL){
-														echo '';//Print Nota Tagihan
+														echo '';//Print Nota Tagihan Tonase
 													}
 													else{
 														echo '<a href="htmltopdf/nota_tagihan.php?id='.$id.'&u='.$admin.'" target="_blank">
 															<button type="button" class="btn btn-block btn-outline btn-info">
-																Print Nota Tagihan
+																Print Nota Tagihan Tonase
 															</button>
 														</a>';
 													}
@@ -329,18 +355,11 @@
 												<input type="text" class="form-control" value="<?php echo $r['p1'].' '.$r['p2'].' '.$c; ?>" disabled>  
 											</div>
 											<div class="form-group" style="padding:10px; margin-right:5px; margin-top:-10px;">
-												<select class="form-control" name="rafa" id="rafa" required>
-													<?php 
-														if($r['rafaksi']==''||$r['rafaksi']==0){
-															echo '<option value="Tidak">Tanpa Rafaksi</option>';
-															echo '<option value="Ya">Beri Rafaksi</option>';
-														}
-														elseif($r['rafaksi']!=''||$r['rafaksi']!=0){
-															echo '<option value="'.$r['rafaksi'].'">Rafaksi '.$r['rafaksi'].' Kg </option>';
-															echo '<option value="Tidak">Tanpa Rafaksi</option>';
-														}
-													?>
-												</select>
+												<a href="htmltopdf/nota_timbangan.php?id=<?php echo $id;?>" target="_blank">
+													<button type="button" class="btn btn-block btn-outline btn-info">
+														Print Nota Timbangan
+													</button>
+												</a>
 											</div>
 											<div class="form-group" style="padding:10px; margin-right:5px; margin-top:-10px;">
 												<?php 

@@ -552,19 +552,19 @@
 		//Jika Jenis pedangang sayur / buar harga berbeda 
 		$jenis		= mb_substr($_POST['merchant'], 0, 1, 'utf-8');
 		if($jenis=='B'){
-			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '8'");
-			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '9'");
+			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '8'"); // Tonase Buah
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '9'"); // Mitra Buah
 			// if($_POST['merchant']=='B0072'&&$_POST['goods']==2){
 			// 	$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
 			// }
 		}
 		elseif($jenis=='S'){
-			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
-			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
+			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'"); // Tonase Sayur 
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'"); // Mitra Sayur
 		}
 		elseif($jenis=='L'){
-			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
-			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
+			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'"); // Tonase Lainnya
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'"); // Mitra Lainnya
 		}
 		
 		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
@@ -1394,26 +1394,26 @@
 		$N			= 0;	
 		$N2			= 0;
 		
-		//Set tarif harga jika Jenis pedangang berbeda 
+		//Set tarif harga jika Jenis pedagang berbeda 
 		$merchant 	= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
 		$jenis		= mb_substr($merchant, 0, 1, 'utf-8');
 		$commodity 	= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
 		
 		//Tarif 2 adlh tarif mitra sdgkan tarif1 adalah tarif normal tanpa mitra
-		if($jenis=='B'){
-			$tarif1 = executeScalar("select pay_total from payment where pay_id = '8'");
-			$tarif2 = executeScalar("select pay_total from payment where pay_id = '9'");
+		if($jenis =='B'){
+			$tarif1 = executeScalar("select pay_total from payment where pay_id = '8'"); // Tarif tonase buah
+			$tarif2 = executeScalar("select pay_total from payment where pay_id = '9'"); // Tarif mitra & mandor buah
 			// if($merchant=='B0072'&&$commodity==2){
 			// 	$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'");
 			// }
 		}
 		elseif($jenis=='S'){
-			$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'");
-			$tarif2 = executeScalar("select pay_total from payment where pay_id = '3'"); //Tarif Menggunakan Mitra Sayur
+			$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'"); // Tarif tonase sayur
+			$tarif2 = executeScalar("select pay_total from payment where pay_id = '3'"); // Tarif mitra & mandor sayur
 		}
 		elseif($jenis=='L'){
-			$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'");
-			$tarif2 = executeScalar("select pay_total from payment where pay_id = '3'");
+			$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'"); // Tarif tonase lainnya
+			$tarif2 = executeScalar("select pay_total from payment where pay_id = '3'"); // Tarif mitra & mandor lainnya
 		}
 
 		//tarifmin adlh tarif minimal timbangan (Saat Ini 15.000)
@@ -1451,12 +1451,12 @@
 		else{
 			$laborer = 'Ya';
 			// Pengecekan pemilihan tarif berdasarkan jenis merchant
-			if($jenis=='B'){
+			if($jenis == 'B'){
 				$mitrabagi 	= executeScalar("select pay_total from payment where pay_id = '10'"); //Tarif Mitra Dibagi Buah
 				$mitrasmpn 	= executeScalar("select pay_total from payment where pay_id = '11'"); //Tarif Mitra Disimpan Buah
 				$mandorbagi = executeScalar("select pay_total from payment where pay_id = '12'"); //Tarif Mandor DiBagi Buah
 				$mandorsmpn	= executeScalar("select pay_total from payment where pay_id = '13'"); //Tarif Mandor Disimpan Buah
-				$total1		= $netto*$tarif3;
+				$total1		= $netto * $tarif3;
 			}
 			elseif($jenis=='S'){
 				$mitrabagi 	= executeScalar("select pay_total from payment where pay_id = '4'"); //Tarif Mitra Dibagi Sayur
@@ -1474,6 +1474,7 @@
 			}
 						
 			$total2		= $total1;
+			
 			//Ambil tarif mitra
 			$total4 	= $netto * $tarif2; //Total4 (Biaya Angkut) = Brt Bersih (Netto) x Tarif Mitra
 			$kuli 		= 0;

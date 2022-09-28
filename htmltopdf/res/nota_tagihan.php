@@ -128,7 +128,7 @@
         </table>
 	<br />
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:0px;">
-		NOTA TAGIHAN
+		NOTA TAGIHAN TONASE
 	</div>
 	<br/>
 	<div style="font-size: 12px; font-weight: bold;">Data timbangan akhir adalah sebagai berikut:</div>
@@ -154,7 +154,7 @@
 		<tr><td>Rafaksi (Potongan) 	</td><td> : <?php echo $r['rafaksi']; ?></td></tr>
 		<tr><td>Berat Bersih		</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_no($r['netto']); ?></b></td></tr>
 		<tr><td>Tarif Tonase  		</td><td> : <?php if ($biayatonase <= $tarifminim) { ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($tarifminim); ?></b><?php }else{ echo "Rp. ".intval($tarif2)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayatonase); ?></b><?php } ?></td></tr>
-		<tr><td>Tarif Bongkar  		</td><td> : <?php if ($r['laborer_sts'] != "Ya") { echo "-"; }else{ echo "Rp. ".intval($tarif1)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b><?php } ?></td></tr>
+		<!-- <tr><td>Tarif Bongkar  		</td><td> : <?php if ($r['laborer_sts'] != "Ya") { echo "-"; }else{ echo "Rp. ".intval($tarif1)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b><?php } ?></td></tr> -->
 		<!-- <tr><td>Total Biaya Tonase 	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayatonase); ?></b></td></tr>
 		<tr><td>Total Biaya Mitra	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b></td></tr> -->
 		<!-- <tr><td>Total Biaya 	 	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($r['cost']); ?></b></td></tr> -->
@@ -257,17 +257,17 @@
 				if($x24>0){
 					$x24 = 'M04.';
 				}
-				echo '<tr><td>Kode Mitra	</td><td width="220"> : '.$x1.$x2.$x3.$x4.$x5.$x6.$x7.$x8.$x9.$x10.$x11.$x12.$x13.$x14.$x15.$x16.$x17.$x18.$x19.$x20.$x21.$x22.$x23.$x24.'</td></tr>';
+				// echo '<tr><td>Kode Mitra	</td><td width="220"> : '.$x1.$x2.$x3.$x4.$x5.$x6.$x7.$x8.$x9.$x10.$x11.$x12.$x13.$x14.$x15.$x16.$x17.$x18.$x19.$x20.$x21.$x22.$x23.$x24.'</td></tr>';
 			}
 		?>
 	</table><br/>
 	<b>NB :</b> Nota tagihan ini harap disimpan sebagai bukti pembayaran. Mohon Dicek Kembali.
 	<br/>
-	<table style="width: 100%; high: 50px; border: 0px black; margin-top:5px; font-size:9pt;">
+	<table style="width: 100%; high: 50px; border: 0px black; margin-top:15px; font-size:9pt;">
 		<tr>
-			<td style="text-align: center;width: 33%; border: 1px solid black;">Checker<br><br><?php echo $checker; ?></td>
+			<td style="text-align: center;width: 33%; border: 1px solid black;">Admin Timbang<br><br><?php echo $checker; ?></td>
 			<td style="text-align: center;width: 34%; border: 1px solid black;">Pedagang<br><br>&nbsp;</td>
-			<td style="text-align: center;width: 33%; border: 1px solid black;">Mandor<br><br>&nbsp;</td>
+			<td style="text-align: center;width: 33%; border: 1px solid black;">Checker<br><br>&nbsp;</td>
 		</tr>
 	</table>
 	<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:5px;">
