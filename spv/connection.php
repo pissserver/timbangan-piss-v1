@@ -1,20 +1,20 @@
 <?php
-	/*$server 	= "localhost";
+	$server 	= "localhost";
 	$username 	= "root";
 	$password 	= "";
-	$database 	= "pios2";*/
-	$server 	= "192.168.1.46";
-	$username 	= "edo";
-	$password 	= "edocakep@007";
-	$database 	= "pios2";
-	$port		= 3306;
+	$database 	= "db_piss";
+	// $server 	= "192.168.1.46";
+	// $username 	= "edo";
+	// $password 	= "edocakep@007";
+	// $database 	= "pios2";
+	// $port		= 3306;
 
 	// Koneksi dan memilih database di server
-	/*mysql_connect($server,$username,$password) or die("Koneksi gagal");
-	mysql_select_db($database) or die("Database tidak bisa dibuka");*/
-	
-	mysql_connect($server.':'.$port,$username,$password) or die("Koneksi gagal");
+	mysql_connect($server,$username,$password) or die("Koneksi gagal");
 	mysql_select_db($database) or die("Database tidak bisa dibuka");
+	
+	// mysql_connect($server.':'.$port,$username,$password) or die("Koneksi gagal");
+	// mysql_select_db($database) or die("Database tidak bisa dibuka");
 
 	function format_rupiah($angka){
 		$rupiah = 'Rp.'.number_format($angka,0,',','.');

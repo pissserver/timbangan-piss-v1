@@ -17,7 +17,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+    <title>KIR Kendaraan | PISS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PIOS</a>
+                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PISS</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -155,11 +155,11 @@
 								<fieldset>
 									<div class="form-group" style="padding:10px; margin-top:-10px; margin-bottom:0px;">
 										<label>Nopol Kendaraan</label>
-										<input type="text" class="form-control" id="trans" name="trans" placeholder="Ketik Nopol Kendaraan.." autofocus="autofocus" required>                  
+										<input type="text" class="form-control" id="trans" name="trans" placeholder="Masukkan Nopol Kendaraan" autofocus="autofocus" required>                  
 									</div>
 									<div class="form-group" style="padding:10px; margin-bottom:0px;">
 										<label>Berat Standar</label>
-										<input class="form-control" id="weight" name="weight" type="text" placeholder="Berat Kendaraan (Kg)" required/>
+										<input class="form-control" id="weight" name="weight" type="text" placeholder="Masukkan Berat Kendaraap (Kg)" required/>
 										<script>
 											$("input[name='weight']").TouchSpin({
 											  verticalbuttons: true,

@@ -45,17 +45,18 @@
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:1050px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 3%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 7%; border: solid 1px black;">TGL MASUK</th>
+			<th style="text-align: left;width: 6%; border: solid 1px black;">TGL MASUK</th>
 			<th style="text-align: left;width: 7%;border: solid 1px black;">NOTA TIMBANG</th>
 			<th style="text-align: left;width: 7%;border: solid 1px black;">NOTA TAGIHAN</th>
-			<th style="text-align: left;width: 7%;border: solid 1px black;">NOPOL</th>
-			<th style="text-align: left;width: 13%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: left;width: 5%;border: solid 1px black;">NOPOL</th>
+			<th style="text-align: left;width: 12%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: left;width: 4%;border: solid 1px black;">JENIS</th>
 			<th style="text-align: left;width: 7%;border: solid 1px black;">KOMODITI</th>
 			<th style="text-align: left;width: 5%;border: solid 1px black;">LAPAK</th>
 			<th style="text-align: center;width: 5%;border: solid 1px black;">STATUS MITRA</th>
-			<th style="text-align: center;width: 6%;border: solid 1px black;">STATUS NOTA</th>
-			<th style="text-align: center;width: 6%;border: solid 1px black;">BERAT MASUK</th>
-			<th style="text-align: center;width: 6%;border: solid 1px black;">BERAT KELUAR</th>
+			<th style="text-align: center;width: 1%;border: solid 1px black;">STATUS NOTA</th>
+			<th style="text-align: center;width: 4%;border: solid 1px black;">BERAT MASUK</th>
+			<th style="text-align: center;width: 4%;border: solid 1px black;">BERAT KELUAR</th>
 			<th style="text-align: center;width: 6%;border: solid 1px black;">NON KOMODITI</th>
 			<th style="text-align: center;width: 5%;border: solid 1px black;">RAFAKSI</th>
 			<th style="text-align: center;width: 6%;border: solid 1px black;">TONASE</th>
@@ -80,6 +81,7 @@
 			$no 		= 1;
 			while($r= mysql_fetch_array($query)){
 				$name		= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
+				$kategori	= executeScalar("select merchant_type from merchant where merchant_id = '".$r['merchant_id']."'");
 				$lapak 		= executeScalar("select l.lapak_name from rent r, lapak l 
 							where r.lapak_id = l.lapak_id and r.merchant_id = '".$r['merchant_id']."' 
 							and (r.rent_sts2 != 'Pindah' && r.rent_sts2 != 'Batal') limit 1");
@@ -101,6 +103,7 @@
 			<td style="text-align: left;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $r['nopol']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $name; ?></td>
+			<td style="text-align: left;border: solid 1px black;"><?php echo $kategori; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $goods; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $lapak; ?></td>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $r['laborer_sts']; ?></td>
