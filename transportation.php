@@ -159,7 +159,7 @@
 									</div>
 									<div class="form-group" style="padding:10px; margin-bottom:0px;">
 										<label>Berat Standar</label>
-										<input class="form-control" id="weight" name="weight" type="text" placeholder="Masukkan Berat Kendaraap (Kg)" required/>
+										<input class="form-control" id="weight" name="weight" type="text" placeholder="Masukkan Berat Kendaraan (Kg)" required/>
 										<script>
 											$("input[name='weight']").TouchSpin({
 											  verticalbuttons: true,
@@ -175,7 +175,7 @@
 							</form> 
                         </div>
                     </div>
-					<div class="panel panel-primary">
+					<!-- <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-truck fa-fw"></i> Print Data Kir Kendaraan
                         </div>
@@ -186,7 +186,7 @@
 								</div>
 							</form> 
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-8" style="margin-top:10px;">
                     <div id="Area1">

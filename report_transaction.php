@@ -22,7 +22,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+    <title>Laporan Transaksi Timbang | PISS</title>
 	<?php echo headScript(); ?>
 	<script src="dataTables/dataTables.tableTools.css"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -37,7 +37,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PIOS</a>
+                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PISS</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -134,7 +134,7 @@
 						</div>
 					</div>
 					<input type="hidden" id="value_day1" />
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Laporan Transaksi Timbang Per Hari
                         </div>
