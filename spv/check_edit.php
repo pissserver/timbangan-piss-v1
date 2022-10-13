@@ -22,6 +22,7 @@
 		$goods 		= executeScalar("select goods_name from goods where goods_id='".$r['goods_id']."'");
 		$status 	= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
 		$status2	= executeScalar("select weighing_sts2 from weighing where weighing_id = '".$id."'");
+		$laborer_sts	= executeScalar("select laborer_sts from weighing where weighing_id = '".$id."'");
 		if($r['noncommodity_id']!=0||$r['noncommodity_id']!=''){
 			$nc1	= $r['noncommodity_id'];
 			$nc2	= executeScalar("select noncommodity_name from noncommodity where noncommodity_id='".$nc1."'");
@@ -47,7 +48,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../../images/icon.png">
     <link rel="shortcut icon" href="../../images/icon.png" />
-    <title>Admin</title>
+    <title>Detail Data Timbangan | PISS</title>
 	<!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -84,7 +85,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PIOS</a>
+                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PISS</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -203,7 +204,7 @@
 			<div class="row">
                 <div class="col-lg-12">
 					<br />
-                    <div class="panel panel-info">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-truck fa-fw"></i> Pengecekan Data Timbangan
 							(<?php 
@@ -211,10 +212,12 @@
 								
 								if($status=='Keluar'||$status=='Lunas'){
 									$year = executeScalar("select date_format(date_out, '%y') from weighing where weighing_id = '".$r['weighing_id']."'");
-									echo 'TG'.$year.$wid;
+									// echo 'TG'.$year.$wid;
+									echo 'TG'.$wid;
 								}else{
 									$year = executeScalar("select date_format(date_in, '%y') from weighing where weighing_id = '".$r['weighing_id']."'");
-									echo 'TB'.$year.$wid;
+									// echo 'TB'.$year.$wid;
+									echo 'TB'.$wid;
 								} 
 							?>)
                         </div>
@@ -286,6 +289,24 @@
 													}
 												?>
 											</div>
+											<div class="form-group" style="padding:10px; margin-top:-10px; margin-left:5px;">
+												<?php
+													if ($laborer_sts == 'Ya' ) {
+														if($status=='Lunas'||$status=='Masuk'||$status2=='Digabung'||$status2=='Dipecah'||$c==NULL){
+															echo '';//Print Nota Tagihan Jasa Bongkar
+														}
+														else{
+															echo '<a href="../htmltopdf/nota_tagihan_mitra.php?id='.$id.'&u='.$admin.'" target="_blank">
+																<button type="button" class="btn btn-block btn-outline btn-info">
+																	Print Nota Tagihan Jasa Bongkar
+																</button>
+															</a>';
+														}
+													}else {
+														echo '';
+													}
+												?>
+											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-group" style="padding:10px; margin-top:-10px;">
@@ -315,7 +336,7 @@
 													else{
 														echo '<a href="../htmltopdf/nota_tagihan.php?id='.$id.'&u='.$admin.'" target="_blank">
 															<button type="button" class="btn btn-block btn-outline btn-info">
-																Print Nota Tagihan
+																Print Nota Tagihan Tonase
 															</button>
 														</a>';
 													}

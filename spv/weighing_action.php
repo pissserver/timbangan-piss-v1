@@ -1818,28 +1818,33 @@
 		$N			= 0;	
 		$N2			= 0;
 		
-		//Set tarif harga jika Jenis pedangang berbeda 
+		//Set tarif harga jika Jenis pedagang berbeda 
 		$merchant 	= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
 		$jenis		= mb_substr($merchant, 0, 1, 'utf-8');
 		$commodity 	= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
-		if($jenis=='B'){
-			$tarif1 	= executeScalar("select pay_total from payment where pay_id = '8'");
-			if($merchant=='B0072'&&$commodity==2){
-				$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'");
-			}
+		
+		//Tarif 2 adlh tarif mitra sdgkan tarif1 adalah tarif normal tanpa mitra
+		if($jenis =='B'){
+			$tarif1 = executeScalar("select pay_total from payment where pay_id = '8'"); // Tarif tonase buah
+			$tarif2 = executeScalar("select pay_total from payment where pay_id = '9'"); // Tarif mitra & mandor buah
+			// if($merchant=='B0072'&&$commodity==2){
+			// 	$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'");
+			// }
 		}
 		elseif($jenis=='S'){
-			$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'");
+			$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'"); // Tarif tonase sayur
+			$tarif2 = executeScalar("select pay_total from payment where pay_id = '3'"); // Tarif mitra & mandor sayur
 		}
 		elseif($jenis=='L'){
-			$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'");
+			$tarif1 = executeScalar("select pay_total from payment where pay_id = '2'"); // Tarif tonase lainnya
+			$tarif2 = executeScalar("select pay_total from payment where pay_id = '3'"); // Tarif mitra & mandor lainnya
 		}
-		//Tarif 2 adlh tarif mitra sdgkan tarif1 adalah tarif normal tanpa mitra
-		$tarif2 	= executeScalar("select pay_total from payment where pay_id = '3'"); //Tarif Menggunakan Mitra
-		//tarifmin adlh tarif minimal timbangan (Saat Ini 10.000)
+
+		//tarifmin adlh tarif minimal timbangan (Saat Ini 15.000)
 		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
+		
 		//tarif3 adlh tarif normal + mitra
-		$tarif3 	= $tarif1+$tarif2;
+		$tarif3 	= $tarif1 + $tarif2;
 		$netto 		= executeScalar("select netto from weighing where weighing_id = '".$id."'");
 		
 		//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
@@ -1870,12 +1875,30 @@
 		else{
 			$laborer = 'Ya';
 			//Ambil tarif mitra & mandor
-			$mitrabagi 	= executeScalar("select pay_total from payment where pay_id = '4'"); //Tarif Mitra Dibagi
-			$mitrasmpn 	= executeScalar("select pay_total from payment where pay_id = '5'"); //Tarif Mitra Disimpan
-			$mandorbagi = executeScalar("select pay_total from payment where pay_id = '6'"); //Tarif Mandor DiBagi
-			$mandorsmpn	= executeScalar("select pay_total from payment where pay_id = '7'"); //Tarif Mandor Disimpan
-			$total1		= $netto*$tarif3;
+			if($jenis == 'B'){
+				$mitrabagi 	= executeScalar("select pay_total from payment where pay_id = '10'"); //Tarif Mitra Dibagi Buah
+				$mitrasmpn 	= executeScalar("select pay_total from payment where pay_id = '11'"); //Tarif Mitra Disimpan Buah
+				$mandorbagi = executeScalar("select pay_total from payment where pay_id = '12'"); //Tarif Mandor DiBagi Buah
+				$mandorsmpn	= executeScalar("select pay_total from payment where pay_id = '13'"); //Tarif Mandor Disimpan Buah
+				$total1		= $netto * $tarif3;
+			}
+			elseif($jenis=='S'){
+				$mitrabagi 	= executeScalar("select pay_total from payment where pay_id = '4'"); //Tarif Mitra Dibagi Sayur
+				$mitrasmpn 	= executeScalar("select pay_total from payment where pay_id = '5'"); //Tarif Mitra Disimpan Sayur
+				$mandorbagi = executeScalar("select pay_total from payment where pay_id = '6'"); //Tarif Mandor DiBagi Sayur
+				$mandorsmpn	= executeScalar("select pay_total from payment where pay_id = '7'"); //Tarif Mandor Disimpan Sayur
+				$total1		= $netto*$tarif3;
+			}
+			elseif($jenis=='L'){
+				$mitrabagi 	= executeScalar("select pay_total from payment where pay_id = '4'"); //Tarif Mitra Dibagi Sayur
+				$mitrasmpn 	= executeScalar("select pay_total from payment where pay_id = '5'"); //Tarif Mitra Disimpan Sayur
+				$mandorbagi = executeScalar("select pay_total from payment where pay_id = '6'"); //Tarif Mandor DiBagi Sayur
+				$mandorsmpn	= executeScalar("select pay_total from payment where pay_id = '7'"); //Tarif Mandor Disimpan Sayur
+				$total1		= $netto*$tarif3;
+			}
+			
 			$total2		= $total1;
+
 			//Ambil tarif mitra
 			$total4 	= $netto*$tarif2; //Total4 (Biaya Angkut) = Brt Bersih (Netto) x Tarif Mitra
 			$kuli 		= 0;
@@ -1889,6 +1912,7 @@
 			//Tgl & Waktu Pembayaran Mitra = tgl keluar
 			$date_out 	= executeScalar("select date_out from weighing where weighing_id = '".$id."'");
 			$time_out 	= executeScalar("select time_out from weighing where weighing_id = '".$id."'");
+			
 			//hitung Tarif permitra
 			if(empty($_POST['mandor'])){//jika tidak ada mandor
 				$N 			= count($_POST['mitra']); //N = Jml Mitra Yg Kerja
@@ -1898,7 +1922,7 @@
 				$k_disimpan = $kuli*$mitrasmpn;
 				$pios		= $netto*($mandorbagi+$mandorsmpn);
 			}
-			elseif(empty($_POST['mitra'])){//jika ada Mandor & tidak ada Mitra
+			elseif(empty($_POST['mitra'])){//jika tidak ada Kuli
 				$N2 		= count($_POST['mandor']); //N2 = Jml Mandor Yg Kerja
 				$N			= 0;
 				$mandor 	= $netto/$N2;
@@ -1914,12 +1938,12 @@
 						if($ada>0){
 							mysql_query("delete from laborer_fee where weighing_id = '".$id."'");
 						}
-						mysql_query("insert into laborer_fee (weighing_id, foreman, foreman_save, pios_fee, laborer_fee_sts, laborer_fee_date) 
+						mysql_query("insert into laborer_fee (weighing_id, $mandor[$i], $mandor[$i]_save, pios_fee, laborer_fee_sts, laborer_fee_date) 
 						value ('".$id."', '".$m_dibagi."', '".$m_disimpan."', '".$pios."', 'Baru', '".$date_out.' '.$time_out."' )");
 					}elseif($i>0){
-						mysql_query("update laborer_fee set foreman 	= '".$m_dibagi."',
-														foreman_save	= '".$m_disimpan."'
-													where weighing_id 	= '".$id."'");
+						mysql_query("update laborer_fee set $mandor[$i] 		= '".$m_dibagi."',
+															$mandor[$i]_save	= '".$m_disimpan."'
+													where weighing_id 			= '".$id."'");
 					}
 				}
 			}
@@ -1949,8 +1973,8 @@
 						mysql_query("insert into laborer_fee (weighing_id, $mitra[$i], $mitra[$i]_save, pios_fee, laborer_fee_sts, laborer_fee_date) 
 						value ('".$id."', '".$k_dibagi."', '".$k_disimpan."', '".$pios."', 'Baru', '".$date_out.' '.$time_out."' )");
 					}else{//jika ada mandor
-						mysql_query("insert into laborer_fee (weighing_id, $mitra[$i], $mitra[$i]_save, foreman, foreman_save, laborer_fee_sts, laborer_fee_date) 
-						value ('".$id."', '".$k_dibagi."', '".$k_disimpan."', '".$m_dibagi."', '".$m_disimpan."', 'Baru', '".$date_out.' '.$time_out."' )");
+						mysql_query("insert into laborer_fee (weighing_id, $mitra[$i], $mitra[$i]_save, laborer_fee_sts, laborer_fee_date) 
+						value ('".$id."', '".$k_dibagi."', '".$k_disimpan."', 'Baru', '".$date_out.' '.$time_out."' )");
 					}
 				}elseif($i>0){//query db untuk data yg kedua dst
 					mysql_query("update laborer_fee set $mitra[$i] 	= '".$k_dibagi."',
@@ -1958,9 +1982,24 @@
 												where weighing_id 	= '".$id."'");
 				}
 			}
+
+			// Input data mandor ke laborer_fee
+			// Cek apakah mandor ada atau tidak
+			if ($N2 > 0) {
+				for($i = 0; $i < $N2; $i++){	
+					$mandor	= $_POST['mandor'];
+					mysql_query("update laborer_fee set $mandor[$i] 	= '".$m_dibagi."',
+													$mandor[$i]_save 	= '".$m_disimpan."'
+													where weighing_id 	= '".$id."'");
+				}
+			}else{
+				echo "<script>window.alert('Mandor Tidak Ditemukan');
+					window.location=('check_edit.php?id=$id')</script>";
+					exit();
+			}
 		}
 		
-		//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
+		//Jika total bayar dibawah 15.000, maka akan dikenakan tarin min (Rp 15.000)
 		if($total1<$tarifmin){
 			$total1 = $tarifmin;
 		}
