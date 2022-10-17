@@ -155,8 +155,8 @@
 
 			<div id="page-wrapper">
 				<div class="row">
-					<div class="col-lg-12">
-						<div class="panel panel-info" style="margin-bottom:-10px;">
+					<div class="col-lg-12 col-md-12 col-xs-12">
+						<div class="panel panel-primary" style="margin-bottom:-10px;">
 							<div class="panel-heading">
 								<i class="fa fa-truck fa-fw"></i> Data Tagihan Tonase
 							</div>
@@ -172,9 +172,13 @@
 								</div>
 							</div>
 						</div>
-						<div class="panel panel-info" style="margin-bottom:0px;">
+					</div>
+				</div><br>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-xs-12">
+						<div class="panel panel-primary" style="margin-bottom:0px;">
 							<div class="panel-heading">
-								<i class="fa fa-truck fa-fw"></i> Data Penampungan Pembayaran Sementara
+								<i class="fa fa-truck fa-fw"></i> Data Penampungan Pembayaran Tonase Sementara
 							</div>
 							<div class="panel-body" style="margin-bottom:-10px;">
 								<div class="row">
@@ -189,8 +193,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">
-						<div class="panel panel-info">
+				</div><br>
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-xs-6">
+						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<i class="fa fa-line-chart fa-fw"></i> Pembatalan Data Pembayaran
 							</div>
@@ -219,8 +225,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">
-						<div class="panel panel-info">
+					<div class="col-lg-6 col-md-6 col-xs-6">
+						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<i class="fa fa-line-chart fa-fw"></i> Acc Data Pembayaran
 							</div>
