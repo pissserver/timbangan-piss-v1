@@ -1,8 +1,8 @@
 <?php
 	$server 	= "localhost";
 	$username 	= "root";
-	$password 	= "protectedbypios";
-	$database 	= "pios2";
+	$password 	= "";
+	$database 	= "db_piss";
 
 	// Koneksi dan memilih database di server
 	mysql_connect($server,$username,$password) or die("Koneksi gagal");
