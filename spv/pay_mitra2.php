@@ -345,7 +345,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../../images/icon.png">
     <link rel="shortcut icon" href="../../images/icon.png" />
-    <title>Admin</title>
+    <title>Pembayaran Upah Mitra | PISS</title>
 	<!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
@@ -501,7 +501,7 @@
 			<div class="row">
                 <div class="col-lg-12">
 					<br />
-                    <div class="panel panel-info">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-truck fa-fw"></i> Pembayaran Upah Mitra (Tanggal <?php echo date("d-m-Y", strtotime($date));?>)
                         </div>
@@ -537,155 +537,566 @@
 									<fieldset>
 										<div class="col-md-3">
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Upah Soari (T06)</label>
-												<input id="" name="" value="<?php echo format_rupiah($t06); ?>" type="text" class="form-control"  disabled />
+												<label>Upah Lukman F (B001)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B001); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Upah Musodik (T14)</label>
-												<input id="" name="" value="<?php echo format_rupiah($t14); ?>" type="text" class="form-control"  disabled />
+												<label>Upah Fandelli (B002)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B002); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Upah Hafid (T17)</label>
-												<input id="" name="" value="<?php echo format_rupiah($t17); ?>" type="text" class="form-control"  disabled />
+												<label>Upah M. Syaifudin (B003)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B003); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Upah Adenan (T24)</label>
-												<input id="" name="" value="<?php echo format_rupiah($t24); ?>" type="text" class="form-control"  disabled />
+												<label>Upah Duwi A. (B004)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B004); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Upah Zaenal (T26)</label>
-												<input id="" name="" value="<?php echo format_rupiah($t26); ?>" type="text" class="form-control"  disabled />
+												<label>Upah Kairul M. S (B005)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B005); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Upah Mustofa (T29)</label>
-												<input id="" name="" value="<?php echo format_rupiah($t29); ?>" type="text" class="form-control"  disabled />
+												<label>Upah Nanang B (B006)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B006); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Upah Rochman (T36)</label>
-												<input id="" name="" value="<?php echo format_rupiah($t36); ?>" type="text" class="form-control"  disabled />
+												<label>Upah Putut S (B007)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B007); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Upah Maksum (T40)</label>
-												<input id="" name="" value="<?php echo format_rupiah($t40); ?>" type="text" class="form-control"  disabled />
+												<label>Upah Abd. Muid (B008)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B008); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Upah Zaini (M03)</label>
-												<input id="" name="" value="<?php echo format_rupiah($m03); ?>" type="text" class="form-control"  disabled />
+												<label>Upah Moh. Muid (B009)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B009); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Didik S (B010)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B010); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Ahmad T. K (B011)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B011); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Fathur R (B012)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B012); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Mat Rizal (B013)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B013); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Slamet P (B014)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B014); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Muktarom (B015)</label>
+												<input id="" name="" value="<?php echo format_rupiah($B015); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah M. Ali M (S001)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S001); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Ahmad F H (S002)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S002); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Amirul M (S003)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S003); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Khoirul A (S004)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S004); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Ragil S (S005)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S005); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Nawawi (S006)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S006); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Muis H (S007)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S007); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah M. Hasin (S008)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S008); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Marsono (S009)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S009); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Seukron (S010)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S010); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Rifai (S011)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S011); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Rofik (S012)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S012); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Durasid (S013)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S013); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Deni (S014)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S014); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Mahmud (S015)</label>
+												<input id="" name="" value="<?php echo format_rupiah($S015); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Darwanto (M01)</label>
+												<input id="" name="" value="<?php echo format_rupiah($M01); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Tri W (M02)</label>
+												<input id="" name="" value="<?php echo format_rupiah($M02); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah Abdul R (M03)</label>
+												<input id="" name="" value="<?php echo format_rupiah($M03); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Upah M. Rois (M04)</label>
+												<input id="" name="" value="<?php echo format_rupiah($M04); ?>" type="text" class="form-control"  disabled />
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Dibagikan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $xt06; ?>" id="t06" name="t06">
+												<input type="number" min="0" class="form-control" value="<?php echo $xB001; ?>" id="B001" name="B001">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Dibagikan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $xt14; ?>" id="t14" name="t14">
+												<input type="number" min="0" class="form-control" value="<?php echo $xB002; ?>" id="B002" name="B002">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Dibagikan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $xt17; ?>" id="t17" name="t17">
+												<input type="number" min="0" class="form-control" value="<?php echo $xB003; ?>" id="B003" name="B003">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Dibagikan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $xt24; ?>" id="t24" name="t24">
+												<input type="number" min="0" class="form-control" value="<?php echo $xB004; ?>" id="B004" name="B004">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Dibagikan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $xt26; ?>" id="t26" name="t26">
+												<input type="number" min="0" class="form-control" value="<?php echo $xB005; ?>" id="B005" name="B005">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Dibagikan</label>
-												<input type="number" class="form-control" value="<?php echo $xt29; ?>" id="t29" name="t29">
+												<input type="number" min="0" class="form-control" value="<?php echo $xB006; ?>" id="B006" name="B006">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Dibagikan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $xt36; ?>" id="t36" name="t36">
+												<input type="number" min="0" class="form-control" value="<?php echo $xB007; ?>" id="B007" name="B007">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Dibagikan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $xt40; ?>" id="t40" name="t40">
+												<input type="number" min="0" class="form-control" value="<?php echo $xB008; ?>" id="B008" name="B008">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Dibagikan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $xm03; ?>" id="m03" name="m03">
+												<input type="number" min="0" class="form-control" value="<?php echo $xB009; ?>" id="B009" name="B009">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xB010; ?>" id="B010" name="B010">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xB011; ?>" id="B011" name="B011">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xB012; ?>" id="B012" name="B012">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xB013; ?>" id="B013" name="B013">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xB014; ?>" id="B014" name="B014">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xB015; ?>" id="B015" name="B015">
+											</div>
+
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS001; ?>" id="S001" name="S001">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS002; ?>" id="S002" name="S002">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS003; ?>" id="S003" name="S003">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS004; ?>" id="S004" name="S004">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS005; ?>" id="S005" name="S005">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS006; ?>" id="S006" name="S006">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS007; ?>" id="S007" name="S007">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS008; ?>" id="S008" name="S008">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS009; ?>" id="S009" name="S009">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS010; ?>" id="S010" name="S010">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS011; ?>" id="S011" name="S011">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS012; ?>" id="S012" name="S012">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS013; ?>" id="S013" name="S013">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS014; ?>" id="S014" name="S014">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xS015; ?>" id="S015" name="S015">
+											</div>
+
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xM01; ?>" id="M01" name="M01">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xM02; ?>" id="M02" name="M02">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xM03; ?>" id="M03" name="M03">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Dibagikan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $xM04; ?>" id="M04" name="M04">
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Simpanan Soari (T06)</label>
-												<input id="" name="" value="<?php echo format_rupiah($st06); ?>" type="text" class="form-control" disabled />
+												<label>Simpanan Lukman F (B001)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB001); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Simpanan Musodik (T14)</label>
-												<input id="" name="" value="<?php echo format_rupiah($st14); ?>" type="text" class="form-control" disabled />
+												<label>Simpanan Fandelli (B002)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB002); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Simpanan Hafid (T17)</label>
-												<input id="" name="" value="<?php echo format_rupiah($st17); ?>" type="text" class="form-control" disabled />
+												<label>Simpanan Syaifudin (B003)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB003); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Simpanan Adenan (T24)</label>
-												<input id="" name="" value="<?php echo format_rupiah($st24); ?>" type="text" class="form-control" disabled />
+												<label>Simpanan Duwi A. (B004)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB004); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Simpanan Zaenal (T26)</label>
-												<input id="" name="" value="<?php echo format_rupiah($st26); ?>" type="text" class="form-control" disabled />
+												<label>Simpanan Kairul M. S (B005)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB005); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Simpanan Mustofa (T29)</label>
-												<input id="" name="" value="<?php echo format_rupiah($st29); ?>" type="text" class="form-control" disabled />
+												<label>Simpanan Nanang B (B006)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB006); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Simpanan Rochman (T36)</label>
-												<input id="" name="" value="<?php echo format_rupiah($st36); ?>" type="text" class="form-control" disabled />
+												<label>Simpanan Putut S (B007)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB007); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Simpanan Maksum (T40)</label>
-												<input id="" name="" value="<?php echo format_rupiah($st40); ?>" type="text" class="form-control" disabled />
+												<label>Simpanan Abd. Muid (B008)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB008); ?>" type="text" class="form-control"  disabled />
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
-												<label>Simpanan Zaini (M03)</label>
-												<input id="" name="" value="<?php echo format_rupiah($sm03); ?>" type="text" class="form-control" disabled />
+												<label>Simpanan Moh. Muid (B009)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB009); ?>" type="text" class="form-control"  disabled />
 											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Didik S (B010)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB010); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Ahmad T. K (B011)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB011); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Fathur R (B012)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB012); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Mat Rizal (B013)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB013); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Slamet P (B014)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB014); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Muktarom (B015)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SB015); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan M. Ali M (S001)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS001); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Ahmad F H (S002)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS002); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Amirul M (S003)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS003); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Khoirul A (S004)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS004); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Ragil S (S005)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS005); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Nawawi (S006)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS006); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Muis H (S007)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS007); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan M. Hasin (S008)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS008); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Marsono (S009)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS009); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Seukron (S010)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS010); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Rifai (S011)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS011); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Rofik (S012)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS012); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Durasid (S013)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS013); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Deni (S014)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS014); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Mahmud (S015)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SS015); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Darwanto (M01)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SM01); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Tri W (M02)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SM02); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan Abdul R (M03)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SM03); ?>" type="text" class="form-control"  disabled />
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:10px; margin-right:5px;">
+												<label>Simpanan M. Rois (M04)</label>
+												<input id="" name="" value="<?php echo format_rupiah($SM04); ?>" type="text" class="form-control"  disabled />
+											</div>
+
 										</div>
 										<div class="col-md-3">
-											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
-												<label>Total Disimpan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $yt06; ?>" id="st06" name="st06">
-											</div>
-											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+											<!-- <div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Disimpan</label>
 												<input type="number" min="0" class="form-control" value="<?php echo $yt14; ?>" id="st14" name="st14">
+											</div> -->
+											
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yB001; ?>" id="SB001" name="SB001">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Disimpan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $yt17; ?>" id="st17" name="st17">
+												<input type="number" min="0" class="form-control" value="<?php echo $yB002; ?>" id="SB002" name="SB002">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Disimpan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $yt24; ?>" id="st24" name="st24">
+												<input type="number" min="0" class="form-control" value="<?php echo $yB003; ?>" id="SB003" name="SB003">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Disimpan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $yt26; ?>" id="st26" name="st26">
+												<input type="number" min="0" class="form-control" value="<?php echo $yB004; ?>" id="SB004" name="SB004">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Disimpan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $yt29; ?>" id="st29" name="st29">
+												<input type="number" min="0" class="form-control" value="<?php echo $yB005; ?>" id="SB005" name="SB005">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Disimpan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $yt36; ?>" id="st36" name="st36">
+												<input type="number" min="0" class="form-control" value="<?php echo $yB006; ?>" id="SB006" name="SB006">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Disimpan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $yt40; ?>" id="st40" name="st40">
+												<input type="number" min="0" class="form-control" value="<?php echo $yB007; ?>" id="SB007" name="SB007">
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
 												<label>Total Disimpan</label>
-												<input type="number" min="0" class="form-control" value="<?php echo $ym03; ?>" id="sm03" name="sm03">
+												<input type="number" min="0" class="form-control" value="<?php echo $yB008; ?>" id="SB008" name="SB008">
 											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yB009; ?>" id="SB009" name="SB009">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yB010; ?>" id="SB010" name="SB010">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yB011; ?>" id="SB011" name="SB011">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yB012; ?>" id="SB012" name="SB012">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yB013; ?>" id="SB013" name="SB013">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yB014; ?>" id="SB014" name="SB014">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yB015; ?>" id="SB015" name="SB015">
+											</div>
+
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS001; ?>" id="SS001" name="SS001">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS002; ?>" id="SS002" name="SS002">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS003; ?>" id="SS003" name="SS003">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS004; ?>" id="SS004" name="SS004">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS005; ?>" id="SS005" name="SS005">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS006; ?>" id="SS006" name="SS006">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS007; ?>" id="SS007" name="SS007">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS008; ?>" id="SS008" name="SS008">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS009; ?>" id="SS009" name="SS009">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS010; ?>" id="SS010" name="SS010">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS011; ?>" id="SS011" name="SS011">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS012; ?>" id="SS012" name="SS012">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS013; ?>" id="SS013" name="SS013">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS014; ?>" id="SS014" name="SS014">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yS015; ?>" id="SS015" name="SS015">
+											</div>
+
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yM01; ?>" id="SM01" name="SM01">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yM02; ?>" id="SM02" name="SM02">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yM03; ?>" id="SM03" name="SM03">
+											</div>
+											<div class="form-group" style="padding:10px; margin-top:-15px; margin-left:5px; margin-right:10px;">
+												<label>Total Disimpan</label>
+												<input type="number" min="0" class="form-control" value="<?php echo $yM04; ?>" id="SM04" name="SM04">
+											</div>
+
 										</div>
 										<div class="form-group" style="padding:10px; margin-left:20px; margin-right:20px; margin-top:-10px; margin-bottom:0px;">
 											<button type="submit" class="btn btn-block btn-outline btn-primary">Simpan</button>
