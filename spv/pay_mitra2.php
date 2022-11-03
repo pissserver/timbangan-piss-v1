@@ -131,7 +131,7 @@
 										sum(fee_B012)+
 										sum(fee_B013)+
 										sum(fee_B014)+
-										sum(fee_S015)+
+										sum(fee_B015)+
 										sum(fee_S001)+
 										sum(fee_S002)+
 										sum(fee_S003)+
