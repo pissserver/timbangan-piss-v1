@@ -10,8 +10,19 @@
 	$ko_date	= executeScalar("select ko_date from ko where ko_id = '".$ko."'");
 	$ko_total	= executeScalar("select ko_total from ko where ko_id = '".$ko."'");
 	//select tonase berdasarkan tanggal masuk
-	$sql = "select weighing_id, date_check, merchant_id, checker_id, reffer, date_check, nopol, netto, cost
-	from weighing where weighing_sts = 'Lunas' and ko_id = '".$ko."'";
+	$sql = "select 	weighing_id, 
+					date_check, 
+					merchant_id, 
+					checker_id, 
+					reffer, 
+					date_check, 
+					nopol, 
+					netto,
+					cost_tonase, 
+					cost
+			from 	weighing 
+			where 	weighing_sts = 'Lunas' and 
+					ko_id = '".$ko."'";
 	
 	$no 	= 1;
 ?>
@@ -35,7 +46,7 @@
         </table>
     </page_footer>
     <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		SETORAN KASIR OPERASIONAL PIOS
+		SETORAN TONASE KASIR OPERASIONAL PISS
 	</div>
     <br/>
 	<table style="margin-bottom: 5px;font-size:11pt; width:400px;" >
@@ -63,14 +74,14 @@
 	<br />
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:9pt; width:850px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
-			<th style="text-align: center;width: 4%; border: solid 1px black;">No</th>
-			<th style="text-align: left;width: 10%; border: solid 1px black;">Tgl Tagihan</th>
-			<th style="text-align: left;width: 11%;border: solid 1px black;">Nota Timbang</th>
-			<th style="text-align: left;width: 11%;border: solid 1px black;">Nota Tagihan</th>
-			<th style="text-align: left;width: 8%;border: solid 1px black;">Nopol</th>
-			<th style="text-align: left;width: 20%;border: solid 1px black;">Pedagang</th>
-			<th style="text-align: center;width: 8%;border: solid 1px black;">Tonase</th>
-			<th style="text-align: center;width: 10%;border: solid 1px black;">Total (Rp)</th>
+			<th style="text-align: center;width: 4%; border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 9%; border: solid 1px black;">TGL TAGIHAN</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">NOTA TIMBANG</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">NOTA TAGIHAN</th>
+			<th style="text-align: center;width: 7%;border: solid 1px black;">NOPOL</th>
+			<th style="text-align: center;width: 23%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: center;width: 8%;border: solid 1px black;">TONASE</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">TOTAL (Rp)</th>
 		</tr>
 		<?php
 			$query 	= mysql_query($sql);
@@ -83,28 +94,27 @@
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_check'])); ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php 
+			<td style="text-align: center;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_check'])); ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php 
 			if($r['reffer']=='null'||$r['reffer']==''){
 				echo 'TB'.$r['weighing_id'];
 			}else{
 				echo 'TB'.$r['reffer'];
 			} ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo $r['nopol']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo $r['nopol']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $name; ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['netto']); ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost']); ?></td>
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost_tonase']); ?></td>
 		</tr>
 		<?php 
 			$no++;
 			}
-			$cost = executeScalar("select sum(cost) from weighing where 
-			weighing_sts = 'Lunas' and ko_id = '".$ko."'");
+			$cost_tonase = executeScalar("select sum(cost_tonase) from weighing where weighing_sts = 'Lunas' and ko_id = '".$ko."'");
 		?>
 		<tr>
 			<td style="text-align: right;border: solid 1px black;" colspan="7"><b>Total </b></td>
-			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($cost); ?></td>
+			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($cost_tonase); ?></td>
 		</tr>
 	</table>
 	<br />Keterangan:

@@ -22,7 +22,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+    <title>Laporan KO & KM | PISS</title>
 	<?php echo headScript(); ?>
 	<style>
 		input[type="checkbox"] {
@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PIOS</a>
+                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PISS</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -84,8 +84,10 @@
 						</li>
 						<li><a href="#"><i class="fa fa-money fa-fw"></i> Pembayaran<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran</a></li>
-								<li><a href="pay_acc.php"><i class="fa fa-money fa-fw"></i> Setoran KO</a></li>
+								<li><a href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran Tonase</a></li>
+								<li><a href="pay_mitra.php"><i class="fa fa-money fa-fw"></i> Pembayaran Jasa Bongkar</a></li>
+								<li><a href="pay_acc.php"><i class="fa fa-money fa-fw"></i> Setoran KO Tonase</a></li>
+								<li><a href="pay_acc_mitra.php"><i class="fa fa-money fa-fw"></i> Setoran KO Jasa Bongkar</a></li>
 							</ul>
 						</li>
 						<li><a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>

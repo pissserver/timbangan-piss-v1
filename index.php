@@ -67,8 +67,10 @@
 						</li>
 						<li><a href="#"><i class="fa fa-money fa-fw"></i> Pembayaran<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran</a></li>
-								<li><a href="pay_acc.php"><i class="fa fa-money fa-fw"></i> Setoran KO</a></li>
+								<li><a href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran Tonase</a></li>
+								<li><a href="pay_mitra.php"><i class="fa fa-money fa-fw"></i> Pembayaran Jasa Bongkar</a></li>
+								<li><a href="pay_acc.php"><i class="fa fa-money fa-fw"></i> Setoran KO Tonase</a></li>
+								<li><a href="pay_acc_mitra.php"><i class="fa fa-money fa-fw"></i> Setoran KO Jasa Bongkar</a></li>
 							</ul>
 						</li>
 						<li><a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>

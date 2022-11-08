@@ -7,12 +7,12 @@
 	}
 	$cashier = executeScalar("select checker_id from checker where checker_code = '".$_SESSION['checker']."'");
 	$admin 	= executeScalar("select checker_name from checker where checker_code = '".$_SESSION['checker']."'");
-	$check 	= executeScalar("select count(ko_id) from ko where cashier_id = '".$cashier."' and ko_status = 'DiTerima'");
+	$check 	= executeScalar("select count(ko_id) from ko where cashier_id = '".$cashier."' and ko_status = 'Diterima'");
 	//Generate KM ID
 	$km_id 	= 0;
 	$year	= date('Y');
 	$km_id 	= executeScalar("select count(km_id) from km where km_year = '".$year."'");
-	$km_id 	= $km_id+1;
+	$km_id 	= $km_id + 1;
 	$km_id 	= sprintf("%06d", $km_id);
 	$km_id  = $year.$km_id;
 	$cost 	= executeScalar("select sum(ko_total) from ko where cashier_id = '".$cashier."' and ko_status = 'Diterima'");
@@ -27,7 +27,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+    <title>Setoran KO Tonase | PISS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -68,7 +68,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PIOS</a>
+                <a class="navbar-brand" href="index.php"><i class="fa fa-balance-scale fa-fw"></i> Admin PISS</a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
@@ -98,11 +98,13 @@
 							</ul>
 						</li>
 						<li class="active"><a href="#"><i class="fa fa-money fa-fw"></i> Pembayaran<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran</a></li>
-								<li><a class="active" href="pay_acc.php"><i class="fa fa-money fa-fw"></i> Setoran KO</a></li>
-							</ul>
-						</li>
+								<ul class="nav nav-second-level">
+									<li><a href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran Tonase</a></li>
+									<li><a href="pay_mitra.php"><i class="fa fa-money fa-fw"></i> Pembayaran Jasa Bongkar</a></li>
+									<li><a class="active" href="pay_acc.php"><i class="fa fa-money fa-fw"></i> Setoran KO Tonase</a></li>
+									<li><a  href="pay_acc_mitra.php"><i class="fa fa-money fa-fw"></i> Setoran KO Jasa Bongkar</a></li>
+								</ul>
+							</li>
 						<li><a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="laborer.php"><i class="fa fa-group fa-fw"></i> Mitra</a></li>
@@ -156,9 +158,9 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-info">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-truck fa-fw"></i> Data Kasir Operasional (KO)
+                            <i class="fa fa-truck fa-fw"></i> Data Kasir Operasional (KO) Tonase
                         </div>
                         <div class="panel-body">
 							<div class="row">
@@ -172,9 +174,9 @@
 							</div>
                         </div>
                     </div>
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-truck fa-fw"></i> Data Penampungan Kasir Operasional (KO)
+                            <i class="fa fa-truck fa-fw"></i> Data Penampungan Kasir Operasional (KO) Tonase
                         </div>
                         <div class="panel-body">
 							<div class="row">
@@ -190,13 +192,13 @@
                     </div>
                 </div>
 				<div class="col-lg-6">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<i class="fa fa-line-chart fa-fw"></i> Pembatalan Data Penampungan KO
+							<i class="fa fa-line-chart fa-fw"></i> Pembatalan Data Penampungan Kasir Operasional (KO) Tonase
 						</div>
 						<div class="panel-body">
 							<div class="row">
-								<form class="form-horizontal" action="pay_action.php?task=cancelAll&type=km" id="cancelkm" name="cancelkm" method="POST">
+								<form class="form-horizontal" action="pay_action2.php?task=cancelAll&type=km" id="cancelkm" name="cancelkm" method="POST">
 									<div class="col-md-6" style="margin-bottom:-10px;">
 										<div class="form-group" style="padding:10px; text-align:center; margin-top:-10px;">
 											<label>ID KO: <?php echo $km_id; ?></label>
@@ -221,9 +223,9 @@
 				</div>
 				<div class="col-lg-6">
 					
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-line-chart fa-fw"></i> Acc Data KO Menjadi KM
+                            <i class="fa fa-line-chart fa-fw"></i> Acc Data KO Tonase Menjadi KM
                         </div>
                         <div class="panel-body">
 							<div class="row">

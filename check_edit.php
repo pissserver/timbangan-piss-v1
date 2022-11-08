@@ -91,8 +91,10 @@
 						</li>
 						<li><a href="#"><i class="fa fa-money fa-fw"></i> Pembayaran<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran</a></li>
-								<li><a href="pay_acc.php"><i class="fa fa-money fa-fw"></i> Setoran KO</a></li>
+								<li><a href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran Tonase</a></li>
+								<li><a href="pay_mitra.php"><i class="fa fa-money fa-fw"></i> Pembayaran Jasa Bongkar</a></li>
+								<li><a href="pay_acc.php"><i class="fa fa-money fa-fw"></i> Setoran KO Tonase</a></li>
+								<li><a href="pay_acc_mitra.php"><i class="fa fa-money fa-fw"></i> Setoran KO Jasa Bongkar</a></li>
 							</ul>
 						</li>
 						<li><a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
@@ -219,8 +221,11 @@
 													$dt		= new DateTime($s);
 													$daten 	= $dt->format('Y-m-d');
 													//Cetak Gabung Nota
-													$exist		= executeScalar("select count(weighing_id) from weighing where merchant_id = '".$r['merchant_id']."' and
-													weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
+													$exist		= executeScalar("	select count(weighing_id) 
+																					from weighing 
+																					where 	merchant_id = '".$r['merchant_id']."' and
+																							weighing_sts = 'Keluar' and 
+																							DATE(date_check) = '".$daten."'");
 													if($status=='Lunas'||$status=='Batal'||$status=='Masuk'){
 														echo '';
 													}
@@ -304,7 +309,7 @@
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-10px;">
 												<label>Total Tagihan Tonase</label>
-												<input type="text" class="form-control" id="trans_total" name="trans_total" value="<?php echo format_rupiah($r['cost']); ?>" disabled>       
+												<input type="text" class="form-control" id="trans_total" name="trans_total" value="<?php echo format_rupiah($r['cost_tonase']); ?>" disabled>       
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-10px;">
 												<a href="mitra.php?id=<?php echo $id; ?>" data-toggle="modal" data-target="#modalMitra">

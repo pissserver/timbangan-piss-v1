@@ -5,16 +5,16 @@
 	if($_SESSION['checker']==''){
 		header("Location:login.html");
 	}
-	$admin 	= executeScalar("select checker_name from checker where checker_code = '".$_SESSION['checker']."'");
+	$admin 			= executeScalar("select checker_name from checker where checker_code = '".$_SESSION['checker']."'");
 	//Generate KO ID
-	$ko_id 	= 0;
-	$year	= date('Y');
-	$ko_id 	= executeScalar("select count(ko_id) from ko where ko_year = '".$year."'");
-	$ko_id 	= $ko_id+1;
-	$ko_id 	= sprintf("%06d", $ko_id);
-	$ko_id  = $year.$ko_id;
-	$check 	= executeScalar("select count(weighing_id) from weighing where weighing_sts3 = 'Pending'");
-	$cost 	= executeScalar("select sum(cost) from weighing where weighing_sts3 = 'Pending'");
+	$ko_id 			= 0;
+	$year			= date('Y');
+	$ko_id 			= executeScalar("select count(ko_id) from ko where ko_year = '".$year."'");
+	$ko_id 			= $ko_id+1;
+	$ko_id 			= sprintf("%06d", $ko_id);
+	$ko_id  		= $year.$ko_id;
+	$check 			= executeScalar("select count(weighing_id) from weighing where weighing_sts3 = 'Pending'");
+	$cost_tonase 	= executeScalar("select sum(cost_tonase) from weighing where weighing_sts3 = 'Pending'");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,8 +99,9 @@
 							<li class="active"><a href="#"><i class="fa fa-money fa-fw"></i> Pembayaran<span class="fa arrow"></span></a>
 								<ul class="nav nav-second-level">
 									<li><a class="active" href="pay.php"><i class="fa fa-money fa-fw"></i> Pembayaran Tonase</a></li>
-									<li><a href="#"><i class="fa fa-money fa-fw"></i> Pembayaran Jasa Bongkar</a></li>
-									<li><a href="pay_acc.php"><i class="fa fa-money fa-fw"></i> Setoran KO</a></li>
+									<li><a href="pay_mitra.php"><i class="fa fa-money fa-fw"></i> Pembayaran Jasa Bongkar</a></li>
+									<li><a href="pay_acc.php"><i class="fa fa-money fa-fw"></i> Setoran KO Tonase</a></li>
+									<li><a href="pay_acc_mitra.php"><i class="fa fa-money fa-fw"></i> Setoran KO Jasa Bongkar</a></li>
 								</ul>
 							</li>
 							<li><a href="#"><i class="fa fa-database fa-fw"></i> Master<span class="fa arrow"></span></a>
@@ -210,7 +211,7 @@
 										</div>
 										<div class="col-md-6" style="margin-top:0px;margin-bottom:-10px;">
 											<div class="form-group" style="padding:10px; text-align:center; margin-top:-10px;">
-												<label>Total Rupiah: <?php echo format_rupiah($cost); ?></label>
+												<label>Total Rupiah: <?php echo format_rupiah($cost_tonase); ?></label>
 											</div>
 										</div>
 										<div class="form-group" style="padding:10px; margin-left:0px; margin-right:0px;">
@@ -260,7 +261,7 @@
 									<div class="col-md-6" style="margin-bottom:-10px;">
 										<form class="form-horizontal" action="pay_action.php?task=calculate&type=ko" id="calculate" name="calculate" method="POST">
 											<div class="form-group" style="padding:10px; text-align:center; margin-top:-10px;">
-												<label>Total Rupiah: <?php echo format_rupiah($cost); ?></label>
+												<label>Total Rupiah: <?php echo format_rupiah($cost_tonase); ?></label>
 											</div>
 											<div class="form-group" style="padding:10px; text-align:center; margin-top:-15px;">
 												<input type="number" class="form-control" id="received" name="receive" placeholder="Uang Yg Diterima" required>                  

@@ -32,7 +32,7 @@
         </table>
     </page_footer>
     <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		SETORAN KO ke KM PIOS
+		SETORAN KO TONASE ke KM TONASE PISS
 	</div>
     <br/>
 	<table style="margin-bottom: 5px;font-size:11pt; width:400px;" >
@@ -61,11 +61,11 @@
 	<br />
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:10pt; width:850px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
-			<th style="text-align: center;width: 10%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 15%; border: solid 1px black;">KO ID</th>
-			<th style="text-align: left;width: 25%;border: solid 1px black;">Nama Penyetor</th>
-			<th style="text-align: center;width: 15%;border: solid 1px black;">Tanggal KO</th>
-			<th style="text-align: center;width: 15%;border: solid 1px black;">Total KO (Rp)</th>
+			<th style="text-align: center;height: 2%; width: 5%; border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 15%; border: solid 1px black;">KO ID</th>
+			<th style="text-align: center;width: 15%;border: solid 1px black;">TANGGAL KO</th>
+			<th style="text-align: center;width: 30%;border: solid 1px black;">NAMA PENYETOR</th>
+			<th style="text-align: center;width: 15%;border: solid 1px black;">TOTAL KO (Rp)</th>
 		</tr>
 		<?php
 			$no 	= 1;
@@ -74,9 +74,9 @@
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo 'KO'.$r['ko_id']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo 'KO'.$r['ko_id']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['ko_date'])); ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $checker; ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['ko_date'])); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['ko_total']); ?></td>
 		</tr>
 		<?php 
