@@ -22,7 +22,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Laporan Mitra | PISS</title>
+    <title>Laporan Mitra Harian | PISS</title>
 	<?php echo headScript(); ?>
 	<script src="dataTables/dataTables.tableTools.css"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -138,7 +138,7 @@
 					<input type="hidden" id="value_day1" />
 				</div>-->
                 <div class="col-lg-6">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Rincian Pendapatan Mitra
                         </div>
