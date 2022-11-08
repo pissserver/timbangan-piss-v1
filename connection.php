@@ -4,10 +4,10 @@
 	$password 	= "";
 	$database 	= "db_piss";
 	
-	// $server 	= "192.168.1.46";
-	// $username 	= "edo";
-	// $password 	= "edocakep@007";
-	// $database 	= "pios2";
+	// $server 		= "192.168.100.250";
+	// $username 	= "timbanganmasuksdtp";
+	// $password 	= "sidotopo1!";
+	// $database 	= "db_piss";
 	// $port		= 3306;
 
 	// Koneksi dan memilih database di server
