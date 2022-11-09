@@ -201,7 +201,7 @@
 								<form class="form-horizontal" action="pay_action2.php?task=cancelAll&type=km" id="cancelkm" name="cancelkm" method="POST">
 									<div class="col-md-6" style="margin-bottom:-10px;">
 										<div class="form-group" style="padding:10px; text-align:center; margin-top:-10px;">
-											<label>ID KO: <?php echo $km_id; ?></label>
+											<label>ID KM: <?php echo $km_id; ?></label>
 										</div>
 									</div>
 									<div class="col-md-6" style="margin-top:0px;margin-bottom:-10px;">

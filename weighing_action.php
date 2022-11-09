@@ -1973,7 +1973,10 @@
 			$time_out 			= executeScalar("select time_out from weighing where weighing_id = '".$id."'");
 			$weighing_sts 		= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
 			$weighing_sts2 		= executeScalar("select weighing_sts2 from weighing where weighing_id = '".$id."'");
-			
+			$reffer 			= executeScalar("select reffer from weighing where weighing_id = '".$id."'");
+			$p1 				= executeScalar("select p1 from weighing where weighing_id = '".$id."'");
+			$p2 				= executeScalar("select p2 from weighing where weighing_id = '".$id."'");
+
 			if($jenis == 'B'){
 				$tarifbongkar 	= executeScalar("select pay_total from payment where pay_id = '9'");
 				$tbb 			= executeScalar("select pay_total from payment where pay_id = '10'"); // Total bagi buruh
@@ -2034,7 +2037,10 @@
 																	`cost_bayar`,
 																	`cost`,
 																	`weighing_sts`, 
-																	`weighing_sts2`) 
+																	`weighing_sts2`,
+																	`reffer`,
+																	`p1`,
+																	`p2`,) 
 									VALUES ('".$id."', 
 											'".$merchant_id."', 
 											'".$checker."',
@@ -2061,7 +2067,10 @@
 											'".$cost_bayar."',
 											'".$cost."', 
 											'".$weighing_sts."', 
-											'".$weighing_sts2."')");
+											'".$weighing_sts2."',
+											'".$reffer."',
+											'".$p1."',
+											'".$p2."')");
 					
 			if(!$insert){
 				//echo 'Data Gagal Masuk';
