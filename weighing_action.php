@@ -2040,7 +2040,7 @@
 																	`weighing_sts2`,
 																	`reffer`,
 																	`p1`,
-																	`p2`,) 
+																	`p2`) 
 									VALUES ('".$id."', 
 											'".$merchant_id."', 
 											'".$checker."',
