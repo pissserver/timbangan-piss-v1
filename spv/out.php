@@ -1,7 +1,7 @@
 <?php
 	include "../connection.php";
 ?>
-<div class="panel panel-info">
+<div class="panel panel-primary">
 	<div class="panel-heading">
 		<i class="fa fa-truck fa-fw"></i> Data Kendaraan Keluar
 	</div>
