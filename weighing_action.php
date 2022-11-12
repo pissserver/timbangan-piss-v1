@@ -768,7 +768,7 @@
 									cost2				= '".$total2."'
 								where weighing_id 		= '".$id."'");
 
-		$update2 = mysql_query("update weighing_mitra set date_check = '".$dt_now."'");
+		$update2 = mysql_query("update weighing_mitra set date_check = '".$dt_now."' where weighing_id = '".$id."'");
 		
 		if($update1 && $update2){//Jika berhasil update
 			echo "<script>window.location=('check_edit.php?id=$id')</script>";

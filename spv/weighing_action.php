@@ -957,11 +957,17 @@
 		
 		//jika mitra status tidak
 		if($laborer=='Tidak'){
-			$total1	= $netto * $tonase1;
-			$total2	= $total1;
+			$total1				= $netto * $tonase1;
+			$total2				= $total1;
+			$cost_tonase 		= $total1;
+			$cost_real_tonase 	= $total2;
+			$cost_bongkar 		= 0;
 		}else{
-			$total1	= $netto*$tonase3;
-			$total2	= $total1;
+			$total1				= $netto*$tonase3;
+			$total2				= $total1;
+			$cost_tonase 		= $netto*$tonase1;
+			$cost_real_tonase 	= $total2;
+			$cost_bongkar 		= 0;
 		}
 		//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
 		if($total1>$tarifmin){
