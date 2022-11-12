@@ -2051,7 +2051,7 @@
 		
 		//tarif3 adlh tarif normal + mitra
 		$tarif3 	= $tarif1 + $tarif2;
-		$netto 		= executeScalar("select netto from weighing where weighing_id = '".$id."'");
+		$netto 		= executeScalar("select netto from weighing_mitra where weighing_id = '".$id."'");
 		
 		//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
 		if(empty($_POST['mitra'])&&empty($_POST['mandor'])){
