@@ -69,7 +69,7 @@
 		</tr>
 		<?php
 			//select tonase berdasarkan tanggal masuk
-			$sql = "select weighing_id, merchant_id, checker_id, reffer, date_check, nopol, netto, cost
+			$sql = "select weighing_id, merchant_id, checker_id, reffer, date_check, nopol, netto, cost, cost_tonase
 			from weighing where weighing_sts = 'Lunas' and ko_id = '".$ko."'";
 			
 			$query 	= mysql_query($sql);
@@ -94,12 +94,12 @@
 			<td style="text-align: left;border: solid 1px black;"><?php echo $r['nopol']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $name; ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['netto']); ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost']); ?></td>
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost_tonase']); ?></td>
 		</tr>
 		<?php 
 			$no++;
 			}
-			$cost = executeScalar("select sum(cost) from weighing where 
+			$cost = executeScalar("select sum(cost_tonase) from weighing where 
 			weighing_sts = 'Lunas' and ko_id = '".$ko."'");
 		?>
 		<tr>

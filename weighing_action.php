@@ -1144,11 +1144,11 @@
 														DATE(date_check)= '".$daten."' and
 														weighing_id		!= '".$wid."'");
 			//update laborer_fee_weighing_id nota yg digabung menjadi id nota yg gabungan/terbaru
-			$update2 = mysql_query("update laborer_fee l, weighing w set l.weighing_id 	= '".$wid."'
-																	where l.weighing_id = w.weighing_id and
-																		w.merchant_id	= '".$merchant."' and
-																		weighing_sts2 	= 'Digabung' and
-																		DATE(date_check)= '".$daten."'");
+			// $update2 = mysql_query("update laborer_fee l, weighing w set l.weighing_id 	= '".$wid."'
+			// 														where l.weighing_id = w.weighing_id and
+			// 															w.merchant_id	= '".$merchant."' and
+			// 															weighing_sts2 	= 'Digabung' and
+			// 															DATE(date_check)= '".$daten."'");
 			if($update&&$update2){//jika update sts transaksi & mitra berhasil
 				echo "<script>window.location=('check_edit.php?id=$wid')</script>";
 				exit();

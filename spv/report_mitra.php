@@ -189,7 +189,7 @@
 					<input type="hidden" id="value_day1" />
 				</div>-->
                 <div class="col-lg-6">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Rincian Pendapatan Mitra Dibagikan
                         </div>
@@ -211,7 +211,31 @@
 							</form>
                         </div>
                     </div>
-					<div class="panel panel-info">
+
+					<div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="fa fa-line-chart fa-fw"></i> Rincian Pendapatan Mitra Dibagikan Per-Tanggal Bayar
+                        </div>
+                        <div class="panel-body">
+							<form class="form-horizontal" action="../htmltopdf/reportMitraPerbayar.php" id="reportMitra" name="reportMitra" method="POST" target="_blank">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group" style="padding:10px; margin-top:-10px;">
+											<label>Pilih Tanggal</label>
+											<input name="date" max="<?php echo $date_now;?>" type="date" class="form-control" placeholder="DD/MM/YYYY" required data-fv-notempty-message="Tanggal Belum Diisi"/>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group" style="padding:10px; margin-top:15px;">
+											<center><button type="submit" class="btn btn-outline btn-primary btn-block">Lihat <i class="fa fa-angle-double-right fa-lg"></i></button></center>
+										</div>
+									</div>
+								</div>
+							</form>
+                        </div>
+                    </div>
+
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Rincian Pendapatan Mitra Disimpan
                         </div>
@@ -235,7 +259,7 @@
                     </div>
 				</div>
 				<div class="col-lg-6">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Rekap Pendapatan Mitra Dibagikan
                         </div>
@@ -263,7 +287,8 @@
 							</form>
                         </div>
                     </div>
-					<div class="panel panel-info">
+				
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Rekap Pendapatan Mitra Disimpan
                         </div>
