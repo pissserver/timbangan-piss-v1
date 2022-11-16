@@ -18,8 +18,8 @@
 	</div>
 	<table style="margin-top: 10px; margin-bottom: 5px;font-size:10pt; width:500px;" >
 		<tr>
-			<td style="width: 30%;">Tanggal Kerja Mitra</td>
-			<td style="width: 70%;">: <?php echo date("d-m-Y", strtotime($date)); ?></td>
+			<td style="width: 40%;">Tanggal Pelunasan Nota </td>
+			<td style="width: 60%;">: <?php echo date("d-m-Y", strtotime($date)); ?></td>
 		</tr>
 	</table>
 	<br />
