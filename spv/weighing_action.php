@@ -22,7 +22,7 @@
 		exit();
 	}
 	$task		= $_GET['task'];
-	$checker	= -1;
+	// $checker	= -1;
 
 	//Spv Masuk
 	if($task=='in'){
