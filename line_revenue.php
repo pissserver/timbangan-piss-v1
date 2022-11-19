@@ -2,11 +2,13 @@
 	include "connection.php";
 	
 	function getDay(){
-		$query 	= "select sum(cost) as total, 
-		date_format(date_pay,'%d-%m-%Y') as day_out, 
-		date_format(date_pay,'%Y-%m-%d') as day_out_sort 
-		from weighing where weighing_sts = 'Lunas'
-		group by day_out order by day_out_sort desc limit 7";
+		$query 	= "	select 	sum(cost_tonase) as total, 
+							date_format(date_pay,'%d-%m-%Y') as day_out, 
+							date_format(date_pay,'%Y-%m-%d') as day_out_sort 
+					from weighing 
+					where weighing_sts = 'Lunas'
+					group by day_out 
+					order by day_out_sort desc limit 7";
 		$data=mysql_query($query);
 		$string="'";
 		$counter=0;
@@ -20,8 +22,10 @@
 		return "'".$string;
 	}
 	function getTotal(){
-		$query 	= "select sum(cost) as total, DATE(date_pay) as date
-					from weighing where weighing_sts = 'Lunas'
+		$query 	= "	select 	sum(cost_tonase) as total, 
+							DATE(date_pay) as date
+					from weighing 
+					where weighing_sts = 'Lunas'
 					group by date desc limit 7";
 		$data=mysql_query($query);
 		$string="";
@@ -44,7 +48,7 @@
 					type: 'spline'
 				},
 				title: {
-					text: 'Pembayaran Timbangan (Terbayar)',
+					text: 'Pembayaran Tonase (Terbayar)',
 					x: -20 //center
 				},
 				xAxis: {

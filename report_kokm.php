@@ -22,7 +22,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Laporan KO & KM | PISS</title>
+    <title>Laporan KO & KM Tonase | PISS</title>
 	<?php echo headScript(); ?>
 	<style>
 		input[type="checkbox"] {
@@ -123,8 +123,10 @@
 								</li>
 								<li class="active"><a href="#"><i class="fa fa-line-chart fa-fw"></i> KO & KM <span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
-										<li><a class="active" href="report_kokm.php"><i class="fa fa-sticky-note-o fa-fw"></i> Laporan KO & KM</a></li>
-										<li><a href="report_outstanding_ko.php"><i class="fa fa-clock-o fa-fw"></i> Outstanding KO & KM</a></li>
+										<li><a class="active" href="report_kokm.php"><i class="fa fa-sticky-note-o fa-fw"></i> KO & KM Tonase</a></li>
+										<li><a href="report_kokm_mitra.php"><i class="fa fa-sticky-note-o fa-fw"></i> KO & KM Mitra</a></li>
+										<li><a href="report_outstanding_ko.php"><i class="fa fa-clock-o fa-fw"></i> Outstanding Tonase</a></li>
+										<li><a href="report_outstanding_ko_mitra.php"><i class="fa fa-clock-o fa-fw"></i> Outstanding Mitra</a></li>
 									</ul>
 								</li>
 								<li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Mitra <span class="fa arrow"></span></a>
@@ -152,7 +154,7 @@
 					<input type="hidden" id="value_day1" />
 				</div>
                 <div class="col-lg-6">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Laporan Pembayaran Tonase (Terbayar) Per ID KO 
                         </div>
@@ -182,7 +184,7 @@
 							</form>
                         </div>
                     </div>
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Rekap Pembayaran Tonase (Terbayar) Per ID KO 
                         </div>
@@ -212,7 +214,7 @@
                     </div>
 				</div>
 				<div class="col-lg-6">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
 						<div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Laporan Pembayaran Tonase (Terbayar) Per ID KM
                         </div>

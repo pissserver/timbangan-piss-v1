@@ -22,7 +22,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../../images/icon.png">
     <link rel="shortcut icon" href="../../images/icon.png" />
-    <title>Admin</title>
+    <title>Laporan KO & Km | PISS</title>
 	<!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->

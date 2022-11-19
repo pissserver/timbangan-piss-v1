@@ -22,7 +22,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Outstanding KO & KM | PISS</title>
+    <title>Outstanding KO & KM Tonase | PISS</title>
 	<?php echo headScript(); ?>
 	<script src="dataTables/dataTables.tableTools.css"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -109,8 +109,10 @@
 								</li>
 								<li class="active"><a href="#"><i class="fa fa-line-chart fa-fw"></i> KO & KM <span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
-										<li><a href="report_kokm.php"><i class="fa fa-sticky-note-o fa-fw"></i> Laporan KO & KM</a></li>
-										<li><a class="active" href="report_outstanding_ko.php"><i class="fa fa-clock-o fa-fw"></i> Outstanding KO & KM</a></li>
+										<li><a href="report_kokm.php"><i class="fa fa-sticky-note-o fa-fw"></i> KO & KM Tonase</a></li>
+										<li><a href="report_kokm_mitra.php"><i class="fa fa-sticky-note-o fa-fw"></i> KO & KM Mitra</a></li>
+										<li><a class="active" href="report_outstanding_ko.php"><i class="fa fa-clock-o fa-fw"></i> Outstanding Tonase</a></li>
+										<li><a href="report_outstanding_ko_mitra.php"><i class="fa fa-clock-o fa-fw"></i> Outstanding Mitra</a></li>
 									</ul>
 								</li>
 								<li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Mitra <span class="fa arrow"></span></a>
@@ -131,9 +133,9 @@
             <div class="row">
 				<div class="col-lg-6">
 					<input type="hidden" id="value_day2" />
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-clock-o fa-fw"></i> Laporan Outstanding KO
+                            <i class="fa fa-clock-o fa-fw"></i> Laporan Outstanding KO Tonase
                         </div>
                         <div class="panel-body">
 							<div class="row">
@@ -170,9 +172,9 @@
 				</div>
 				<div class="col-lg-6">
 					<input type="hidden" id="value_day2" />
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-clock-o fa-fw"></i> Laporan Outstanding KM
+                            <i class="fa fa-clock-o fa-fw"></i> Laporan Outstanding KM Tonase
                         </div>
                         <div class="panel-body">
 							<div class="row">
@@ -211,7 +213,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src='img/Delete.png' width='25' height='25'/></button>
-					<h4 id="header_outstanding">Tonase Outstanding PIOS </h4>
+					<h4 id="header_outstanding">Tonase Outstanding PISS </h4>
 				</div>
 				<div class="modal-body">
 					<div id="body_outstanding" style="margin-bottom: 0px;">

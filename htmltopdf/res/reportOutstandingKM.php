@@ -23,15 +23,15 @@
         </table>
     </page_footer>
     <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		Outstanding Kasir Manajemen PIOS
+		Outstanding Kasir Manajemen Tonase PISS
 	</div>
     <br	/>
 	<br />
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:9pt; width:850px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
-			<th style="text-align: center;width: 5%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 15%; border: solid 1px black;">KM ID</th>
-			<th style="text-align: left;width: 25%;border: solid 1px black;">Nama Kasir</th>
+			<th style="text-align: center;height: 2%; width: 5%; border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 15%; border: solid 1px black;">KM ID</th>
+			<th style="text-align: center;width: 25%;border: solid 1px black;">Nama Kasir</th>
 			<th style="text-align: center;width: 15%;border: solid 1px black;">Tanggal KM</th>
 			<th style="text-align: center;width: 15%;border: solid 1px black;">Total KM (Rp)</th>
 		</tr>
@@ -40,9 +40,14 @@
 			if($cashier=='Semua'){
 				$sql = "select * from km where km_status != 'Acc' order by km_id";
 			}else{
-				$sql = "select distinct(m.km_id), m.km_date, m.km_status, m.km_total from km m, ko o 
-				where o.km_id = m.km_id and o.cashier_id = '".$cashier."' and
-				m.km_status != 'Acc' order by m.km_id ";
+				$sql = "select 	distinct(m.km_id), 
+								m.km_date, 
+								m.km_status, 
+								m.km_total 
+						from km m, ko o 
+						where 	o.km_id = m.km_id and 
+								o.cashier_id = '".$cashier."' and
+								m.km_status != 'Acc' order by m.km_id ";
 			}
 			$query 	= mysql_query($sql);
 			$no 	= 1;
@@ -52,9 +57,9 @@
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo 'KM'.$r['km_id']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo 'KM'.$r['km_id']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $cashier; ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['km_date'])); ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['km_date'])); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['km_total']); ?></td>
 		</tr>
 		<?php 

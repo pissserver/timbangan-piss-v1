@@ -27,7 +27,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+    <title>Laporan Tonase Terbayar | PISS</title>
 	<?php echo headScript(); ?>
 	
 	<script src="../dataTables/dataTables.tableTools.css"></script>
@@ -133,9 +133,10 @@
 										<li><a href="report_merchant_comodity.php"><i class="fa fa-truck fa-fw"></i> Pedagang & Komoditi</a></li>
 									</ul>
 								</li>
-								<li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Pendapatan<span class="fa arrow"></span></a>
+								<li class="active"><a href="#"><i class="fa fa-line-chart fa-fw"></i> Pendapatan<span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
-										<li><a class="active" href="report_revenue.php"><i class="fa fa-money fa-fw"></i> Terbayar</a></li> 
+										<li><a class="active" href="report_revenue.php"><i class="fa fa-money fa-fw"></i> Tonase Terbayar</a></li>
+										<li><a href="#"><i class="fa fa-money fa-fw"></i> Jasa Bongkar Terbayar</a></li> 
 										<li><a href="report_revenue_merchant.php"><i class="fa fa-money fa-fw"></i> Terbayar Per Pedagang</a></li>
 										<li><a href="report_revenue_unpaid.php"><i class="fa fa-clock-o fa-fw"></i> Belum Terbayar</a></li>
 										<li><a href="report_revenue_unpaid_merchant.php"><i class="fa fa-clock-o fa-fw"></i> Belum Terbayar Per Pedagang</a></li>
@@ -172,9 +173,9 @@
 					<input type="hidden" id="value_day1" />
 				</div>
                 <div class="col-lg-6">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa fa-line-chart fa-fw"></i> Laporan Pembayaran Tonase (Terbayar)
+                            <i class="fa fa-line-chart fa-fw"></i> Laporan Pembayaran Tonase ( Terbayar )
                         </div>
                         <div class="panel-body">
 							<form class="form-horizontal" action="../htmltopdf/reportRevenue.php" id="reportRevenue" name = "reportRevenue" method="POST" target="_blank">
@@ -215,7 +216,7 @@
                     </div>
 				</div>
 				<div class="col-lg-6">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Laporan Setoran Pembayaran Tonase
                         </div>

@@ -16,7 +16,7 @@
 	<thead>
 		<tr>
 			<th style="width:5%; text-align:center;">No</th>
-			<th style="width:10%; text-align:center;">Tanggal Kerja</th>
+			<th style="width:10%; text-align:center;">Tanggal Pelunasan</th>
 			<th style="width:20%; text-align:center;">Upah Mitra Yg Dibagi</th>
 			<th style="width:20%; text-align:center;">Upah Mitra Yg Disimpan</th>
 			<th style="width:10%; text-align:center;">Aksi</th>
@@ -26,7 +26,7 @@
 		<?php
 			$no		= 0;
 			$total	= 0;
-			$query 	= mysql_query("	SELECT date(laborer_fee_date) as dt,
+			$query 	= mysql_query("	SELECT date(date_pay) as dt,
 										sum(B001) as SB001, 
 										sum(B002) as SB002, 
 										sum(B003) as SB003,
@@ -95,8 +95,10 @@
 										sum(M02_save) as SM02s,
 										sum(M03_save) as SM03s,
 										sum(M04_save) as SM04s
-									FROM `laborer_fee` where laborer_fee_sts = 'Baru'
-									group by date(laborer_fee_date) desc limit 90");
+									FROM laborer_fee lf
+									JOIN weighing_mitra wm ON wm.weighing_id = lf.weighing_id 
+									where laborer_fee_sts = 'Baru'
+									group by date(date_pay) desc limit 90");
 			while($r	= mysql_fetch_array($query)) { 
 				$no++;
 				$share	= executeScalar("	select (sum(fee_B001)+

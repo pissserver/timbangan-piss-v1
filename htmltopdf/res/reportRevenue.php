@@ -26,7 +26,7 @@
         </table>
     </page_footer>
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		LAPORAN PEMBAYARAN TONASE PIOS
+		LAPORAN PEMBAYARAN TONASE PISS
 	</div>
     <br/>
 	<table style="margin-bottom: 5px;font-size:10pt; width:300px;" >
@@ -47,28 +47,48 @@
 	<br />
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:850px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
-			<th style="text-align: center;width: 5%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 9%; border: solid 1px black;">TGL TAGIHAN</th>
-			<th style="text-align: left;width: 9%; border: solid 1px black;">TGL BAYAR</th>
-			<th style="text-align: left;width: 11%;border: solid 1px black;">NOTA TIMBANG</th>
-			<th style="text-align: left;width: 11%;border: solid 1px black;">NOTA TAGIHAN</th>
-			<th style="text-align: left;width: 22%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: center; height: 2%; width: 5%; border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 9%; border: solid 1px black;">TGL TAGIHAN</th>
+			<th style="text-align: center;width: 9%; border: solid 1px black;">TGL BAYAR</th>
+			<th style="text-align: center;width: 11%;border: solid 1px black;">NOTA TIMBANG</th>
+			<th style="text-align: center;width: 11%;border: solid 1px black;">NOTA TAGIHAN</th>
+			<th style="text-align: center;width: 22%;border: solid 1px black;">PEDAGANG</th>
 			<th style="text-align: center;width: 8%;border: solid 1px black;">TONASE</th>
 			<th style="text-align: center;width: 9%;border: solid 1px black;">TOTAL</th>
 		</tr>
 		<?php
 			//select tonase berdasarkan tanggal masuk
 			if($commodity=='Semua'){
-				$sql = "select weighing_id, merchant_id, checker_id, reffer, date_in, date_pay, nopol, netto, cost
-				from weighing where weighing_sts = 'Lunas' and 
-				(date_pay between '".$date1."' and '".$date2."')";
+				$sql = "select 	weighing_id, 
+								merchant_id, 
+								checker_id, 
+								reffer, 
+								date_in, 
+								date_pay, 
+								nopol, 
+								netto, 
+								cost_tonase,
+								cost
+						from weighing 
+						where weighing_sts = 'Lunas' and 
+						(date_pay between '".$date1."' and '".$date2."')";
 			}else{
-				$sql = "select w.weighing_id, w.merchant_id, w.checker_id, w.reffer, w.date_in, w.date_pay, w.nopol, w.netto, w.cost 
-				from weighing w, merchant m 
-				where w.merchant_id = m.merchant_id and 
-				weighing_sts = 'Lunas' and 
-				m.merchant_type = '".$commodity."' and
-				(w.date_pay between '".$date1."' and '".$date2."')";
+				$sql = "select 	w.weighing_id, 
+								w.merchant_id, 
+								w.checker_id, 
+								w.reffer, 
+								w.date_in, 
+								w.date_pay, 
+								w.nopol, 
+								w.netto, 
+								w.cost_tonase,
+								w.cost 
+						from 	weighing w, 
+								merchant m 
+						where 	w.merchant_id = m.merchant_id and 
+								weighing_sts = 'Lunas' and 
+								m.merchant_type = '".$commodity."' and
+								(w.date_pay between '".$date1."' and '".$date2."')";
 			}
 			$query 		= mysql_query($sql);
 			$no 		= 1;
@@ -81,21 +101,21 @@
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_in'])); ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_pay'])); ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php 
+			<td style="text-align: center;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_in'])); ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_pay'])); ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php 
 			if($r['reffer']=='null'||$r['reffer']==''){
 				echo 'TB'.$r['weighing_id'];
 			}else{
 				echo 'TB'.$r['reffer'];
 			} ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $name; ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['netto']); ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost']); ?></td>
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost_tonase']); ?></td>
 		</tr>
 		<?php 
-			$grandtot	= $grandtot+$r['cost'];
+			$grandtot	= $grandtot+$r['cost_tonase'];
 			$no++;
 			}
 		?>
