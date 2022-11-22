@@ -120,7 +120,7 @@
 										<li><a href="report_tonase_comodity.php"><i class="fa fa-archive fa-fw"></i> Tonase Komoditi</a></li>
 									</ul>
 								</li>
-								<li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Pendapatan<span class="fa arrow"></span></a>
+								<li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Pendapatan Tonase<span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
 										<li><a href="report_revenue.php"><i class="fa fa-money fa-fw"></i> Terbayar</a></li> 
 										<li><a href="report_revenue_merchant.php"><i class="fa fa-money fa-fw"></i> Terbayar Per Pedagang</a></li>
@@ -128,10 +128,20 @@
 										<li><a href="report_revenue_unpaid_merchant.php"><i class="fa fa-clock-o fa-fw"></i> Belum Terbayar Per Pedagang</a></li>
 									</ul>
 								</li>
+								<li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Pendapatan Mitra<span class="fa arrow"></span></a>
+									<ul class="nav nav-third-level">
+										<li><a href="report_revenue_mitra.php"><i class="fa fa-money fa-fw"></i> Terbayar</a></li> 
+										<li><a href="report_revenue_merchant_mitra.php"><i class="fa fa-money fa-fw"></i> Terbayar Per Pedagang</a></li>
+										<li><a href="report_revenue_unpaid_mitra.php"><i class="fa fa-clock-o fa-fw"></i> Belum Terbayar</a></li>
+										<li><a href="report_revenue_unpaid_merchant_mitra.php"><i class="fa fa-clock-o fa-fw"></i> Belum Terbayar Per Pedagang</a></li>
+									</ul>
+								</li>
 								<li><a href="#"><i class="fa fa-line-chart fa-fw"></i> KO & KM <span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
-										<li><a href="report_kokm.php"><i class="fa fa-sticky-note-o fa-fw"></i> Laporan KO & KM</a></li>
-										<li><a href="report_outstanding_ko.php"><i class="fa fa-clock-o fa-fw"></i> Outstanding KO & KM</a></li>
+										<li><a href="report_kokm.php"><i class="fa fa-sticky-note-o fa-fw"></i> KO & KM Tonase</a></li>
+										<li><a href="report_kokm_mitra.php"><i class="fa fa-sticky-note-o fa-fw"></i> KO & KM Mitra</a></li>
+										<li><a href="report_outstanding_ko.php"><i class="fa fa-clock-o fa-fw"></i> Outstanding Tonase</a></li>
+										<li><a href="report_outstanding_ko_mitra.php"><i class="fa fa-clock-o fa-fw"></i> Outstanding Mitra</a></li>
 									</ul>
 								</li>
 								<li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Mitra <span class="fa arrow"></span></a>

@@ -48,7 +48,7 @@
 					type: 'spline'
 				},
 				title: {
-					text: 'Tonase Pedagang PIOS',
+					text: 'Tonase Pedagang PISS',
 					x: -20 //center
 				},
 				xAxis: {

@@ -48,7 +48,7 @@
 					type: 'spline'
 				},
 				title: {
-					text: 'Tonase Per Blok PIOS',
+					text: 'Tonase Per Blok PISS',
 					x: -20 //center
 				},
 				xAxis: {

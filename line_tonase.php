@@ -48,7 +48,7 @@
 					type: 'spline'
 				},
 				title: {
-					text: 'Tonase TImbangan PIOS',
+					text: 'Tonase TImbangan PISS',
 					x: -20 //center
 				},
 				xAxis: {

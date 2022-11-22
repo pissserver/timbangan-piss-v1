@@ -74,7 +74,7 @@
 					type: 'spline'
 				},
 				title: {
-					text: 'Pendapatan Mitra PIOS',
+					text: 'Pendapatan Mitra PISS',
 					x: -20 //center
 				},
 				xAxis: {
