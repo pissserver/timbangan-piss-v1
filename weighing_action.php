@@ -1149,7 +1149,7 @@
 			// 															w.merchant_id	= '".$merchant."' and
 			// 															weighing_sts2 	= 'Digabung' and
 			// 															DATE(date_check)= '".$daten."'");
-			if($update&&$update2){//jika update sts transaksi & mitra berhasil
+			if($update){//jika update sts transaksi & mitra berhasil
 				echo "<script>window.location=('check_edit.php?id=$wid')</script>";
 				exit();
 			}
