@@ -25,7 +25,7 @@
         </table>
     </page_footer>
     <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		REKAP SETORAN KO Per Checker
+		REKAP SETORAN TONASE KO Per Checker
 	</div>
     <br/>
 	<table style="margin-bottom: 5px;font-size:11pt; width:400px;" >
@@ -42,8 +42,8 @@
     <br/>
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:9pt; width:800px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
-			<th style="text-align: center;width: 5%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 35%;border: solid 1px black;">Nama Penyetor</th>
+			<th style="text-align: center;height: 2%; width: 5%; border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 35%;border: solid 1px black;">Nama Penyetor</th>
 			<th style="text-align: center;width: 20%;border: solid 1px black;">Total Tagihan</th>
 			<th style="text-align: center;width: 20%;border: solid 1px black;">Total Setoran KO (Rp)</th>
 		</tr>

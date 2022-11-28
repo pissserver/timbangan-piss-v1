@@ -12,7 +12,7 @@
 		$html2pdf = new HTML2PDF('P', 'A4', 'fr', array(20, 10, 20, 10));
 		$html2pdf->pdf->SetDisplayMode('fullpage');
 		$html2pdf->writeHTML($content);
-		$html2pdf->Output('Rekap Setoran Kasir Manajemen (KM) Per Tanggal.pdf', 'I');
+		$html2pdf->Output('Rekap Setoran Tonase Kasir Manajemen (KM) Per Tanggal.pdf', 'I');
 	}
 	catch(HTML2PDF_exception $e) {
 		echo $e;

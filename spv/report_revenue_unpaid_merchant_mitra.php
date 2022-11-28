@@ -180,40 +180,40 @@
                         <div class="panel-body">
 							<div class="row">
 								<form class="form-horizontal" action="../htmltopdf/reportMerchantBill_mitra.php" id="reportOmzetMerchant" name="reportOmzetMerchant" method="POST" target="_blank">
-								<fieldset>
-									<div class="col-md-6" style="margin-top:-10px;margin-bottom:-10px;">
-										<div class="form-group" style="padding:10px; margin-top:0px;">
-											<label>Tanggal Akhir</label>
-											<input name="date2" max="<?php echo $date_now;?>" type="date" class="form-control" placeholder="DD/MM/YYYY" required
-											data-fv-notempty-message="Tanggal Belum Diisi"/>
+									<fieldset>
+										<div class="col-md-6" style="margin-top:-10px;margin-bottom:-10px;">
+											<div class="form-group" style="padding:10px; margin-top:0px;">
+												<label>Tanggal Akhir</label>
+												<input name="date2" max="<?php echo $date_now;?>" type="date" class="form-control" placeholder="DD/MM/YYYY" required
+												data-fv-notempty-message="Tanggal Belum Diisi"/>
+											</div>
 										</div>
-									</div>
-									<div class="col-md-6" style="margin-top:-10px;margin-bottom:-10px;">
-										<div class="form-group" style="padding:10px; margin-top:0px;">
-											<label>Pedagang</label>
-											<select class="form-control" name="merchant" id="merchant">
-												<option value="">- Pilih Pedagang -</option>
-												<?php 
-													$sql1 	= mysql_query("select merchant_id, merchant_name, merchant_nick from merchant order by merchant_name");
-													while($d1 = mysql_fetch_array($sql1)){
-														$lpk 	= executeScalar("select l.lapak_name from rent r, lapak l 
-														where r.lapak_id = l.lapak_id and r.merchant_id = '".$d1['merchant_id']."' limit 1");
-														$nick	= $d1['merchant_nick'];
-														if($nick!=''){
-															$nick = $nick.' / ';
-														}else{
-															$nick = '';
-														}
-												?>
-													<option value="<?php echo $d1['merchant_id'];?>"><?php echo $nick.$d1['merchant_name'].' / '.$d1['merchant_id'].' / '.$lpk;?></option>
-												<?php } ?>
-											</select>
+										<div class="col-md-6" style="margin-top:-10px;margin-bottom:-10px;">
+											<div class="form-group" style="padding:10px; margin-top:0px;">
+												<label>Pedagang</label>
+												<select class="form-control" name="merchant" id="merchant">
+													<option value="">- Pilih Pedagang -</option>
+													<?php 
+														$sql1 	= mysql_query("select merchant_id, merchant_name, merchant_nick from merchant order by merchant_name");
+														while($d1 = mysql_fetch_array($sql1)){
+															$lpk 	= executeScalar("select l.lapak_name from rent r, lapak l 
+															where r.lapak_id = l.lapak_id and r.merchant_id = '".$d1['merchant_id']."' limit 1");
+															$nick	= $d1['merchant_nick'];
+															if($nick!=''){
+																$nick = $nick.' / ';
+															}else{
+																$nick = '';
+															}
+													?>
+														<option value="<?php echo $d1['merchant_id'];?>"><?php echo $nick.$d1['merchant_name'].' / '.$d1['merchant_id'].' / '.$lpk;?></option>
+													<?php } ?>
+												</select>
+											</div>
 										</div>
-									</div>
-									<div class="form-group" style="padding:10px; margin-top:30px; margin-left:0px; margin-right:0px; margin-bottom:0px;">
-										<center><button type="submit" class="btn btn-outline btn-primary btn-block">Lihat <i class="fa fa-angle-double-right fa-lg"></i></button></center>
-									</div>
-								</fieldset>
+										<div class="form-group" style="padding:10px; margin-top:30px; margin-left:0px; margin-right:0px; margin-bottom:0px;">
+											<center><button type="submit" class="btn btn-outline btn-primary btn-block">Lihat <i class="fa fa-angle-double-right fa-lg"></i></button></center>
+										</div>
+									</fieldset>
 								</form>
 							</div>
                         </div>

@@ -22,11 +22,11 @@
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:680px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 5%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 25%;border: solid 1px black;">PEDAGANG</th>
-			<th style="text-align: left;width: 25%;border: solid 1px black;">LAPAK</th>
-			<th style="text-align: center;width: 10%;border: solid 1px black;">TOTAL NOTA</th>
-			<th style="text-align: center;width: 10%;border: solid 1px black;">UMUR TAGIHAN</th>
-			<th style="text-align: center;width: 20%;border: solid 1px black;">TOTAL (Rp)</th>
+			<th style="text-align: center;width: 25%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: center;width: 25%;border: solid 1px black;">LAPAK</th>
+			<th style="text-align: center;width: 8%;border: solid 1px black;">TOTAL NOTA</th>
+			<th style="text-align: center;width: 8%;border: solid 1px black;">UMUR TAGIHAN</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">TOTAL (Rp)</th>
 		</tr>
 		<?php
 			$query = mysql_query("select m.merchant_id as id, m.merchant_name as name
@@ -95,8 +95,8 @@
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $r['name']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $lapak; ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($jml); ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php if($jml>0){ echo $diff.' Hari'; } ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo format_no($jml); ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php if($jml>0){ echo $diff.' Hari'; } ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($total); ?></td>
 		</tr>
 		<?php 

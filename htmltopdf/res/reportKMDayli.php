@@ -25,7 +25,7 @@
         </table>
     </page_footer>
     <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		REKAP SETORAN KM HARIAN PIOS
+		REKAP SETORAN TONASE KM HARIAN PISS
 	</div>
     <br/>
 	<table style="margin-bottom: 5px;font-size:11pt; width:400px;" >
@@ -42,10 +42,10 @@
     <br/>
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:9pt; width:800px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
-			<th style="text-align: center;width: 5%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 15%; border: solid 1px black;">Tanggal KM</th>
-			<th style="text-align: left;width: 20%;border: solid 1px black;">KM Awal</th>
-			<th style="text-align: left;width: 20%;border: solid 1px black;">KM Akhir</th>
+			<th style="text-align: center;height: 2%; width: 5%; border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 15%; border: solid 1px black;">Tanggal KM</th>
+			<th style="text-align: center;width: 20%;border: solid 1px black;">KM Awal</th>
+			<th style="text-align: center;width: 20%;border: solid 1px black;">KM Akhir</th>
 			<th style="text-align: center;width: 15%;border: solid 1px black;">Total KM (Rp)</th>
 		</tr>
 		<?php
@@ -60,9 +60,9 @@
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo $r['kmdt']; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo $first_km; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo $last_km; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo $r['kmdt']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo $first_km; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo $last_km; ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($total_dayli); ?></td>
 		</tr>
 		<?php 
