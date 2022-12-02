@@ -28,13 +28,28 @@
 			exit();
 		}
 	}
-	//ACC Pembayaran
+	//ACC Pembayaran Tonase
 	elseif ($task=='acc'){
 		$km		= $_GET['id'];
 		//update status pembayaran
 		$update = mysql_query("update km set km_status = 'Acc', km_date_acc = '".$date_now."' where km_id = '".$km."'");
 		if($update){
 			echo "<script>window.location=('pay.php')</script>";
+			exit();
+		}
+		else{
+			echo "<script>window.alert('ACC Gagal');
+			window.history.back()</script>";
+			exit();
+		}
+	}
+	//ACC Pembayaran Mitra
+	elseif ($task=='acc_mitra'){
+		$km		= $_GET['id'];
+		//update status pembayaran
+		$update = mysql_query("update km_mitra set km_status = 'Acc', km_date_acc = '".$date_now."' where km_id = '".$km."'");
+		if($update){
+			echo "<script>window.location=('pay_km_mitra.php')</script>";
 			exit();
 		}
 		else{
