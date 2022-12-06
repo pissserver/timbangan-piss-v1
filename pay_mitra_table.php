@@ -45,7 +45,8 @@
 													w.cost, 
 													w.weighing_sts, 
 													w.weighing_sts3, 
-													w.date_out, 
+													w.date_out,
+													(w.cost_bagi_mitra + w.cost_simpan_mitra) AS pendapatan_mitra,
 													w.date_check 
 										from weighing_mitra w, merchant m	
 										where 	w.merchant_id = m.merchant_id and 
@@ -64,7 +65,7 @@
 			<td style="text-align:left;"><?php echo $data2['merchant_id']; ?></td>
 			<td><?php echo $merchant; ?></td>
 			<td style="text-align:right;"><?php echo $data2['netto']; ?> Kg</td>
-			<td style="text-align:right;"><?php echo format_rupiah($data2['cost_bagi_mitra']); ?></td>
+			<td style="text-align:right;"><?php echo format_rupiah($data2['pendapatan_mitra']); ?></td>
 			<!-- <td style="text-align:right;"><?php echo format_rupiah($data2['cost_simpan_mitra']); ?></td>
 			<td style="text-align:right;"><?php echo format_rupiah($data2['cost_bagi_mandor']); ?></td>
 			<td style="text-align:right;"><?php echo format_rupiah($data2['cost_simpan_mandor']); ?></td> -->

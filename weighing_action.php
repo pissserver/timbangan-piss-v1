@@ -2002,7 +2002,8 @@
 			$cost_simpan_mitra 	= $netto * $tsb; // Hitung cost simpan mitra
 			$cost_bagi_mandor 	= $netto * $tbm; // Hitung cost bagi mandor
 			$cost_simpan_mandor = $netto * $tsm; // Hitung cost simpan mandor
-			$cost_bayar 		= intval($cost_simpan_mitra) + intval($cost_bagi_mandor) + intval($cost_simpan_mandor); // Hitung cost simpan mandor
+			// $cost_bayar 		= intval($cost_simpan_mitra) + intval($cost_bagi_mandor) + intval($cost_simpan_mandor); // Hitung cost simpan mandor
+			$cost_bayar 		= intval($cost_bagi_mandor) + intval($cost_simpan_mandor); // Hitung cost simpan mandor
 
 			
 			$cek = executeScalar("select count(weighing_id) from laborer_fee where weighing_id = '".$id."'");
