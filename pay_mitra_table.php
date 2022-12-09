@@ -48,7 +48,7 @@
 													w.date_out,
 													(w.cost_bagi_mitra + w.cost_simpan_mitra) AS pendapatan_mitra,
 													w.date_check 
-										from weighing_mitra w, merchant m	
+										from 	weighing_mitra w, merchant m	
 										where 	w.merchant_id = m.merchant_id and 
 												m.merchant_status = 'Aktif' and
 												w.weighing_sts = 'Keluar' and 
