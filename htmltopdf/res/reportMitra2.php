@@ -64,7 +64,7 @@
 		</tr>
 		<?php
 			//select data
-			$query 	= mysql_query("	select 	weighing_id, 
+			$query 	= mysql_query("	select 	lf.weighing_id, 
 											B001_save,
 											B002_save,
 											B003_save,
@@ -99,9 +99,9 @@
 											M02_save, 
 											M03_save,
 											M04_save 
-									from 	laborer_fee 
-									where 	laborer_fee_sts = 'Baru' and 
-											date(laborer_fee_date) = '".$date."' ");
+									from 	laborer_fee lf
+									JOIN 	weighing_mitra wm ON wm.weighing_id = lf.weighing_id
+									where 	laborer_fee_sts = 'Baru' and date(date_pay) = '".$date."'");
 			$no 	= 1;
 			$total2	= 0;
 			$B001	= 0;
