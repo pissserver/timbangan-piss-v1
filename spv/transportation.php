@@ -133,6 +133,7 @@
 								<li><a href="laborer.php"><i class="fa fa-group fa-fw"></i> Mitra</a></li>
 								<li><a class="active" href="transportation.php"><i class="fa fa-truck fa-fw"></i> Kendaraan</a></li>
 								<li><a href="goods.php"><i class="fa fa-archive fa-fw"></i> Barang</a></li>
+								<li><a href="seasonalcommodity.php"><i class="fa fa-archive fa-fw"></i> Komoditi Khusus</a></li>
 								<li><a href="noncommodity.php"><i class="fa fa-archive fa-fw"></i> Non Komoditi</a></li>
 								<li><a href="payment.php"><i class="fa fa-money fa-fw"></i> Tarif</a></li>
 							</ul>

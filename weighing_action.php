@@ -15,7 +15,7 @@
 	//Mengambil Id Checker
 	$checker= executeScalar("select checker_id from checker where checker_code='".$_SESSION['checker']."'");
 	
-	//Kendaraan Masuk 
+	//Start Kendaraan Masuk  =========================================================================================================
 	if($task=='masuk'){
 		if($_POST['merchant']==''|| $_POST['goods']==''){
 			trigger_error("Data pedagang atau jenis barang belum diisi", E_USER_ERROR);
@@ -202,8 +202,8 @@
 			exit();
 		}
 	}
-	
-	//Retail Masuk 
+	// End barang Masuk ==============================================================================================================================
+	// Start Retail Masuk ============================================================================================================================
 	if($task=='masuk2'){
 		if($_POST['merchant']==''||$_POST['goods']==''){
 			trigger_error("Data pedagang & jenis barang belum diisi", E_USER_ERROR);
@@ -288,8 +288,8 @@
 			}
 		}
 	}
-
-	//Edit Kendaraan Masuk
+	// End Retail Masuk ======================================================================================================================================
+	// Start Edit Kendaraan Masuk ============================================================================================================================
 	elseif($task=='edit'){
 		$id		= $_GET['id'];
 		$update1 = mysql_query("update weighing set nopol = '".$_POST['nopol']."',
@@ -306,11 +306,15 @@
 			exit();
 		}
 	}
-	
-	//Kendaraan Keluar
+	// End Edit Kendaraan Masuk ================================================================================================================================
+	// Start Kendaraan Keluar ==================================================================================================================================
 	elseif($task=='keluar'){
-		$id		= $_GET['id'];
-		$sts 	= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
+		$id						= $_GET['id'];
+		$sts 					= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
+		$id_komoditi			= $_POST['goods'];
+		$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$id_komoditi."' AND status_aktif = '1'");
+		$tarifmin 				= executeScalar("select pay_total from payment where pay_id = '1'");
+
 		if($sts=='Masuk'){
 			$netto	= 0;
 			$total1	= 0;
@@ -338,9 +342,12 @@
 				$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 			}
 			
-			$tarifmin 		= executeScalar("select pay_total from payment where pay_id = '1'");
-			$tonase3 		= $tonase1 + $tonase2;
-			
+			// Pengecekan apabila buah yang dimasukkan termasuk buah khusus
+			if ($cekseasonalcommodity > 0) { 
+				$tonase1 = executeScalar("select pay_total from payment where pay_id = '14'");
+			}
+
+			$tonase3 	= $tonase1 + $tonase2;
 			$weight_in 	= executeScalar("select weight_in from weighing where weighing_id = '".$id."'");
 			
 			$x 			= getWeight();
@@ -358,14 +365,16 @@
 			$total1			= $netto*$tonase1;
 			$total2			= $netto*$tonase1;
 			
-			//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
-			if($total1>$tarifmin){
-				$total1 = $total1;
+			if($jenis != 'B'){
+				//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
+				if($total1>$tarifmin){
+					$total1 = $total1;
+				}
+				else{
+					$total1 = $tarifmin;
+				}	
 			}
-			else{
-				$total1 = $tarifmin;
-			}
-			
+
 			//Jika Berat Keluar = 0
 			if($weight_out==0){
 				echo "<script>window.alert('Berat Keluar 0, Tolong Diinputkan lagi')</script>;
@@ -478,11 +487,14 @@
 			exit();
 		}
 	}
-	
-	//Kendaraan Keluar dengan kir
+	// End Kendaraan Keluar Normal ==========================================================================================================================
+	// Start Kendaraan Keluar dengan kir ====================================================================================================================
 	elseif($task =='kir'){
-		$id		= $_GET['id'];
-		$sts 	= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
+		$id						= $_GET['id'];
+		$sts 					= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
+		$id_komoditi			= $_POST['goods'];
+		$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$id_komoditi."' AND status_aktif = '1'");
+
 		if($sts == 'Masuk'){
 			$netto	= 0;
 			$total1	= 0;
@@ -510,6 +522,10 @@
 				$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 				$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 			}
+
+			if ($cekseasonalcommodity > 0) { 
+				$tonase1 = executeScalar("select pay_total from payment where pay_id = '14'");
+			}
 			
 			$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
 			$tonase3 	= $tonase1 + $tonase2;
@@ -533,11 +549,13 @@
 			
 			//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
 			//set total bayar
-			if($total1>$tarifmin){
-				$total1 = $total1;
-			}
-			else{
-				$total1 = $tarifmin;
+			if($jenis != 'B'){
+				//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
+				if($total1>$tarifmin){
+					$total1 = $total1;
+				}else{
+					$total1 = $tarifmin;
+				}
 			}
 			//Cek Berat Keluar
 			if($weight_in<$kir){
@@ -593,18 +611,20 @@
 			exit();
 		}
 	}
-	
-	//Update Data Timbangan, rafaksi, dll
+	// End Kendaraan Keluar Dengan Kir =====================================================================================================================================
+	// Start Update Data Timbangan, rafaksi, dll atau simpan jadi Nota =====================================================================================================
 	elseif($task=='update'){
-		$id			= $_GET['id'];
-		$netto		= 0;
-		$total1		= 0;
-		$total2		= 0;
-		$tonase1 	= 0;
-		$tonase3 	= 0;
-		$trfbongkar = 0;
-		$trftonase 	= 0;
-		
+		$id						= $_GET['id'];
+		$netto					= 0;
+		$total1					= 0;
+		$total2					= 0;
+		$tonase1 				= 0;
+		$tonase3 				= 0;
+		$trfbongkar 			= 0;
+		$trftonase 				= 0;
+		$id_komoditi			= $_POST['goods'];
+		$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$id_komoditi."' AND status_aktif = '1'");
+
 		//Cek apabila tagihan sdh d print
 		$p2 	= executeScalar("select p2 from weighing where weighing_id = '".$id."'");
 		if($p2==2){
@@ -630,6 +650,10 @@
 		elseif($jenis=='L'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'"); // Tonase Lainnya
 			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'"); // Mitra Lainnya
+		}
+
+		if ($cekseasonalcommodity > 0) { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '14'");
 		}
 		
 		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
@@ -733,20 +757,24 @@
 			$trftonase 		= $netto*$tonase1;
 			$trfrealtonase 	= $netto*$tonase1;
 		}
-		//Jika total bayar dibawah 15.000, maka akan dikenakan tarin min (Rp 15.000)
-		if($total1>$tarifmin){
-			$total1 = $total1;
-		}
-		else{
-			$total1 = $tarifmin;
-		}
+		
+		if($jenis != 'B'){
+			//Jika total bayar dibawah 15.000, maka akan dikenakan tarin min (Rp 15.000)
+			if($total1>$tarifmin){
+				$total1 = $total1;
+			}
+			else{
+				$total1 = $tarifmin;
+			}
 
-		if($trftonase>$tarifmin){
-			$trftonase = $trftonase;
+			if($trftonase>$tarifmin){
+				$trftonase = $trftonase;
+			}
+			else{
+				$trftonase = $tarifmin;
+			}
 		}
-		else{
-			$trftonase = $tarifmin;
-		}
+		
 		//jika status pembayaran berubah
 		$ceksts 	= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
 		$cekweight	= executeScalar("select weight_in from weighing where weighing_id = '".$id."'");
@@ -768,7 +796,12 @@
 									cost2				= '".$total2."'
 								where weighing_id 		= '".$id."'");
 
-		$update2 = mysql_query("update weighing_mitra set date_check = '".$dt_now."' where weighing_id = '".$id."'");
+		$update2 = mysql_query("update 	weighing_mitra 
+								set 	date_check 	= '".$dt_now."',
+										checker_id	= '".$checker."',
+										merchant_id	= '".$_POST['merchant']."',
+										goods_id	= '".$_POST['goods']."' 
+								where 	weighing_id = '".$id."'");
 		
 		if($update1 && $update2){//Jika berhasil update
 			echo "<script>window.location=('check_edit.php?id=$id')</script>";
@@ -785,9 +818,14 @@
 	elseif($task == 'detail'){
 		$id	= $_GET['id'];
 		//Ambil Harga Tonase
-		$tonase1 	= 0;
-		$tonase2 	= 0;
-		$tonase3 	= 0;
+		$tonase1 				= 0;
+		$tonase2 				= 0;
+		$tonase3 				= 0;
+		$trfbongkar 			= 0;
+		$trftonase 				= 0;
+		$commodity 				= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
+		$id_komoditi			= $commodity;
+		$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$id_komoditi."' AND status_aktif = '1'");
 		
 		//mencari berat barang nonkomoditi berdasarkan id nonkomoditi
 		$nc1	= executeScalar("select noncommodity_weight from noncommodity where noncommodity_id = '".$_POST['weight1']."'");
@@ -801,7 +839,6 @@
 		
 		//Jika Jenis pedangang sayur / buar harga berbeda
 		$merchant	= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
-		$commodity 	= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
 		$jenis		= mb_substr($merchant, 0, 1, 'utf-8');
 		if($jenis=='B'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '8'");
@@ -817,6 +854,10 @@
 		elseif($jenis=='L'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
+		}
+
+		if ($cekseasonalcommodity > 0) { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '14'");
 		}
 		
 		//ambil date tarif tonase yg ada di db
@@ -1025,25 +1066,26 @@
 		$cost2 		= 0;
 		
 		//memanggil semua data nota pedagang (yg dipilih) pada hari ini
-		$nopol 			= executeScalar("select nopol from weighing where weighing_id = '".$id."'");
-		$date_check 	= executeScalar("select date_check from weighing where weighing_id = '".$id."'");
-		$s 				= $date_check;
-		$dt				= new DateTime($s);
-		$daten 			= $dt->format('Y-m-d');
-		$date_in 		= executeScalar("select date_in from weighing where weighing_id = '".$id."'");
-		$date_out 		= executeScalar("select date_out from weighing where weighing_id = '".$id."'");
-		$time_in 		= executeScalar("select time_in from weighing where weighing_id = '".$id."'");
-		$time_out 		= executeScalar("select time_out from weighing where weighing_id = '".$id."'");
-		$goods 			= executeScalar("select goods_id from weighing where merchant_id = '".$merchant."' and weighing_id = '".$id."'");
-		$laborer 		= executeScalar("select laborer_sts from weighing where merchant_id = '".$merchant."' and weighing_id = '".$id."'");
-		$name	 		= executeScalar("select merchant_name from merchant where merchant_id = '".$merchant."'");
-		$weight_in		= executeScalar("select sum(weight_in) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
-		$weight_out 	= executeScalar("select sum(weight_out) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
-		$noncommodity 	= executeScalar("select sum(noncommodity) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
-		$netto			= executeScalar("select sum(netto) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
-		$total 			= executeScalar("select sum(cost2) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
-		$cost_bongkar 	= executeScalar("select sum(cost_bongkar) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
-		
+		$nopol 					= executeScalar("select nopol from weighing where weighing_id = '".$id."'");
+		$date_check 			= executeScalar("select date_check from weighing where weighing_id = '".$id."'");
+		$s 						= $date_check;
+		$dt						= new DateTime($s);
+		$daten 					= $dt->format('Y-m-d');
+		$date_in 				= executeScalar("select date_in from weighing where weighing_id = '".$id."'");
+		$date_out 				= executeScalar("select date_out from weighing where weighing_id = '".$id."'");
+		$time_in 				= executeScalar("select time_in from weighing where weighing_id = '".$id."'");
+		$time_out 				= executeScalar("select time_out from weighing where weighing_id = '".$id."'");
+		$goods 					= executeScalar("select goods_id from weighing where merchant_id = '".$merchant."' and weighing_id = '".$id."'");
+		$laborer 				= executeScalar("select laborer_sts from weighing where merchant_id = '".$merchant."' and weighing_id = '".$id."'");
+		$name	 				= executeScalar("select merchant_name from merchant where merchant_id = '".$merchant."'");
+		$weight_in				= executeScalar("select sum(weight_in) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
+		$weight_out 			= executeScalar("select sum(weight_out) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
+		$noncommodity 			= executeScalar("select sum(noncommodity) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
+		$netto					= executeScalar("select sum(netto) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
+		$total 					= executeScalar("select sum(cost2) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
+		$cost_bongkar 			= executeScalar("select sum(cost_bongkar) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
+		$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$goods."'");
+
 		//Jika Jenis pedangang sayur / buar harga berbeda
 		$jenis		= mb_substr($merchant, 0, 1, 'utf-8');
 		if($jenis=='B'){
@@ -1061,25 +1103,32 @@
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		}
+
+		if ($cekseasonalcommodity > 0) { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '14'");
+		}
+		
 		$tarifmin 			= executeScalar("select pay_total from payment where pay_id = '1'");
 		$tonase3 			= $tonase1 + $tonase2;
 		$cost_tonase 		= $netto * $tonase1;
 		$cost_real_tonase 	= $netto * $tonase1;
 
-		//Jika Total Dibawah Tarif Min
-		if($total < $tarifmin){
-			$cost1 				= $tarifmin;
-			$cost2 				= $total;
-		}else{
-			$cost1 				= $total;
-			$cost2 				= $total;
-		}
+		if($jenis != 'B'){
+			//Jika Total Dibawah Tarif Min
+			if($total < $tarifmin){
+				$cost1 				= $tarifmin;
+				$cost2 				= $total;
+			}else{
+				$cost1 				= $total;
+				$cost2 				= $total;
+			}
 
-		// Jika total cost tonase dibawah tarif min
-		if($cost_tonase < $tarifmin){
-			$cost_tonase = $tarifmin;
-		}else{
-			$cost_tonase = $cost_tonase;
+			// Jika total cost tonase dibawah tarif min
+			if($cost_tonase < $tarifmin){
+				$cost_tonase = $tarifmin;
+			}else{
+				$cost_tonase = $cost_tonase;
+			}
 		}
 		
 		//ambil id nota yg digabung
@@ -1231,30 +1280,31 @@
 											where weighing_id	= '".$id."'");
 					
 					//memanggil tarif tonase
-					$cost 				= 0;
-					$cost1 				= 0;
-					$cost2 				= 0;
-					$tonase1 			= 0;
-					$tonase2 			= 0;
-					$tonase3 			= 0;
-					$cost_tonase 		= 0;
-					$cost_real_tonase 	= 0;
-					$cost_bongkar 		= 0;
-					$tonase2 			= 0;
-					$tonase3 			= 0;
-					$commodity 			= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
-					$nopol				= executeScalar("select nopol from weighing where weighing_id = '".$id."'");
-					$weight_in			= executeScalar("select weight_in from weighing where weighing_id = '".$id."'");
-					$weight_out			= executeScalar("select weight_out from weighing where weighing_id = '".$id."'");
-					$nid 				= executeScalar("select noncommodity_id from weighing where weighing_id = '".$id."'");
-					$noncommodity 		= executeScalar("select noncommodity from weighing where weighing_id = '".$id."'");
-					$goods				= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
-					$date_in			= executeScalar("select date_in from weighing where weighing_id = '".$id."'");
-					$time_out			= executeScalar("select time_out from weighing where weighing_id = '".$id."'");
-					$date_out			= executeScalar("select date_out from weighing where weighing_id = '".$id."'");
-					$time_in			= executeScalar("select time_in from weighing where weighing_id = '".$id."'");
-					$laborer 			= executeScalar("select laborer_sts from weighing where weighing_id = '".$id."'");
-					$rafa	 			= executeScalar("select rafaksi from weighing where weighing_id = '".$id."'");
+					$cost 					= 0;
+					$cost1 					= 0;
+					$cost2 					= 0;
+					$tonase1 				= 0;
+					$tonase2 				= 0;
+					$tonase3 				= 0;
+					$cost_tonase 			= 0;
+					$cost_real_tonase 		= 0;
+					$cost_bongkar 			= 0;
+					$tonase2 				= 0;
+					$tonase3 				= 0;
+					$commodity 				= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
+					$nopol					= executeScalar("select nopol from weighing where weighing_id = '".$id."'");
+					$weight_in				= executeScalar("select weight_in from weighing where weighing_id = '".$id."'");
+					$weight_out				= executeScalar("select weight_out from weighing where weighing_id = '".$id."'");
+					$nid 					= executeScalar("select noncommodity_id from weighing where weighing_id = '".$id."'");
+					$noncommodity 			= executeScalar("select noncommodity from weighing where weighing_id = '".$id."'");
+					$goods					= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
+					$date_in				= executeScalar("select date_in from weighing where weighing_id = '".$id."'");
+					$time_out				= executeScalar("select time_out from weighing where weighing_id = '".$id."'");
+					$date_out				= executeScalar("select date_out from weighing where weighing_id = '".$id."'");
+					$time_in				= executeScalar("select time_in from weighing where weighing_id = '".$id."'");
+					$laborer 				= executeScalar("select laborer_sts from weighing where weighing_id = '".$id."'");
+					$rafa	 				= executeScalar("select rafaksi from weighing where weighing_id = '".$id."'");
+					$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$goods."'");
 					
 					//Jika Jenis pedangang sayur / buar harga berbeda
 					$jenis			= mb_substr($merchant, 0, 1, 'utf-8');
@@ -1274,6 +1324,10 @@
 						$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 					}
 					
+					if ($cekseasonalcommodity > 0) { 
+						$tonase1 = executeScalar("select pay_total from payment where pay_id = '14'");
+					}
+
 					$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
 					$tonase3 	= $tonase1 + $tonase2;
 					
@@ -1292,22 +1346,24 @@
 							$cost_bongkar 		= $n1 * 0;
 						}
 						
-						//jika total harga krg dari tarif min
-						if($cost < $tarifmin){
-							$cost1 = $tarifmin;
-							$cost2 = $cost;
-						}
-						else{
-							$cost1 = $cost;
-							$cost2 = $cost;
-						}
+						if($jenis != 'B'){
+							//jika total harga krg dari tarif min
+							if($cost < $tarifmin){
+								$cost1 = $tarifmin;
+								$cost2 = $cost;
+							}
+							else{
+								$cost1 = $cost;
+								$cost2 = $cost;
+							}
 
-						//jika total harga tonase krg dari tarif min
-						if($cost_tonase < $tarifmin){
-							$cost_tonase = $tarifmin;
-						}
-						else{
-							$cost_tonase = $cost_tonase;
+							//jika total harga tonase krg dari tarif min
+							if($cost_tonase < $tarifmin){
+								$cost_tonase = $tarifmin;
+							}
+							else{
+								$cost_tonase = $cost_tonase;
+							}
 						}
 						
 						$insert1 = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, 
@@ -1337,21 +1393,24 @@
 							$cost_bongkar 		= $n2 * 0;
 						}
 						
-						if($cost<$tarifmin){
-							$cost1 = $tarifmin;
-							$cost2 = $cost;
-						}
-						else{
-							$cost1 = $cost;
-							$cost2 = $cost;
-						}
-						
-						//jika total harga tonase krg dari tarif min
-						if($cost_tonase < $tarifmin){
-							$cost_tonase = $tarifmin;
-						}
-						else{
-							$cost_tonase = $cost_tonase;
+						if($jenis != 'B'){
+							//jika total harga krg dari tarif min
+							if($cost < $tarifmin){
+								$cost1 = $tarifmin;
+								$cost2 = $cost;
+							}
+							else{
+								$cost1 = $cost;
+								$cost2 = $cost;
+							}
+
+							//jika total harga tonase krg dari tarif min
+							if($cost_tonase < $tarifmin){
+								$cost_tonase = $tarifmin;
+							}
+							else{
+								$cost_tonase = $cost_tonase;
+							}
 						}
 
 						$insert2 = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `noncommodity_id`,`netto`, 
@@ -1379,21 +1438,24 @@
 							$cost_bongkar 		= $n3 * 0;
 						}
 						
-						if($cost<$tarifmin){
-							$cost1 = $tarifmin;
-							$cost2 = $cost;
-						}
-						else{
-							$cost1 = $cost;
-							$cost2 = $cost;
-						}
-						
-						//jika total harga tonase krg dari tarif min
-						if($cost_tonase < $tarifmin){
-							$cost_tonase = $tarifmin;
-						}
-						else{
-							$cost_tonase = $cost_tonase;
+						if($jenis != 'B'){
+							//jika total harga krg dari tarif min
+							if($cost < $tarifmin){
+								$cost1 = $tarifmin;
+								$cost2 = $cost;
+							}
+							else{
+								$cost1 = $cost;
+								$cost2 = $cost;
+							}
+
+							//jika total harga tonase krg dari tarif min
+							if($cost_tonase < $tarifmin){
+								$cost_tonase = $tarifmin;
+							}
+							else{
+								$cost_tonase = $cost_tonase;
+							}
 						}
 
 						$insert3 = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `noncommodity_id`, `netto`, 
@@ -1421,21 +1483,24 @@
 							$cost_bongkar 		= $n4 * 0;
 						}
 						
-						if($cost<$tarifmin){
-							$cost1 = $tarifmin;
-							$cost2 = $cost;
-						}
-						else{
-							$cost1 = $cost;
-							$cost2 = $cost;
-						}
-						
-						//jika total harga tonase krg dari tarif min
-						if($cost_tonase < $tarifmin){
-							$cost_tonase = $tarifmin;
-						}
-						else{
-							$cost_tonase = $cost_tonase;
+						if($jenis != 'B'){
+							//jika total harga krg dari tarif min
+							if($cost < $tarifmin){
+								$cost1 = $tarifmin;
+								$cost2 = $cost;
+							}
+							else{
+								$cost1 = $cost;
+								$cost2 = $cost;
+							}
+
+							//jika total harga tonase krg dari tarif min
+							if($cost_tonase < $tarifmin){
+								$cost_tonase = $tarifmin;
+							}
+							else{
+								$cost_tonase = $cost_tonase;
+							}
 						}
 
 						$insert4 = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `noncommodity_id`,`netto`, 
@@ -1462,21 +1527,24 @@
 							$cost_bongkar 		= $n5 * 0;
 						}
 						
-						if($cost<$tarifmin){
-							$cost1 = $tarifmin;
-							$cost2 = $cost;
-						}
-						else{
-							$cost1 = $cost;
-							$cost2 = $cost;
-						}
-						
-						//jika total harga tonase krg dari tarif min
-						if($cost_tonase < $tarifmin){
-							$cost_tonase = $tarifmin;
-						}
-						else{
-							$cost_tonase = $cost_tonase;
+						if($jenis != 'B'){
+							//jika total harga krg dari tarif min
+							if($cost < $tarifmin){
+								$cost1 = $tarifmin;
+								$cost2 = $cost;
+							}
+							else{
+								$cost1 = $cost;
+								$cost2 = $cost;
+							}
+
+							//jika total harga tonase krg dari tarif min
+							if($cost_tonase < $tarifmin){
+								$cost_tonase = $tarifmin;
+							}
+							else{
+								$cost_tonase = $cost_tonase;
+							}
 						}
 
 						$insert5 = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `noncommodity_id`, `netto`, 
@@ -1504,21 +1572,24 @@
 							$cost_bongkar 		= $n6 * 0;
 						}
 						
-						if($cost<$tarifmin){
-							$cost1 = $tarifmin;
-							$cost2 = $cost;
-						}
-						else{
-							$cost1 = $cost;
-							$cost2 = $cost;
-						}
-						
-						//jika total harga tonase krg dari tarif min
-						if($cost_tonase < $tarifmin){
-							$cost_tonase = $tarifmin;
-						}
-						else{
-							$cost_tonase = $cost_tonase;
+						if($jenis != 'B'){
+							//jika total harga krg dari tarif min
+							if($cost < $tarifmin){
+								$cost1 = $tarifmin;
+								$cost2 = $cost;
+							}
+							else{
+								$cost1 = $cost;
+								$cost2 = $cost;
+							}
+
+							//jika total harga tonase krg dari tarif min
+							if($cost_tonase < $tarifmin){
+								$cost_tonase = $tarifmin;
+							}
+							else{
+								$cost_tonase = $cost_tonase;
+							}
 						}
 
 						$insert6 = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `noncommodity_id`,  `netto`, 
@@ -1546,21 +1617,24 @@
 							$cost_bongkar 		= $n7 * 0;
 						}
 						
-						if($cost<$tarifmin){
-							$cost1 = $tarifmin;
-							$cost2 = $cost;
-						}
-						else{
-							$cost1 = $cost;
-							$cost2 = $cost;
-						}
-						
-						//jika total harga tonase krg dari tarif min
-						if($cost_tonase < $tarifmin){
-							$cost_tonase = $tarifmin;
-						}
-						else{
-							$cost_tonase = $cost_tonase;
+						if($jenis != 'B'){
+							//jika total harga krg dari tarif min
+							if($cost < $tarifmin){
+								$cost1 = $tarifmin;
+								$cost2 = $cost;
+							}
+							else{
+								$cost1 = $cost;
+								$cost2 = $cost;
+							}
+
+							//jika total harga tonase krg dari tarif min
+							if($cost_tonase < $tarifmin){
+								$cost_tonase = $tarifmin;
+							}
+							else{
+								$cost_tonase = $cost_tonase;
+							}
 						}
 
 						$insert7 = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `noncommodity_id`, `netto`, 
@@ -1588,21 +1662,24 @@
 							$cost_bongkar 		= $n8 * 0;
 						}
 						
-						if($cost<$tarifmin){
-							$cost1 = $tarifmin;
-							$cost2 = $cost;
-						}
-						else{
-							$cost1 = $cost;
-							$cost2 = $cost;
-						}
-						
-						//jika total harga tonase krg dari tarif min
-						if($cost_tonase < $tarifmin){
-							$cost_tonase = $tarifmin;
-						}
-						else{
-							$cost_tonase = $cost_tonase;
+						if($jenis != 'B'){
+							//jika total harga krg dari tarif min
+							if($cost < $tarifmin){
+								$cost1 = $tarifmin;
+								$cost2 = $cost;
+							}
+							else{
+								$cost1 = $cost;
+								$cost2 = $cost;
+							}
+
+							//jika total harga tonase krg dari tarif min
+							if($cost_tonase < $tarifmin){
+								$cost_tonase = $tarifmin;
+							}
+							else{
+								$cost_tonase = $cost_tonase;
+							}
 						}
 
 						$insert8 = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `noncommodity_id`, `netto`, 
@@ -1630,21 +1707,24 @@
 							$cost_bongkar 		= $n9 * 0;
 						}
 						
-						if($cost<$tarifmin){
-							$cost1 = $tarifmin;
-							$cost2 = $cost;
-						}
-						else{
-							$cost1 = $cost;
-							$cost2 = $cost;
-						}
-						
-						//jika total harga tonase krg dari tarif min
-						if($cost_tonase < $tarifmin){
-							$cost_tonase = $tarifmin;
-						}
-						else{
-							$cost_tonase = $cost_tonase;
+						if($jenis != 'B'){
+							//jika total harga krg dari tarif min
+							if($cost < $tarifmin){
+								$cost1 = $tarifmin;
+								$cost2 = $cost;
+							}
+							else{
+								$cost1 = $cost;
+								$cost2 = $cost;
+							}
+
+							//jika total harga tonase krg dari tarif min
+							if($cost_tonase < $tarifmin){
+								$cost_tonase = $tarifmin;
+							}
+							else{
+								$cost_tonase = $cost_tonase;
+							}
 						}
 
 						$insert9 = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `noncommodity_id`, `netto`, 
@@ -1672,22 +1752,26 @@
 							$cost_bongkar 		= $n10 * 0;
 						}
 						
-						if($cost<$tarifmin){
-							$cost1 = $tarifmin;
-							$cost2 = $cost;
-						}
-						else{
-							$cost1 = $cost;
-							$cost2 = $cost;
+						if($jenis != 'B'){
+							//jika total harga krg dari tarif min
+							if($cost < $tarifmin){
+								$cost1 = $tarifmin;
+								$cost2 = $cost;
+							}
+							else{
+								$cost1 = $cost;
+								$cost2 = $cost;
+							}
+
+							//jika total harga tonase krg dari tarif min
+							if($cost_tonase < $tarifmin){
+								$cost_tonase = $tarifmin;
+							}
+							else{
+								$cost_tonase = $cost_tonase;
+							}
 						}
 						
-						//jika total harga tonase krg dari tarif min
-						if($cost_tonase < $tarifmin){
-							$cost_tonase = $tarifmin;
-						}
-						else{
-							$cost_tonase = $cost_tonase;
-						}
 						$insert10 = mysql_query("INSERT INTO `weighing` (`weighing_id`, `nopol`, `noncommodity_id`, `netto`, 
 						`checker_id`, `merchant_id`, `goods_id`, `date_in`, `date_out`, `time_in`, `time_out`, `laborer_sts`, 
 						`cost_tonase`, `cost_real_tonase`, `cost_bongkar`, `cost`, `cost2`,
@@ -1748,10 +1832,11 @@
 		$N2					= 0;
 		
 		//Set tarif harga jika Jenis pedagang berbeda 
-		$merchant 	= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
-		$jenis		= mb_substr($merchant, 0, 1, 'utf-8');
-		$commodity 	= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
-		$stsnota 	= executeScalar("select weighing_sts2 from weighing where weighing_id = '".$id."'");
+		$merchant 				= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
+		$jenis					= mb_substr($merchant, 0, 1, 'utf-8');
+		$commodity 				= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
+		$stsnota 				= executeScalar("select weighing_sts2 from weighing where weighing_id = '".$id."'");
+		$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$commodity."'");
 		
 		//Tarif 2 adlh tarif mitra sdgkan tarif1 adalah tarif normal tanpa mitra
 		if($jenis =='B'){
@@ -1770,6 +1855,10 @@
 			$tarif2 = executeScalar("select pay_total from payment where pay_id = '3'"); // Tarif mitra & mandor lainnya
 		}
 
+		if ($cekseasonalcommodity > 0) { 
+			$tarif1 = executeScalar("select pay_total from payment where pay_id = '14'");
+		}
+
 		//tarifmin adlh tarif minimal timbangan (Saat Ini 15.000)
 		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
 		
@@ -1786,12 +1875,14 @@
 			$cost_real_tonase 	= $netto * $tarif1;
 			$cost_bongkar 		= '0';
 
-			if($total1<$tarifmin){
-				$total1 = $tarifmin;
-			}
-
-			if($cost_tonase < $tarifmin){
-				$cost_tonase = $tarifmin;
+			if($jenis != 'B'){
+				if($total1<$tarifmin){
+					$total1 = $tarifmin;
+				}
+	
+				if($cost_tonase < $tarifmin){
+					$cost_tonase = $tarifmin;
+				}
 			}
 
 			$update1 = mysql_query("update laborer_fee set laborer_fee_sts = 'Batal' where weighing_id = '".$id."'");
@@ -1996,6 +2087,10 @@
 				$tbm 			= executeScalar("select pay_total from payment where pay_id = '6'"); // Total bagi mandor
 				$tsm 			= executeScalar("select pay_total from payment where pay_id = '7'"); // Total simpan mandor
 			}
+
+			if ($cekseasonalcommodity > 0) { 
+				$tarifbongkar 	= executeScalar("select pay_total from payment where pay_id = '14'");
+			}
 			
 			$cost 				= $netto * $tarifbongkar; // Hitung cost jasa bongkar
 			$cost_bagi_mitra 	= $netto * $tbb; // Hitung cost bagi mitra
@@ -2081,14 +2176,16 @@
 			}
 		}
 		
-		//Jika total bayar dibawah 30.000, maka akan dikenakan tarin min (Rp 30.000)
-		if($total1 < $tarifmin){
-			$total1 = $tarifmin;
-		}
+		if($jenis != 'B'){
+			// Jika total bayar dibawah 30.000, maka akan dikenakan tarin min (Rp 30.000)
+			if($total1 < $tarifmin){
+				$total1 = $tarifmin;
+			}
 
-		//Jika total cost tonase dibawah 30.000, maka akan dikenakan tarin min (Rp 30.000)
-		if($cost_tonase < $tarifmin){
-			$cost_tonase = $tarifmin;
+			// Jika total cost tonase dibawah 30.000, maka akan dikenakan tarin min (Rp 30.000)
+			if($cost_tonase < $tarifmin){
+				$cost_tonase = $tarifmin;
+			}	
 		}
 		
 		//update status dan nilai rupiah pada nota
@@ -2101,7 +2198,6 @@
 									cost2				= '".$total2."'
 								where weighing_id 		= '".$id."'");
 		if($update){
-			
 			echo "<script>window.location=('check_edit.php?id=$id')</script>";
 			exit();
 		}
