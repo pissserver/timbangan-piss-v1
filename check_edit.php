@@ -12,6 +12,9 @@
 	$admin 		= executeScalar("select checker_name from checker where checker_code = '".$_SESSION['checker']."'");
 	$id			= $_GET['id'];
 	$edit		= mysql_query("select * from weighing where weighing_id = '".$id."'");
+	$pdg 		= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
+	$jenis		= mb_substr($pdg, 0, 1, 'utf-8');
+
 	while ($r 	= mysql_fetch_array($edit)){
 		$merchant 		= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
 		$nick	 		= executeScalar("select merchant_nick from merchant where merchant_id = '".$r['merchant_id']."'");
@@ -240,7 +243,9 @@
 														echo '';
 													}
 													elseif($exist>1){
-														echo '<br /><button onclick="merge()" type="button" class="btn btn-block btn-outline btn-success">Gabung Nota</button>';
+														if ($jenis != 'B') {
+															echo '<br /><button onclick="merge()" type="button" class="btn btn-block btn-outline btn-success">Gabung Nota</button>';
+														}
 													}
 													else{
 														//echo $daten;

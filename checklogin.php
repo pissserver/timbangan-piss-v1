@@ -23,7 +23,7 @@
 	}
 	//Jika user & pass checker tidak ada, lakukan query pencarian user sbg admin
 	else{
-		$login2	= mysql_query("select username, password, role from admin
+		$login2	= mysql_query("select id_admin, username, password, role from admin
 				where username = '".antiinjection($_POST["user"])."' and 
 				password = '".antiinjection($_POST["pass"])."' and 
 				timbangan = 'Yes'");
@@ -34,6 +34,7 @@
 		if($ada==1){
 			//Jika user adl pp
 			if($role['role']=='pp'){
+				$_SESSION['id_admin'] 	= $role['id_admin'];
 				$_SESSION['username'] 	= $role['username'];
 				$_SESSION['role'] 		= $role['role'];
 				echo "<script>window.location=('pp/index.php')</script>";
@@ -41,6 +42,7 @@
 			}
 			//Jika user adl kas kecil
 			if($role['role']=='kk'){
+				$_SESSION['id_admin'] 	= $role['id_admin'];
 				$_SESSION['username'] 	= $role['username'];
 				$_SESSION['role'] 		= $role['role'];
 				echo "<script>window.location=('kk/index.php')</script>";
@@ -48,6 +50,7 @@
 			}
 			//jika user adl admin / super admin
 			if($role['role']=='admin'||$role['role']=='super_admin'){
+				$_SESSION['id_admin'] 	= $role['id_admin'];
 				$_SESSION['username'] 	= $role['username'];
 				$_SESSION['role'] 		= $role['role'];
 				echo "<script>window.location=('spv/index.php')</script>";

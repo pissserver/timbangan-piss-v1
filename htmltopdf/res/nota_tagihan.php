@@ -13,6 +13,8 @@
 		$sql 			= mysql_query("select * from weighing where weighing_id = '".$id."'");
 		$biayatonase 	= 0;
 		$biayamitra 	= 0;
+		$cost_tonase	= executeScalar("select cost_tonase from weighing where weighing_id = '".$id."'");
+
 		while($r= mysql_fetch_array($sql)){
 			$prnt 		= mysql_query("update weighing set p2 = '2' where weighing_id = '".$id."'");
 			$jenis		= mb_substr($r['merchant_id'], 0, 1, 'utf-8');
@@ -30,6 +32,10 @@
 			$date_out	= date("d-m-Y", strtotime($r['date_out']));
 			$date_cek	= date("d-m-Y H:i", strtotime($r['date_check']));
 			$nc_weight	= $r['noncommodity'];
+			
+			// Periksa apa kah termasuk komoditi khusus
+			$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$r['goods_id']."' AND status_aktif = '1'");
+
 			if($nc_weight!=0||$nc_weight!=''){
 				$nc_weight	= $nc_weight;
 			}
@@ -55,18 +61,18 @@
 					$biayatonase 	= $r['netto'] * $tarif2;
 					$biayamitra 	= $r['netto'] * $tarif1;
 					$tarifminim	 	= executeScalar("select pay_total from payment where pay_id = '1'");
-				if ($biayatonase < $tarifminim) {
-					$biayatonase = $tarifminim;
-				}
+					// if ($biayatonase < $tarifminim) {
+					// 	$biayatonase = $tarifminim;
+					// }
 				}else{
 					$tarif2	 		= executeScalar("select pay_total from payment where pay_id = '8'");
 					$tarif1 		= 0;
 					$biayatonase 	= $r['netto'] * $tarif2;
 					$biayamitra 	= $r['netto'] * $tarif1;
 					$tarifminim	 	= executeScalar("select pay_total from payment where pay_id = '1'");
-				if ($biayatonase < $tarifminim) {
-					$biayatonase = $tarifminim;
-				}
+					// if ($biayatonase < $tarifminim) {
+					// 	$biayatonase = $tarifminim;
+					// }
 				}
 				// if($r['merchant_id']=='B0072'&&$r['goods_id']==2){
 				// 	$tarif 	= executeScalar("select pay_total from payment where pay_id = '2'");
@@ -113,7 +119,11 @@
 				if ($biayatonase < $tarifminim) {
 					$biayatonase = $tarifminim;
 				}
-			} 
+			}
+			
+			if ($cekseasonalcommodity > 0) { 
+				$tarif2 = executeScalar("select pay_total from payment where pay_id = '14'");
+			}
 		
 	?>
 	<page_header>
@@ -153,7 +163,7 @@
 		<tr><td>Berat NonKomoditi	</td><td> : <?php echo $nc_weight; ?></td></tr>
 		<tr><td>Rafaksi (Potongan) 	</td><td> : <?php echo $r['rafaksi']; ?></td></tr>
 		<tr><td>Berat Bersih		</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_no($r['netto']); ?></b></td></tr>
-		<tr><td>Tarif Tonase  		</td><td> : <?php if ($biayatonase <= $tarifminim) { ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($tarifminim); ?></b><?php }else{ echo "Rp. ".intval($tarif2)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayatonase); ?></b><?php } ?></td></tr>
+		<tr><td>Tarif Tonase  		</td><td> : <?php if ($biayatonase <= $tarifminim && $jenis != 'B') { ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($tarifminim); ?></b><?php }else{ echo "Rp. ".intval($tarif2)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($cost_tonase); ?></b><?php } ?></td></tr>
 		<!-- <tr><td>Tarif Bongkar  		</td><td> : <?php if ($r['laborer_sts'] != "Ya") { echo "-"; }else{ echo "Rp. ".intval($tarif1)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b><?php } ?></td></tr> -->
 		<!-- <tr><td>Total Biaya Tonase 	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayatonase); ?></b></td></tr>
 		<tr><td>Total Biaya Mitra	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b></td></tr> -->
