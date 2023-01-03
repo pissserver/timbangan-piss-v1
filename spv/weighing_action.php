@@ -2665,6 +2665,7 @@
 
 			// Input data ke weighing mitra untuk data pelunasan mitra
 			$merchant_id 		= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
+			$checker_id 		= executeScalar("select checker_id from weighing where weighing_id = '".$id."'");
 			$goods_id 			= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
 			$nopol 				= executeScalar("select nopol from weighing where weighing_id = '".$id."'");
 			$weight_in 			= executeScalar("select weight_in from weighing where weighing_id = '".$id."'");
@@ -2680,6 +2681,7 @@
 			$time_in 			= executeScalar("select time_in from weighing where weighing_id = '".$id."'");
 			$date_out 			= executeScalar("select date_out from weighing where weighing_id = '".$id."'");
 			$time_out 			= executeScalar("select time_out from weighing where weighing_id = '".$id."'");
+			$date_check 		= executeScalar("select date_check from weighing where weighing_id = '".$id."'");
 			$weighing_sts 		= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
 			$weighing_sts2 		= executeScalar("select weighing_sts2 from weighing where weighing_id = '".$id."'");
 			$reffer 			= executeScalar("select reffer from weighing where weighing_id = '".$id."'");
@@ -2711,7 +2713,8 @@
 			$cost_simpan_mitra 	= $netto * $tsb; // Hitung cost simpan mitra
 			$cost_bagi_mandor 	= $netto * $tbm; // Hitung cost bagi mandor
 			$cost_simpan_mandor = $netto * $tsm; // Hitung cost simpan mandor
-			$cost_bayar 		= intval($cost_simpan_mitra) + intval($cost_bagi_mandor) + intval($cost_simpan_mandor); // Hitung cost simpan mandor
+			// $cost_bayar 		= intval($cost_simpan_mitra) + intval($cost_bagi_mandor) + intval($cost_simpan_mandor); // Hitung cost simpan mandor
+			$cost_bayar 		= intval($cost_bagi_mandor) + intval($cost_simpan_mandor); // Hitung cost simpan mandor
 
 			
 			$cek = executeScalar("select count(weighing_id) from laborer_fee where weighing_id = '".$id."'");
@@ -2734,6 +2737,7 @@
 																	`time_in`,
 																	`date_out`, 
 																	`time_out`,
+																	`date_check`,
 																	`laborer_sts`,
 																	`cost_permitra_bagi`,
 																	`cost_permitra_simpan`,
@@ -2752,7 +2756,7 @@
 																	`p2`) 
 									VALUES ('".$id."', 
 											'".$merchant_id."', 
-											'".$checker."',
+											'".$checker_id."',
 											'".$goods_id."',
 											'".$nopol."',
 											'".$weight_in."',
@@ -2764,6 +2768,7 @@
 											'".$time_in."', 
 											'".$date_out."',
 											'".$time_out."',
+											'".$date_check."',
 											'".$laborer."',
 											'".$k_dibagi."',
 											'".$k_disimpan."',
