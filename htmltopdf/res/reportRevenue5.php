@@ -105,7 +105,7 @@
 					(w.date_pay > '".$r['dateonly']."' || w.date_pay is NULL) and
 					w.weighing_sts != 'Batal' and
 					(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");*/
-				$other = executeScalar("select sum(w.cost) from weighing w, merchant m 
+				$other = executeScalar("select sum(w.cost_tonase) from weighing w, merchant m 
 				where w.merchant_id = m.merchant_id and 
 				m.merchant_status = 'Aktif' and
 				m.merchant_type = 'Lainnya' and 
@@ -114,7 +114,7 @@
 				w.weighing_sts != 'Batal' and
 				(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
 				
-				$vegie = executeScalar("select sum(w.cost) from weighing w, merchant m 
+				$vegie = executeScalar("select sum(w.cost_tonase) from weighing w, merchant m 
 				where w.merchant_id = m.merchant_id and 
 				m.merchant_status = 'Aktif' and
 				m.merchant_type = 'Sayur' and 
@@ -123,7 +123,7 @@
 				w.weighing_sts != 'Batal' and
 				(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
 				
-				$fruit = executeScalar("select sum(w.cost) from weighing w, merchant m 
+				$fruit = executeScalar("select sum(w.cost_tonase) from weighing w, merchant m 
 				where w.merchant_id = m.merchant_id and 
 				m.merchant_status = 'Aktif' and
 				m.merchant_type = 'Buah' and 
@@ -132,7 +132,7 @@
 				w.weighing_sts != 'Batal' and
 				(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
 				
-				$cost = executeScalar("select sum(w.cost) from weighing w, merchant m 
+				$cost = executeScalar("select sum(w.cost_tonase) from weighing w, merchant m 
 				where w.merchant_id = m.merchant_id and 
 				(w.date_check between '".$date." 00:00:00' and '".$date3." 23:59:59') and
 				m.merchant_status = 'Aktif' and
