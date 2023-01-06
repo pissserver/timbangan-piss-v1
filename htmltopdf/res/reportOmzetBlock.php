@@ -33,8 +33,8 @@
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:680px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 5%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 30%;border: solid 1px black;">PEDAGANG</th>
-			<th style="text-align: left;width: 20%;border: solid 1px black;">LAPAK</th>
+			<th style="text-align: center;width: 30%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: center;width: 20%;border: solid 1px black;">LAPAK</th>
 			<th style="text-align: center;width: 15%;border: solid 1px black;">TOTAL NOTA</th>
 			<th style="text-align: center;width: 15%;border: solid 1px black;">RATA-RATA TONASE HARIAN</th>
 			<th style="text-align: center;width: 15%;border: solid 1px black;">TONASE</th>
@@ -100,8 +100,8 @@
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $r['name']; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo $lapak; ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($tot); ?></td>
+			<td style="text-align: left;border: solid 1px black;width: 5%;"><?php echo $lapak; ?></td>
+			<td style="text-align: right;border: solid 1px black;width: 1%;"><?php echo format_no($tot); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($mean); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($total); ?></td>
 		</tr>

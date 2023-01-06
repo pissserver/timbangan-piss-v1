@@ -252,7 +252,7 @@
 												<select class="form-control" name="receiver" id="receiver" required>
 													<option value="" >- Pilih Penyetor Uang -</option>
 													<?php 
-														$sql 		= mysql_query("select checker_id, checker_name from checker where checker_sts = 'Aktif' order by checker_name");
+														$sql 		= mysql_query("select checker_id, checker_name from checker where checker_sts = 'Aktif' AND checker_role = 'Mandor' order by checker_name");
 														while($data = mysql_fetch_array($sql))
 													{?>
 														<option value="<?php echo $data['checker_id'];?>"><?php echo $data['checker_name'];?></option>

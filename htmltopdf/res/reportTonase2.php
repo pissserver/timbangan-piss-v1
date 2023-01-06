@@ -38,11 +38,11 @@
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:820px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 3%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 7%; border: solid 1px black;">TGL KELUAR</th>
-			<th style="text-align: left;width: 10%;border: solid 1px black;">NOTA TIMBANG</th>
-			<th style="text-align: left;width: 10%;border: solid 1px black;">NOTA TAGIHAN</th>
-			<th style="text-align: left;width: 15%;border: solid 1px black;">PEDAGANG</th>
-			<th style="text-align: left;width: 6%;border: solid 1px black;">LAPAK</th>
+			<th style="text-align: center;width: 7%; border: solid 1px black;">TGL KELUAR</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">NOTA TIMBANG</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">NOTA TAGIHAN</th>
+			<th style="text-align: center;width: 15%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: center;width: 6%;border: solid 1px black;">LAPAK</th>
 			<th style="text-align: center;width: 7%;border: solid 1px black;">BERAT MASUK</th>
 			<th style="text-align: center;width: 7%;border: solid 1px black;">BERAT KELUAR</th>
 			<th style="text-align: center;width: 7%;border: solid 1px black;">NON KOMODITI</th>
@@ -72,14 +72,14 @@
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_out'])); ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php 
+			<td style="text-align: center;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_out'])); ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php 
 			if($r['reffer']=='null'||$r['reffer']==''){
 				echo 'TB'.$r['weighing_id'];
 			}else{
 				echo 'TB'.$r['reffer'];
 			} ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $name; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $lapak; ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['weight_in']); ?></td>

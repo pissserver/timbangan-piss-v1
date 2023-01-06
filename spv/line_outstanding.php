@@ -48,7 +48,7 @@
 					type: 'spline'
 				},
 				title: {
-					text: 'Outstanding Timbangan PIOS',
+					text: 'Outstanding Timbangan PISS',
 					x: -20 //center
 				},
 				xAxis: {

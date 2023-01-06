@@ -24,7 +24,7 @@
 <page backtop="15mm" backbottom="10mm" backleft="5mm" backright="5mm">
 	<page_header>
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:20px;">
-			Pembayaran Tonase Per Pedagang
+			PEMBAYARAN TONASE PER PEDAGANG<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     </page_header>
 	<table style="margin-bottom: 5px;font-size:10pt; width:450px;" >
@@ -50,20 +50,33 @@
 	<br />
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:850px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
-			<th style="text-align: center;width: 5%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 10%; border: solid 1px black;">TGL BAYAR</th>
-			<th style="text-align: left;width: 12%;border: solid 1px black;">NOTA TIMBANG</th>
-			<th style="text-align: left;width: 12%;border: solid 1px black;">NOTA TAGIHAN</th>
-			<th style="text-align: left;width: 8%;border: solid 1px black;">NOPOL</th>
-			<th style="text-align: left;width: 10%;border: solid 1px black;">KOMODITI</th>
+			<th style="text-align: center;width: 5%;height: 3%;border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 10%; border: solid 1px black;">TGL BAYAR</th>
+			<th style="text-align: center;width: 12%;border: solid 1px black;">NOTA TIMBANG</th>
+			<th style="text-align: center;width: 12%;border: solid 1px black;">NOTA TAGIHAN</th>
+			<th style="text-align: center;width: 8%;border: solid 1px black;">NOPOL</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">KOMODITI</th>
 			<th style="text-align: center;width: 8%;border: solid 1px black;">TONASE</th>
 			<th style="text-align: center;width: 15%;border: solid 1px black;">TOTAL BAYAR (Rp)</th>
 		</tr>
 		<?php
-			$query 	= mysql_query("select weighing_id, goods_id, reffer, date_out, nopol, weighing_sts2, 
-			weight_in, weight_out, noncommodity, rafaksi, netto, cost from weighing 
-			where weighing_sts = 'Lunas' and merchant_id = '".$mid."' and 
-			(date_pay between '".$date1."' and '".$date2."')");
+			$query 	= mysql_query("	select 	weighing_id, 
+											goods_id, 
+											reffer, 
+											date_out, 
+											nopol, 
+											weighing_sts2, 
+											weight_in, 
+											weight_out, 
+											noncommodity, 
+											rafaksi, 
+											netto, 
+											cost_tonase,
+											cost 
+									from 	weighing 
+									where 	weighing_sts = 'Lunas' and 
+											merchant_id = '".$mid."' and 
+											(date_pay between '".$date1."' and '".$date2."')");
 			$no 	= 1;
 			$netto 	= 0;
 			$cost 	= 0;
@@ -76,23 +89,23 @@
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_out'])); ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php 
+			<td style="text-align: center;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_out'])); ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php 
 			if($r['reffer']=='null'||$r['reffer']==''){
 				echo 'TB'.$r['weighing_id'];
 			}else{
 				echo 'TB'.$r['reffer'];
 			} ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo $r['nopol']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo $r['nopol']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $goods; ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['netto']); ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost']); ?></td>
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost_tonase']); ?></td>
 		</tr>
 		<?php 
 				$no++;
 				$netto 	= $netto+$r['netto'];
-				$cost 	= $cost+$r['cost'];
+				$cost 	= $cost+$r['cost_tonase'];
 			} 
 		?>
 		<tr>

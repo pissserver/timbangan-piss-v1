@@ -12,7 +12,7 @@
 <page backtop="15mm" backbottom="10mm" backleft="10mm" backright="10mm">
 	<page_header>
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:20px; margin-right:65px;">
-			LAPORAN OMZET HARIAN PIOS
+			LAPORAN OMZET TONASE HARIAN PISS
 		</div>
     </page_header>
 	<table style="margin-bottom: 5px;font-size:10pt; width:250px; margin-left:-5px;" >
@@ -25,32 +25,52 @@
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px; margin-left:-5px; font-size:8pt; width:1000px; margin-right:0px;" id="tableOmzetHarian">
 		<tr>
 			<th style="text-align: center;width: 3%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 7%; border: solid 1px black;">TGL TAGIHAN</th>
-			<th style="text-align: left;width: 8%;border: solid 1px black;">NOTA TAGIHAN</th>
-			<th style="text-align: left;width: 7%;border: solid 1px black;">NOPOL</th>
-			<th style="text-align: left;width: 15%;border: solid 1px black;">PEDAGANG</th>
-			<th style="text-align: left;width: 9%;border: solid 1px black;">KOMODITI</th>
-			<th style="text-align: left;width: 6%;border: solid 1px black;">STATUS</th>
+			<th style="text-align: center;width: 7%; border: solid 1px black;">TGL TAGIHAN</th>
+			<th style="text-align: center;width: 8%;border: solid 1px black;">NOTA TAGIHAN</th>
+			<th style="text-align: center;width: 7%;border: solid 1px black;">NOPOL</th>
+			<th style="text-align: center;width: 15%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: center;width: 9%;border: solid 1px black;">KOMODITI</th>
+			<th style="text-align: center;width: 6%;border: solid 1px black;">STATUS</th>
 			<th style="text-align: center;width: 6%;border: solid 1px black;">TONASE</th>
 			<th style="text-align: center;width: 7%;border: solid 1px black;">TOTAL</th>
 		</tr>
 		<?php
 			if($commodity=='Semua'){
-				$query 	= mysql_query("select w.weighing_id, w.nopol, w.goods_id, w.checker_id, w.merchant_id, w.reffer, w.date_check,
-				w.weighing_sts, w.netto, w.cost
-				from weighing w, merchant m 
-				where w.merchant_id = m.merchant_id and 
-				W.weighing_sts != 'Batal' and 
-				(w.date_check between '".$date1." 00:00:00' and '".$date1." 23:59:59')");
+				$query 	= mysql_query("	select 	w.weighing_id, 
+												w.nopol, 
+												w.goods_id, 
+												w.checker_id, 
+												w.merchant_id, 
+												w.reffer, 
+												w.date_check,
+												w.weighing_sts, 
+												w.netto, 
+												w.cost_tonase,
+												w.cost
+										from 	weighing w, 
+												merchant m 
+										where 	w.merchant_id = m.merchant_id and 
+												W.weighing_sts != 'Batal' and 
+												(w.date_check between '".$date1." 00:00:00' and '".$date1." 23:59:59')");
 				
 			}else{
-				$query 	= mysql_query("select w.weighing_id, w.nopol, w.goods_id, w.checker_id, w.merchant_id, w.reffer, w.date_check,
-				w.weighing_sts, w.netto, w.cost
-				from weighing w, merchant m 
-				where w.merchant_id = m.merchant_id and 
-				W.weighing_sts != 'Batal' and 
-				m.merchant_type = '".$commodity."' and 
-				(w.date_check between '".$date1." 00:00:00' and '".$date1." 23:59:59')");
+				$query 	= mysql_query("	select 	w.weighing_id, 
+												w.nopol, 
+												w.goods_id, 
+												w.checker_id, 
+												w.merchant_id, 
+												w.reffer, 
+												w.date_check,
+												w.weighing_sts, 
+												w.netto,
+												w.cost_tonase, 
+												w.cost
+										from 	weighing w, 
+												merchant m 
+										where 	w.merchant_id = m.merchant_id and 
+												W.weighing_sts != 'Batal' and 
+												m.merchant_type = '".$commodity."' and 
+												(w.date_check between '".$date1." 00:00:00' and '".$date1." 23:59:59')");
 			}
 			
 			$no 	= 1;
@@ -62,20 +82,20 @@
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"> <?php echo $no; ?></td>
-			<td style="text-align: left;border: solid 1px black;"> <?php echo date("d-m-Y", strtotime($r['date_check'])); ?></td>
-			<td style="text-align: left;border: solid 1px black;"> <?php echo 'TG'.$r['weighing_id']; ?></td>
-			<td style="text-align: left;border: solid 1px black;"> <?php echo $r['nopol']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"> <?php echo date("d-m-Y", strtotime($r['date_check'])); ?></td>
+			<td style="text-align: center;border: solid 1px black;"> <?php echo 'TG'.$r['weighing_id']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"> <?php echo $r['nopol']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"> <?php echo $name; ?></td>
 			<td style="text-align: left;border: solid 1px black;"> <?php echo $goods; ?></td>
 			<td style="text-align: left;border: solid 1px black;"> <?php echo $r['weighing_sts']; ?></td>
 			<td style="text-align: right;border: solid 1px black;"> <?php echo format_no($r['netto']); ?></td>
-			<td style="text-align: right;border: solid 1px black;"> <?php echo format_no($r['cost']); ?></td>
+			<td style="text-align: right;border: solid 1px black;"> <?php echo format_no($r['cost_tonase']); ?></td>
 		</tr>
 		<?php 
 			$no++;
 			if($r['weighing_sts']!='Batal'||$r['weighing_sts']!='Dipecah'||$r['weighing_sts']!='Digabung')
 			$netto 	= $netto+$r['netto'];
-			$cost 	= $cost+$r['cost'];
+			$cost 	= $cost+$r['cost_tonase'];
 			} 
 		?>
 		<tr>

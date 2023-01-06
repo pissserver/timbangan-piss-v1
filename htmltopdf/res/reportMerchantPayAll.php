@@ -27,7 +27,7 @@
         </table>
     </page_footer>
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		Rekap Pembayaran Tonase Seluruh Pedagang
+		REKAP PEMBAYARAN TONASE SELURUH PEDAGANG<br>PASAR INDUK SURABAYA SIDOTOPO ( PISS )
 	</div>
     <br/>
 	<table style="margin-bottom: 5px;font-size:10pt; width:300px;" >
@@ -49,34 +49,51 @@
 	<br />
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:800px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
-			<th style="text-align: center;width: 5%; border: solid 1px black;">No</th>
-			<th style="text-align: center;width: 45%;border: solid 1px black;">Nama Pedagang</th>
-			<th style="text-align: center;width: 10%;border: solid 1px black;">Blok Aktif</th>
-			<th style="text-align: center;width: 10%;border: solid 1px black;">Total Nota</th>
-			<th style="text-align: center;width: 15%;border: solid 1px black;">Total Rupiah (Rp)</th>
+			<th style="text-align: center;width: 5%;height: 3%;border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 45%;border: solid 1px black;">NAMA PEDAGANG</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">BLOK AKTIF</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">TOTAL NOTA</th>
+			<th style="text-align: center;width: 15%;border: solid 1px black;">TOTAL RUPIAH (Rp)</th>
 		</tr>
 		<?php
 			$sql 	= '';
 			$jml 	= 0;
 			$total 	= 0;
 			if($commodity=='Semua'){
-				$sql = "select m.merchant_id as id, m.merchant_name as name, m.active_block, m.merchant_type as type, 
-				count(w.weighing_id) as tot, count(weighing_id) as tot, sum(w.cost) as total
-				from merchant m, weighing w
-				where w.merchant_id = m.merchant_id and
-				w.weighing_sts = 'Lunas' and
-				(w.date_pay between '".$date1."' and '".$date2."') and
-				m.merchant_status = 'Aktif' and m.merchant_type != 'Lainnya'
-				group by id order by ".$sort."";
+				$sql = "select 	m.merchant_id as id, 
+								m.merchant_name as name, 
+								m.active_block, 
+								m.merchant_type as type, 
+								count(w.weighing_id) as tot, 
+								count(weighing_id) as tot, 
+								sum(w.cost_tonase) as total
+						from 	merchant m, 
+								weighing w
+						where 	w.merchant_id = m.merchant_id and
+								w.weighing_sts = 'Lunas' and
+								(w.date_pay between '".$date1."' and '".$date2."') and
+								m.merchant_status = 'Aktif' and 
+								m.merchant_type != 'Lainnya'
+						group by id 
+						order by ".$sort."";
 			}else{
-				$sql = "select m.merchant_id as id, m.merchant_name as name, m.active_block, m.merchant_type as type,
-				count(w.weighing_id) as tot, count(weighing_id) as tot, sum(w.cost) as total
-				from merchant m, weighing w
-				where w.merchant_id = m.merchant_id and
-				m.merchant_type = '".$commodity."' and w.weighing_sts = 'Lunas' and
-				(w.date_pay between '".$date1."' and '".$date2."') and
-				m.merchant_status = 'Aktif' and m.merchant_type != 'Lainnya'
-				group by id order by ".$sort."";
+				$sql = "select 	m.merchant_id as id, 
+								m.merchant_name as name, 
+								m.active_block, 
+								m.merchant_type as type,
+								count(w.weighing_id) as tot, 
+								count(weighing_id) as tot, 
+								sum(w.cost_tonase) as total
+						from 	merchant m, 
+								weighing w
+						where 	w.merchant_id = m.merchant_id and
+								m.merchant_type = '".$commodity."' and 
+								w.weighing_sts = 'Lunas' and
+								(w.date_pay between '".$date1."' and '".$date2."') and
+								m.merchant_status = 'Aktif' and 
+								m.merchant_type != 'Lainnya'
+						group by id 
+						order by ".$sort."";
 			}
 			$query 	= mysql_query($sql);
 			$no 	= 1;
