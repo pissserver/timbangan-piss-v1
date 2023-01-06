@@ -47,8 +47,8 @@
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:680px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 5%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 30%;border: solid 1px black;">PEDAGANG</th>
-			<th style="text-align: left;width: 20%;border: solid 1px black;">LAPAK</th>
+			<th style="text-align: center;width: 30%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">LAPAK</th>
 			<?php
 				$no			= 1;
 				$monthTH 	= $month1;
@@ -107,7 +107,7 @@
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $r['name']; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo $lapak; ?></td>
+			<td style="text-align: left;width: 36%;border: solid 1px black;"><?php echo $lapak; ?></td>
 			<?php
 				$month7	= $month1;
 				$year7  = $year1;

@@ -27,7 +27,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
-    <title>Admin</title>
+    <title>Laporan Tonase | PISS</title>
 	<?php echo headScript(); ?>
 	<script src="../dataTables/dataTables.tableTools.css"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -110,6 +110,7 @@
 								<li><a href="laborer.php"><i class="fa fa-group fa-fw"></i> Mitra</a></li>
 								<li><a href="transportation.php"><i class="fa fa-truck fa-fw"></i> Kendaraan</a></li>
 								<li><a href="goods.php"><i class="fa fa-archive fa-fw"></i> Barang</a></li>
+								<li><a href="seasonalcommodity.php"><i class="fa fa-archive fa-fw"></i> Barang Musiman</a></li>
 								<li><a href="noncommodity.php"><i class="fa fa-archive fa-fw"></i> Non Komoditi</a></li>
 								<li><a href="payment.php"><i class="fa fa-money fa-fw"></i> Tarif</a></li>
 							</ul>
@@ -164,14 +165,14 @@
             <div class="row">
 				<div class="col-lg-12">
 					<div id="Area1">
-						<div class="alert alert-info" onclick="clearNotif()">
+						<div class="alert alert-primary" onclick="clearNotif()">
 							<center><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></center>
 						</div>
 					</div>
 					<input type="hidden" id="value_day1" />
 				</div>
                 <div class="col-lg-6">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Laporan Tonase Timbangan
                         </div>
@@ -212,7 +213,7 @@
 							</form>
                         </div>
                     </div>
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Laporan Omzet Timbangan Harian
                         </div>
@@ -250,7 +251,7 @@
                     </div>
 				</div>
 				<div class="col-lg-6">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
                         <div class="panel-heading">
                             <i class="fa fa-line-chart fa-fw"></i> Rekap Tonase Timbangan
                         </div>
@@ -278,7 +279,7 @@
 							</form>
                         </div>
                     </div>
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<i class="fa fa-line-chart fa-fw"></i> Rekap Omzet Timbangan
 						</div>
@@ -320,7 +321,7 @@
 				</div>
 				<div class="modal-body">
 					<div id="body_tonase" style="margin-bottom: 0px;">
-						<div class="alert alert-info" onclick="clearNotif()"><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></div>
+						<div class="alert alert-primary" onclick="clearNotif()"><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></div>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -338,7 +339,7 @@
 				</div>
 				<div class="modal-body">
 					<div id="data_password" style="margin-bottom: 0px;">
-						<div class="alert alert-info" onclick="clearNotif()"><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></div>
+						<div class="alert alert-primary" onclick="clearNotif()"><h3><i class="fa fa-spinner fa-spin"></i> Loading...</h3></div>
 					</div>
 					<input type="hidden" id="value_id" />
 				</div>

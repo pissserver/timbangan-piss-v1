@@ -8,7 +8,7 @@
 <page backtop="15mm" backbottom="10mm" backleft="10mm" backright="10mm">
 	<page_header>
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:20px;">
-			REKAP OMZET TONASE HARIAN PIOS
+			REKAP OMZET TONASE HARIAN PISS
 		</div>
     </page_header>
 	<table style="margin-bottom: 5px;font-size:10pt; width:300px;" >
@@ -26,7 +26,7 @@
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:700px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 7%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 15%; border: solid 1px black;">TANGGAL</th>
+			<th style="text-align: center;width: 15%; border: solid 1px black;">TANGGAL</th>
 			<th style="text-align: center;width:18%;border: solid 1px black;">LAINNYA</th>
 			<th style="text-align: center;width:18%;border: solid 1px black;">SAYUR</th>
 			<th style="text-align: center;width:18%;border: solid 1px black;">BUAH</th>
@@ -45,20 +45,20 @@
 			$total3		= 0;
 			$total4		= 0;
 			while($r	= mysql_fetch_array($query)){
-				$tonase1 = executeScalar("select sum(cost) from weighing 
+				$tonase1 = executeScalar("select sum(cost_tonase) from weighing 
 				where (date_check between '".$r['do']." 00:00:00' and '".$r['do']." 23:59:59') and 
 				weighing_sts != 'Batal'");
-				$tonase2 = executeScalar("select sum(w.cost) from weighing w, merchant m 
+				$tonase2 = executeScalar("select sum(w.cost_tonase) from weighing w, merchant m 
 				where w.merchant_id = m.merchant_id and 
 				(w.date_check between '".$r['do']." 00:00:00' and '".$r['do']." 23:59:59') and 
 				m.merchant_type = 'Buah' and 
 				w.weighing_sts != 'Batal'");
-				$tonase3 = executeScalar("select sum(w.cost) from weighing w, merchant m 
+				$tonase3 = executeScalar("select sum(w.cost_tonase) from weighing w, merchant m 
 				where w.merchant_id = m.merchant_id and 
 				(w.date_check between '".$r['do']." 00:00:00' and '".$r['do']." 23:59:59') and 
 				m.merchant_type = 'Sayur' and 
 				w.weighing_sts != 'Batal'");
-				$tonase4 = executeScalar("select sum(w.cost) from weighing w, merchant m 
+				$tonase4 = executeScalar("select sum(w.cost_tonase) from weighing w, merchant m 
 				where w.merchant_id = m.merchant_id and 
 				(w.date_check between '".$r['do']." 00:00:00' and '".$r['do']." 23:59:59') and 
 				m.merchant_type = 'Lainnya' and 

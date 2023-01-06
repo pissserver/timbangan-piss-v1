@@ -25,15 +25,15 @@
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px; margin-left:-5px; font-size:8pt; width:1000px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 3%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 7%; border: solid 1px black;">TGL MASUK</th>
-			<th style="text-align: left;width: 8%;border: solid 1px black;">NOTA TIMBANG</th>
-			<th style="text-align: left;width: 8%;border: solid 1px black;">NOTA TAGIHAN</th>
+			<th style="text-align: center;width: 7%; border: solid 1px black;">TGL MASUK</th>
+			<th style="text-align: center;width: 8%;border: solid 1px black;">NOTA TIMBANG</th>
+			<th style="text-align: center;width: 8%;border: solid 1px black;">NOTA TAGIHAN</th>
 			<th style="text-align: center;width: 7%;border: solid 1px black;">NOPOL</th>
-			<th style="text-align: left;width: 14%;border: solid 1px black;">PEDAGANG</th>
-			<th style="text-align: left;width: 7%;border: solid 1px black;">KOMODITI</th>
+			<th style="text-align: center;width: 14%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: center;width: 7%;border: solid 1px black;">KOMODITI</th>
 			<th style="text-align: center;width: 4%;border: solid 1px black;">MITRA</th>
-			<th style="text-align: left;width: 7%;border: solid 1px black;">STATUS KENDARAAN</th>
-			<th style="text-align: left;width: 5%;border: solid 1px black;">STATUS NOTA</th>
+			<th style="text-align: center;width: 7%;border: solid 1px black;">STATUS KENDARAAN</th>
+			<th style="text-align: center;width: 5%;border: solid 1px black;">STATUS NOTA</th>
 			<th style="text-align: center;width: 6%;border: solid 1px black;">B. MASUK</th>
 			<th style="text-align: center;width: 6%;border: solid 1px black;">B. KELUAR</th>
 			<th style="text-align: center;width: 5%;border: solid 1px black;">NK</th>
@@ -55,14 +55,14 @@
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_in'])); ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php 
+			<td style="text-align: center;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['date_in'])); ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php 
 			if($r['reffer']=='null'||$r['reffer']==''){
 				echo 'TB'.$r['weighing_id'];
 			}else{
 				echo 'TB'.$r['reffer'];
 			} ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo 'TG'.$r['weighing_id']; ?></td>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $r['nopol']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $name; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $goods; ?></td>

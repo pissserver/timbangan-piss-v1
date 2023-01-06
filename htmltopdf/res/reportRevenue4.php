@@ -26,7 +26,7 @@
         </table>
     </page_footer>
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		REKAP TAGIHAN TONASE BELUM TERBAYAR PERHARI PIOS
+		REKAP TAGIHAN TONASE BELUM TERBAYAR PERHARI<br>PASAR INDUK SURABAYA SIDOTOPO ( PISS )
 	</div>
     <br/>
 	<table style="margin-bottom: 5px;font-size:10pt; width:300px;" >
@@ -42,23 +42,24 @@
 	<br />
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:9pt; width:1000px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
-			<th style="text-align: center;width: 5%; border: solid 1px black;">NO</th>
-			<th style="text-align: left;width: 15%; border: solid 1px black;">TGL TAGIHAN</th>
+			<th style="text-align: center;width: 5%;height: 3%;border: solid 1px black;">NO</th>
+			<th style="text-align: center;width: 15%;border: solid 1px black;">TGL TAGIHAN</th>
 			<th style="text-align: center;width: 10%;border: solid 1px black;">LAINNYA</th>
 			<th style="text-align: center;width: 10%;border: solid 1px black;">SAYUR</th>
 			<th style="text-align: center;width: 10%;border: solid 1px black;">BUAH</th>
 			<th style="text-align: center;width: 10%;border: solid 1px black;">TOTAL</th>
 		</tr>
 		<?php
-			$sql = "select DATE(w.date_check) dateonly
-			from weighing w, merchant m 
-			where w.merchant_id = m.merchant_id and 
-			m.merchant_status = 'Aktif' and
-			(w.date_check between '".$date1." 00:00:00' and '".$date2." 23:59:59') and
-			(w.date_pay > '".$date2."' || w.date_pay is NULL) and
-			w.weighing_sts != 'Batal' and
-			(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')
-			group by dateonly";
+			$sql = "select 	DATE(w.date_check) dateonly
+					from 	weighing w, 
+							merchant m 
+					where 	w.merchant_id = m.merchant_id and 
+							m.merchant_status = 'Aktif' and
+							(w.date_check between '".$date1." 00:00:00' and '".$date2." 23:59:59') and
+							(w.date_pay > '".$date2."' || w.date_pay is NULL) and
+							w.weighing_sts != 'Batal' and
+							(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')
+					group by dateonly";
 			
 			$query 	= mysql_query($sql);
 			$no 	= 1;
@@ -67,49 +68,53 @@
 			$tfruit = 0;
 			$tcost 	= 0;
 			while($r= mysql_fetch_array($query)){
-				$other	= executeScalar("select sum(w.cost)
-					from weighing w, merchant m 
-					where DATE(w.date_check) = '".$r['dateonly']."' and
-					w.merchant_id = m.merchant_id and 
-					m.merchant_status = 'Aktif' and
-					m.merchant_type = 'Lainnya' and
-					(w.date_check between '".$date1." 00:00:00' and '".$date2." 23:59:59') and
-					(w.date_pay > '".$date2."' || w.date_pay is NULL) and
-					w.weighing_sts != 'Batal' and
-					(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
-				$vegie	= executeScalar("select sum(w.cost)
-					from weighing w, merchant m 
-					where DATE(w.date_check) = '".$r['dateonly']."' and
-					w.merchant_id = m.merchant_id and 
-					m.merchant_status = 'Aktif' and
-					m.merchant_type = 'Sayur' and
-					(w.date_check between '".$date1." 00:00:00' and '".$date2." 23:59:59') and
-					(w.date_pay > '".$date2."' || w.date_pay is NULL) and
-					w.weighing_sts != 'Batal' and
-					(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
-				$fruit	= executeScalar("select sum(w.cost)
-					from weighing w, merchant m 
-					where DATE(w.date_check) = '".$r['dateonly']."' and
-					w.merchant_id = m.merchant_id and 
-					m.merchant_status = 'Aktif' and
-					m.merchant_type = 'Buah' and
-					(w.date_check between '".$date1." 00:00:00' and '".$date2." 23:59:59') and
-					(w.date_pay > '".$date2."' || w.date_pay is NULL) and
-					w.weighing_sts != 'Batal' and
-					(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
-				$cost	= executeScalar("select sum(w.cost)
-					from weighing w, merchant m 
-					where DATE(w.date_check) = '".$r['dateonly']."' and
-					w.merchant_id = m.merchant_id and 
-					m.merchant_status = 'Aktif' and
-					(w.date_check between '".$date1." 00:00:00' and '".$date2." 23:59:59') and
-					(w.date_pay > '".$date2."' || w.date_pay is NULL) and
-					w.weighing_sts != 'Batal' and
-					(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
+				$other	= executeScalar("	select 	sum(w.cost_tonase)
+											from 	weighing w, 
+													merchant m 
+											where 	DATE(w.date_check) = '".$r['dateonly']."' and
+													w.merchant_id = m.merchant_id and 
+													m.merchant_status = 'Aktif' and
+													m.merchant_type = 'Lainnya' and
+													(w.date_check between '".$date1." 00:00:00' and '".$date2." 23:59:59') and
+													(w.date_pay > '".$date2."' || w.date_pay is NULL) and
+													w.weighing_sts != 'Batal' and
+													(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
+				$vegie	= executeScalar("	select 	sum(w.cost_tonase)
+											from 	weighing w, 
+													merchant m 
+											where 	DATE(w.date_check) = '".$r['dateonly']."' and
+													w.merchant_id = m.merchant_id and 
+													m.merchant_status = 'Aktif' and
+													m.merchant_type = 'Sayur' and
+													(w.date_check between '".$date1." 00:00:00' and '".$date2." 23:59:59') and
+													(w.date_pay > '".$date2."' || w.date_pay is NULL) and
+													w.weighing_sts != 'Batal' and
+													(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
+				$fruit	= executeScalar("	select 	sum(w.cost_tonase)
+											from 	weighing w, 
+													merchant m 
+											where 	DATE(w.date_check) = '".$r['dateonly']."' and
+													w.merchant_id = m.merchant_id and 
+													m.merchant_status = 'Aktif' and
+													m.merchant_type = 'Buah' and
+													(w.date_check between '".$date1." 00:00:00' and '".$date2." 23:59:59') and
+													(w.date_pay > '".$date2."' || w.date_pay is NULL) and
+													w.weighing_sts != 'Batal' and
+													(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
+				$cost	= executeScalar("	select 	sum(w.cost_tonase)
+											from 	weighing w, 
+													merchant m 
+											where 	DATE(w.date_check) = '".$r['dateonly']."' and
+													w.merchant_id = m.merchant_id and 
+													m.merchant_status = 'Aktif' and
+													(w.date_check between '".$date1." 00:00:00' and '".$date2." 23:59:59') and
+													(w.date_pay > '".$date2."' || w.date_pay is NULL) and
+													w.weighing_sts != 'Batal' and
+													(w.weighing_sts2 != 'Dipecah' || w.weighing_sts2 != 'Digabung')");
 		?>
 		<tr>
 			<td style="text-align: center;border: solid 1px black;"><?php echo $no; ?></td>
-			<td style="text-align: left;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['dateonly'])); ?></td>
+			<td style="text-align: center;border: solid 1px black;"><?php echo date("d-m-Y", strtotime($r['dateonly'])); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($other); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($vegie); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($fruit); ?></td>

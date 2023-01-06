@@ -19,6 +19,7 @@
 					nopol, 
 					netto,
 					cost_bagi_mitra,
+					cost_simpan_mitra,
 					cost_bayar, 
 					cost
 			from 	weighing_mitra
@@ -109,7 +110,7 @@
 			<td style="text-align: left;border: solid 1px black;"><?php echo $r['merchant_id']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"><?php echo $name; ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['netto']); ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost_bagi_mitra']); ?></td>
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost_bagi_mitra'] + $r['cost_simpan_mitra']); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost_bayar']); ?></td>
 		</tr>
 		<?php 
