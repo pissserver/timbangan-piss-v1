@@ -224,7 +224,7 @@
 											<div class="form-group" style="padding:10px; margin-top:-10px; margin-left:5px;">
 												<?php
 													//Cetak Pecah Nota
-													if($status=='Lunas'||$status=='Batal'||$status=='Masuk'||$status2=='Digabung'||$status2=='Dipecah'){
+													if($status=='Lunas'||$status=='Batal'||$status=='Masuk'||$status2=='Digabung'||$status2=='Dipecah'||$status2=='Pecahan'){
 														echo '';
 													}
 													else{
