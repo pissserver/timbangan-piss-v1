@@ -26,7 +26,7 @@
 	<div style="font-size: 12px; font-weight: bold; text-align: left; margin-bottom:10px;">
 		Disimpan:
 	</div>
-	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:7pt; width:1100px; margin-right:0px;" id="tableNonkomoditi">
+	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:7pt; width:900px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 2%;border: solid 1px black;">No</th>
 			<th style="text-align: center;width: 5%;border: solid 1px black;">No Nota</th>
@@ -60,6 +60,11 @@
 			<th style="text-align: center;width: 3%;border: solid 1px black;">S013</th>
 			<th style="text-align: center;width: 3%;border: solid 1px black;">S014</th>
 			<th style="text-align: center;width: 3%;border: solid 1px black;">S015</th>
+
+			<th style="text-align: center;width: 3%;border: solid 1px black;">M01</th>
+			<th style="text-align: center;width: 3%;border: solid 1px black;">M02</th>
+			<th style="text-align: center;width: 3%;border: solid 1px black;">M03</th>
+			<th style="text-align: center;width: 3%;border: solid 1px black;">M04</th>
 			<!-- <th style="text-align: center;width: 5%;border: solid 1px black;">Mandor</th> -->
 		</tr>
 		<?php
@@ -101,7 +106,8 @@
 											M04_save 
 									from 	laborer_fee lf
 									JOIN 	weighing_mitra wm ON wm.weighing_id = lf.weighing_id
-									where 	laborer_fee_sts = 'Baru' and date(date_pay) = '".$date."'");
+									where 	laborer_fee_sts = 'Baru' and 
+											date(date_pay) = '".$date."'");
 			$no 	= 1;
 			$total2	= 0;
 			$B001	= 0;
@@ -134,6 +140,10 @@
 			$S013	= 0;
 			$S014	= 0;
 			$S015	= 0;
+			$M01	= 0;
+			$M02	= 0;
+			$M03	= 0;
+			$M04	= 0;
 			while($r= mysql_fetch_array($query)){
 		?>
 		<tr>
@@ -169,6 +179,11 @@
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['S013_save']); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['S014_save']); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['S015_save']); ?></td>
+
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['M01_save']); ?></td>
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['M02_save']); ?></td>
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['M03_save']); ?></td>
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['M04_save']); ?></td>
 			<!-- <td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['foreman_save']); ?></td> -->
 		</tr>
 		<?php
@@ -203,6 +218,11 @@
 				$S013 = $S013+$r['S013_save'];
 				$S014 = $S014+$r['S014_save'];
 				$S015 = $S015+$r['S015_save'];
+
+				$M01 = $M01+$r['M01_save'];
+				$M02 = $M02+$r['M02_save'];
+				$M03 = $M03+$r['M03_save'];
+				$M04 = $M04+$r['M04_save'];
 			}
 			$total2 = 	$B001+
 						$B002+
@@ -233,7 +253,12 @@
 						$S012+
 						$S013+
 						$S014+
-						$S015;
+						$S015+
+						
+						$M01+
+						$M02+
+						$M03+
+						$M04;
 		?>
 		<tr>
 			<td style="text-align: right;border: solid 1px black;" colspan="2"><b>Total </b></td>
@@ -267,6 +292,11 @@
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($S013); ?></td>
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($S014); ?></td>
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($S015); ?></td>
+			
+			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($M01); ?></td>
+			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($M02); ?></td>
+			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($M03); ?></td>
+			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($M04); ?></td>
 		</tr>
 		<tr>
 			<td style="text-align: right;border: solid 1px black;" colspan="30"><b>Total Disimpan </b></td>

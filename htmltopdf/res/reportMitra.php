@@ -26,7 +26,7 @@
 	<div style="font-size: 12px; font-weight: bold; text-align: left; margin-bottom:10px;">
 		Dibagikan:
 	</div>
-	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:9pt; width:1100px; margin-right:0px;" id="tableNonkomoditi">
+	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:9pt; width:900px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>
 			<th style="text-align: center;width: 2%;border: solid 1px black;">No</th>
 			<th style="text-align: center;width: 7%;border: solid 1px black;">No Nota</th>
@@ -60,19 +60,61 @@
 			<th style="text-align: center;width: 3%;border: solid 1px black;">S013</th>
 			<th style="text-align: center;width: 3%;border: solid 1px black;">S014</th>
 			<th style="text-align: center;width: 3%;border: solid 1px black;">S015</th>
-			<!-- <th style="text-align: center;width: 3%;border: solid 1px black;">M01</th>
+
+			<th style="text-align: center;width: 3%;border: solid 1px black;">M01</th>
 			<th style="text-align: center;width: 3%;border: solid 1px black;">M02</th>
 			<th style="text-align: center;width: 3%;border: solid 1px black;">M03</th>
-			<th style="text-align: center;width: 3%;border: solid 1px black;">M04</th> -->
+			<th style="text-align: center;width: 3%;border: solid 1px black;">M04</th>
 		</tr>
 		<?php
-			//select data
-			$query 		= mysql_query("	select 	weighing_id, 
-												B001, B002, B003, B004, B005, B006, B007, B008, B009, B010, B011, B012, B013, B014, B015,
-												S001, S002, S003, S004, S005, S006, S007, S008, S009, S010, S011, S012, S013, S014, S015, 
-												M01, M02, M03, M04
-										from laborer_fee 
-										where laborer_fee_sts = 'Baru' and date(laborer_fee_date) = '".$date."'");
+			//select data tanpa berdasarkan tgl bayar
+			// $query 		= mysql_query("	select 	weighing_id, 
+			// 									B001, B002, B003, B004, B005, B006, B007, B008, B009, B010, B011, B012, B013, B014, B015,
+			// 									S001, S002, S003, S004, S005, S006, S007, S008, S009, S010, S011, S012, S013, S014, S015, 
+			// 									M01, M02, M03, M04
+			// 							from 	laborer_fee 
+			// 							where 	laborer_fee_sts = 'Baru' and 
+			// 									date(laborer_fee_date) = '".$date."'");
+
+			// SELECT DATA BERDASARKAN TGL BAYAR
+			$query 	= mysql_query("	select 	lf.weighing_id, 
+											B001,
+											B002,
+											B003,
+											B004,
+											B005,
+											B006,
+											B007,
+											B008,
+											B009,
+											B010,
+											B011,
+											B012,
+											B013,
+											B014,
+											B015,
+											S001,
+											S002,
+											S003,
+											S004,
+											S005,
+											S006,
+											S007,
+											S008,
+											S009,
+											S010,
+											S011,
+											S012,
+											S013,
+											S014,
+											S015, 						
+											M01, 
+											M02, 
+											M03,
+											M04 
+									from 	laborer_fee lf
+									JOIN 	weighing_mitra wm ON wm.weighing_id = lf.weighing_id
+									where 	laborer_fee_sts = 'Baru' and date(date_pay) = '".$date."'");
 					
 			$no 	= 1;
 			$total1	= 0;
@@ -114,10 +156,11 @@
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['S013']); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['S014']); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['S015']); ?></td>
-			<!-- <td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['M01']); ?></td>
+			
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['M01']); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['M02']); ?></td>
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['M03']); ?></td>
-			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['M04']); ?></td> -->
+			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['M04']); ?></td>
 		</tr>
 		<?php
 				$no++;
@@ -153,10 +196,10 @@
 				$S014 = $S014 + $r['S014'];
 				$S015 = $S015 + $r['S015'];
 
-				// $M01 = $M01 + $r['M01'];
-				// $M02 = $M02 + $r['M02'];
-				// $M03 = $M03 + $r['M03'];
-				// $M04 = $M04 + $r['M04'];
+				$M01 = $M01 + $r['M01'];
+				$M02 = $M02 + $r['M02'];
+				$M03 = $M03 + $r['M03'];
+				$M04 = $M04 + $r['M04'];
 			} 
 			$total1 = 	$B001+
 						$B002+
@@ -187,11 +230,12 @@
 						$S012+
 						$S013+
 						$S014+
-						$S015;
-						// $M01+
-						// $M02+
-						// $M03+
-						// $M04;
+						$S015+
+
+						$M01+
+						$M02+
+						$M03+
+						$M04;
 		?>
 		<tr>
 			<td style="text-align: right;border: solid 1px black;" colspan="2"><b>Total </b></td>
@@ -225,10 +269,10 @@
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($S013); ?></td>
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($S014); ?></td>
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($S015); ?></td>
-			<!-- <td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($M01); ?></td>
+			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($M01); ?></td>
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($M02); ?></td>
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($M03); ?></td>
-			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($M04); ?></td> -->
+			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($M04); ?></td>
 		</tr>
 		<tr>
 			<td style="text-align: right;border: solid 1px black;" colspan="30"><b>Total Dibagi </b></td>

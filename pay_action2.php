@@ -73,11 +73,11 @@
 		//cek jika selisih uang diterima -+ 1000
 		if(($diff1>=0&&$diff1<=1000)||($diff2>=0&&$diff2<=1000)){
 			//update status pembayaran
-			if($total==0){
-				echo "<script>window.alert('Data Tampungan KO Sedang Kosong');
-				window.history.back()</script>";
-				exit();
-			}
+			// if($total==0){
+			// 	echo "<script>window.alert('Data Tampungan KO Sedang Kosong');
+			// 	window.history.back()</script>";
+			// 	exit();
+			// }
 			$update = mysql_query("update ko set ko_status = 'Acc', km_id = '".$km_id."' where cashier_id = '".$cashier."' and ko_status = 'Diterima'");
 			if($update){
 				$insert = mysql_query("	insert into km (km_id, 
