@@ -9,11 +9,12 @@
 		$headScript=file_get_contents("headScript.html");
 		return $headScript;
 	}
-	$admin 		= executeScalar("select checker_name from checker where checker_code = '".$_SESSION['checker']."'");
-	$id			= $_GET['id'];
-	$edit		= mysql_query("select * from weighing where weighing_id = '".$id."'");
-	$pdg 		= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
-	$jenis		= mb_substr($pdg, 0, 1, 'utf-8');
+	$admin 			= executeScalar("select checker_name from checker where checker_code = '".$_SESSION['checker']."'");
+	$id				= $_GET['id'];
+	$edit			= mysql_query("select * from weighing where weighing_id = '".$id."'");
+	$pdg 			= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
+	$jenis			= mb_substr($pdg, 0, 1, 'utf-8');
+	$kat_merchant 	= executeScalar("select kat_merchant from merchant where merchant_id = '".$pdg."'");
 
 	while ($r 	= mysql_fetch_array($edit)){
 		$merchant 		= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
@@ -223,13 +224,18 @@
 											</div>
 											<div class="form-group" style="padding:10px; margin-top:-10px; margin-left:5px;">
 												<?php
-													//Cetak Pecah Nota
-													if($status=='Lunas'||$status=='Batal'||$status=='Masuk'||$status2=='Digabung'||$status2=='Dipecah'||$status2=='Pecahan'){
+													if ($kat_merchant != 'Tetap') {
 														echo '';
+													} else {
+														//Cetak Pecah Nota
+														if($status=='Lunas'||$status=='Batal'||$status=='Masuk'||$status2=='Digabung'||$status2=='Dipecah'||$status2=='Pecahan'){
+															echo '';
+														}
+														else{
+															echo '<button onclick="pecahNota()" type="button" class="btn btn-block btn-outline btn-success">Pecah Nota</button>';
+														}
 													}
-													else{
-														echo '<button onclick="pecahNota()" type="button" class="btn btn-block btn-outline btn-success">Pecah Nota</button>';
-													}
+													
 													$s 		= $r['date_check'];
 													$dt		= new DateTime($s);
 													$daten 	= $dt->format('Y-m-d');
@@ -243,9 +249,13 @@
 														echo '';
 													}
 													elseif($exist>1){
-														if ($jenis != 'B') {
-															echo '<br /><button onclick="merge()" type="button" class="btn btn-block btn-outline btn-success">Gabung Nota</button>';
-														}
+														if ($kat_merchant != 'Tetap') {
+															echo '';
+														} else {
+															if ($jenis != 'B') {
+																echo '<br /><button onclick="merge()" type="button" class="btn btn-block btn-outline btn-success">Gabung Nota</button>';
+															}
+														}	
 													}
 													else{
 														//echo $daten;
@@ -315,9 +325,17 @@
 										</div>
 										<div class="col-md-3">
 											<div class="form-group" style="padding:10px; margin-top:-10px;">
-												<label>Status Mitra</label>
-												<input id="laborer" name="laborer" value="<?php echo $r['laborer_sts']; ?>" type="text" class="form-control" disabled />
-											</div>
+												<div class="row">
+													<div class="col-md-6" >
+														<label>Status Pedagang</label>
+														<input type="text" class="form-control" value="<?php echo $kat_merchant ?>" disabled>  
+													</div>
+													<div class="col-md-6">
+														<label>Status Mitra</label>
+														<input id="laborer" name="laborer" value="<?php echo $r['laborer_sts']; ?>" type="text" class="form-control" disabled />
+													</div>
+												</div>
+											</div>											
 											<div class="form-group" style="padding:10px; margin-top:-10px;">
 												<label>Berat Bersih (Netto)</label>
 												<input type="text" class="form-control" id="netto" name="netto" value="<?php echo $r['netto']; ?> Kg" disabled />
@@ -383,13 +401,17 @@
 											</div>
 											<div class="form-group" style="padding:10px; margin-right:5px; margin-top:-10px;">
 												<?php 
-													if($status=='Lunas'||$status=='Batal'||$status2=='Digabung'||$status2=='Dipecah'){
-														echo '';//Input Berat NonKomoditi
-													}
-													else{
-														echo '<button onclick="nonkomoditi()" type="button" class="btn btn-block btn-outline btn-info">
-															Input Berat NonKomoditi
-														</button>';
+													if ($kat_merchant != 'Tetap') {
+														echo '';
+													} else {
+														if($status=='Lunas'||$status=='Batal'||$status2=='Digabung'||$status2=='Dipecah'){
+															echo '';//Input Berat NonKomoditi
+														}
+														else{
+															echo '<button onclick="nonkomoditi()" type="button" class="btn btn-block btn-outline btn-info">
+																Input Berat NonKomoditi
+															</button>';
+														}
 													}
 												?>
 											</div>
