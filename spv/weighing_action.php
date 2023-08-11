@@ -222,6 +222,25 @@
 						<script>window.history.back()</script>";
 						exit();
 				}
+
+				$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
+				$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+				if ($kat_merchant == 'Trial Lapak') { 
+					$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
+					if ($jml_kehadiran_hari_ini > 1) {
+						$total1 = 0;
+					}
+				}
+
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+				if ($kat_merchant == 'Trial Lapak Jalan') { 
+					$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
+					if ($jml_kehadiran_hari_ini > 1) {
+						$total1 = 0;
+					}
+				}
+
 				//update status = batal
 				elseif($in==$out){
 					
@@ -499,6 +518,25 @@
 				}
 			}
 		}
+
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
+		$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 = 0;
+			}
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 = 0;
+			}
+		}
+
 		//update weighing
 		$update1 = mysql_query("update weighing 
 								set nopol 				= '".$_POST['nopol']."',
@@ -600,6 +638,23 @@
 				echo "<script>window.alert('Data Gagal Diperbarui');
 				window.history.back()</script>";
 				exit();
+			}
+		}
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
+		$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 = 0;
+			}
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 = 0;
 			}
 		}
 		$update1 = mysql_query("update weighing set nopol 		= '".$_POST['nopol']."',
@@ -741,6 +796,24 @@
 				$total1 = $tarifmin;
 			}
 			
+			$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$merchant."'");
+			$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$merchant."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+			// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+			if ($kat_merchant == 'Trial Lapak') { 
+				$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
+				if ($jml_kehadiran_hari_ini > 1) {
+					$total1 = 0;
+				}
+			}
+
+			// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+			if ($kat_merchant == 'Trial Lapak Jalan') { 
+				$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
+				if ($jml_kehadiran_hari_ini > 1) {
+					$total1 = 0;
+				}
+			}
+
 			$update2 = mysql_query("update weighing 
 									set rafaksi				= '".$rafa."',
 										weight_in			= '".$bm."',
@@ -871,6 +944,30 @@
 		}else{
 			$cost_tonase = $tarifmin;
 		}
+
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$merchant."'");
+		$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$merchant."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$total1 		= executeScalar("select pay_total from payment where pay_id = '15'");
+			$cost_tonase 	= executeScalar("select pay_total from payment where pay_id = '15'");
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 		= 0;
+				$cost_tonase 	= 0;
+			}
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$total1 		= executeScalar("select pay_total from payment where pay_id = '16'");
+			$cost_tonase 	= executeScalar("select pay_total from payment where pay_id = '16'");
+
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 		= 0;
+				$cost_tonase 	= 0;
+			}
+		}
+
 		if($netto==0){
 			$update = mysql_query("	update 	weighing 
 									set 	rafaksi				= '".$rafa."',
@@ -993,6 +1090,29 @@
 			$cost_tonase = $tarifmin;
 		}
 		
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$merchant."'");
+		$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$merchant."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$total1 		= executeScalar("select pay_total from payment where pay_id = '15'");
+			$cost_tonase 	= executeScalar("select pay_total from payment where pay_id = '15'");
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 		= 0;
+				$cost_tonase 	= 0;
+			}
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$total1 		= executeScalar("select pay_total from payment where pay_id = '16'");
+			$cost_tonase 	= executeScalar("select pay_total from payment where pay_id = '16'");
+
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 		= 0;
+				$cost_tonase 	= 0;
+			}
+		}
+
 		$update = mysql_query("	update 	weighing 
 								set 	netto				= '".$netto."',
 										cost_tonase			= '".$cost_tonase."',
@@ -1425,6 +1545,29 @@
 		$ceksts 	= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
 		$cekweight	= executeScalar("select weight_in from weighing where weighing_id = '".$id."'");
 		
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
+		$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$total1 		= executeScalar("select pay_total from payment where pay_id = '15'");
+			$cost_tonase 	= executeScalar("select pay_total from payment where pay_id = '15'");
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 		= 0;
+				$cost_tonase 	= 0;
+			}
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$total1 		= executeScalar("select pay_total from payment where pay_id = '16'");
+			$cost_tonase 	= executeScalar("select pay_total from payment where pay_id = '16'");
+
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 		= 0;
+				$cost_tonase 	= 0;
+			}
+		}
+
 		$update1 	= mysql_query("	update 	weighing 
 									set 	nopol 				= '".$_POST['nopol']."',
 											noncommodity		= '".$nc."',
@@ -1790,6 +1933,30 @@
 									where 	merchant_id 	= '".$merchant."' and
 											date_in 		= '".$date_now."' and 
 											weighing_sts 	= 'Keluar'");
+
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$merchant."'");
+		$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$merchant."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$total1 		= executeScalar("select pay_total from payment where pay_id = '15'");
+			$cost_tonase 	= executeScalar("select pay_total from payment where pay_id = '15'");
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 		= 0;
+				$cost_tonase 	= 0;
+			}
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$total1 		= executeScalar("select pay_total from payment where pay_id = '16'");
+			$cost_tonase 	= executeScalar("select pay_total from payment where pay_id = '16'");
+
+			if ($jml_kehadiran_hari_ini > 1) {
+				$total1 		= 0;
+				$cost_tonase 	= 0;
+			}
+		}									
+
 		//Membuat data transaksi timbangan baru
 		$insert = mysql_query("	INSERT INTO `weighing` (`weighing_id`, 
 														`nopol`, 
