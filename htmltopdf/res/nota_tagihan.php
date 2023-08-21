@@ -32,6 +32,7 @@
 			$date_out	= date("d-m-Y", strtotime($r['date_out']));
 			$date_cek	= date("d-m-Y H:i", strtotime($r['date_check']));
 			$nc_weight	= $r['noncommodity'];
+			$kat_merchant = executeScalar("select kat_merchant from merchant where merchant_id = '".$r['merchant_id']."'");
 			
 			// Periksa apa kah termasuk komoditi khusus
 			$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$r['goods_id']."' AND status_aktif = '1'");
@@ -163,7 +164,7 @@
 		<tr><td>Berat NonKomoditi	</td><td> : <?php echo $nc_weight; ?></td></tr>
 		<tr><td>Rafaksi (Potongan) 	</td><td> : <?php echo $r['rafaksi']; ?></td></tr>
 		<tr><td>Berat Bersih		</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_no($r['netto']); ?></b></td></tr>
-		<tr><td>Tarif Tonase  		</td><td> : <?php if ($biayatonase <= $tarifminim && $jenis != 'B') { ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($tarifminim); ?></b><?php }else{ echo "Rp. ".intval($tarif2)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($cost_tonase); ?></b><?php } ?></td></tr>
+		<tr><td>Tarif Tonase  		</td><td> : <?php if ($biayatonase <= $tarifminim && $jenis != 'B' && $kat_merchant == 'Tetap') { ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($tarifminim); ?></b><?php }else{ echo "Rp. ".intval($tarif2)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($cost_tonase); ?></b><?php } ?></td></tr>
 		<!-- <tr><td>Tarif Bongkar  		</td><td> : <?php if ($r['laborer_sts'] != "Ya") { echo "-"; }else{ echo "Rp. ".intval($tarif1)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b><?php } ?></td></tr> -->
 		<!-- <tr><td>Total Biaya Tonase 	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayatonase); ?></b></td></tr>
 		<tr><td>Total Biaya Mitra	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b></td></tr> -->
