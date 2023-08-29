@@ -401,11 +401,9 @@
 											</div>
 											<div class="form-group" style="padding:10px; margin-right:5px; margin-top:-10px;">
 												<?php 
-													if ($kat_merchant != 'Tetap') {
-														echo '<button onclick="nonkomoditi()" type="button" class="btn btn-block btn-outline btn-info">
-																Input Berat NonKomoditi
-															</button>';
-													} else {
+													// if ($kat_merchant != 'Tetap') {
+													// 	echo '';
+													// } else {
 														if($status=='Lunas'||$status=='Batal'||$status2=='Digabung'||$status2=='Dipecah'){
 															echo '';//Input Berat NonKomoditi
 														}
@@ -414,7 +412,7 @@
 																Input Berat NonKomoditi
 															</button>';
 														}
-													}
+													//}
 												?>
 											</div>
 										</div>
