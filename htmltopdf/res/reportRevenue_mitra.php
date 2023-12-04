@@ -1,10 +1,11 @@
 <?php
 	include "../connection.php";
-	$date1		= $_POST['date1'];
-	$date2		= $_POST['date2'];
-	$commodity	= $_POST['commodity'];
-	$date 		= date("d-m-Y");
-	$grandtot	= 0;
+	$date1			= $_POST['date1'];
+	$date2			= $_POST['date2'];
+	$commodity		= $_POST['commodity'];
+	$date 			= date("d-m-Y");
+	$grandtot		= 0;
+	$totaltonase	= 0;
 ?>
 <page backtop="8mm" backbottom="10mm" backleft="5mm" backright="5mm">
 	<page_header>
@@ -115,12 +116,14 @@
 			<td style="text-align: right;border: solid 1px black;"><?php echo format_no($r['cost_bayar']); ?></td>
 		</tr>
 		<?php 
-			$grandtot	= $grandtot+$r['cost_bayar'];
+			$grandtot		= $grandtot+$r['cost_bayar'];
+			$totaltonase	= $totaltonase+$r['netto'];
 			$no++;
 			}
 		?>
 		<tr>
-			<td style="text-align: right;border: solid 1px black;" colspan="7"><b>Total </b></td>
+			<td style="text-align: right;border: solid 1px black;" colspan="6"><b>Total </b></td>
+			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($totaltonase); ?></td>
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($grandtot); ?></td>
 		</tr>
 	</table>
