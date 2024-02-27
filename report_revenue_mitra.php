@@ -85,7 +85,7 @@
 						</li>
 						<li class="active"><a href="#"><i class="fa fa-clipboard fa-fw"></i> Laporan<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Transaksi Timbang<span class="fa arrow"></span></a>
+								<!-- <li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Transaksi Timbang<span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
 										<li><a href="report_transaction.php"><i class="fa fa-line-chart fa-fw"></i> Transaksi Timbang</a></li>
 										<li><a href="report_outstanding.php"><i class="fa fa-clock-o fa-fw"></i> Transaksi Outstanding</a></li>
@@ -107,7 +107,7 @@
 										<li><a href="report_revenue_unpaid.php"><i class="fa fa-clock-o fa-fw"></i> Belum Terbayar</a></li>
 										<li><a href="report_revenue_unpaid_merchant.php"><i class="fa fa-clock-o fa-fw"></i> Belum Terbayar Per Pedagang</a></li>
 									</ul>
-								</li>
+								</li> -->
 								<li class="active"><a href="#"><i class="fa fa-line-chart fa-fw"></i> Pendapatan Mitra<span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
 										<li><a class="active" href="report_revenue_mitra.php"><i class="fa fa-money fa-fw"></i> Terbayar</a></li> 
@@ -124,12 +124,12 @@
 										<li><a href="report_outstanding_ko_mitra.php"><i class="fa fa-clock-o fa-fw"></i> Outstanding Mitra</a></li>
 									</ul>
 								</li>
-								<li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Mitra <span class="fa arrow"></span></a>
+								<!-- <li><a href="#"><i class="fa fa-line-chart fa-fw"></i> Mitra <span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
 										<li><a href="report_mitra.php"><i class="fa fa-line-chart fa-fw"></i> Mitra Harian <span class="fa arrow"></span></a></li>
 										<li><a href="report_mitra_year.php"><i class="fa fa-line-chart fa-fw"></i> Mitra Tahunan <span class="fa arrow"></span></a></li>
 									</ul>
-								</li>
+								</li> -->
 							</ul>
 						</li>
                     </ul>
