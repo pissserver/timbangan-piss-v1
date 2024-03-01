@@ -255,7 +255,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
 	<script type="text/javascript">
-    	$(".chzn-select").chosen({"search_contains": true,"width":"100%", "no_results_text":"Nothing Found..!"});
+    	$(".chzn-select").chosen({"search_contains": true,"width":"100%", "no_results_text":"Hasil tidak ditemukan !"});
     </script>
 </body>
 </html>

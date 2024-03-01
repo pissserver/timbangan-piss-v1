@@ -225,7 +225,7 @@
 			window.location=('index.php')</script>";
 			exit();
 		}else{
-			$nopol 	= 'XXXXX';
+			$nopol 	= 'CENTENG';
 			//tahun 2018
 			$year 	= date("y");
 			$year2 	= date("Y");
@@ -253,6 +253,8 @@
 															`time_in`, 
 															`time_out`, 
 															`laborer_sts`, 
+															`cost_tonase`, 
+															`cost_real_tonase`,
 															`cost`, 
 															`cost2`, 
 															`weighing_sts`, 
@@ -270,7 +272,9 @@
 											'".$date_now."', 
 											'".$time_now."', 
 											'".$time_now."', 
-											'Tidak', 
+											'Tidak',
+											'".$tarifretail."', 
+											'".$tarifretail."', 
 											'".$tarifretail."', 
 											'".$tarifretail."', 
 											'Keluar', 
