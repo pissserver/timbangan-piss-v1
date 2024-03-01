@@ -825,23 +825,26 @@
 		//jika status pembayaran berubah
 		$ceksts 	= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
 		$cekweight	= executeScalar("select weight_in from weighing where weighing_id = '".$id."'");
+		$nopol		= executeScalar("select nopol from weighing where weighing_id = '".$id."'");
 		
-		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
-		if ($kat_merchant == 'Trial Lapak') { 
-			$trftonase = executeScalar("select pay_total from payment where pay_id = '15'");
-			if ($jml_kehadiran_hari_ini > 1) {
-				$trftonase = 0;
+		if ($nopol != 'CENTENG') {
+			// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+			if ($kat_merchant == 'Trial Lapak') { 
+				$trftonase = executeScalar("select pay_total from payment where pay_id = '15'");
+				if ($jml_kehadiran_hari_ini > 1) {
+					$trftonase = 0;
+				}
+			}
+
+			// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+			if ($kat_merchant == 'Trial Lapak Jalan') { 
+				$trftonase = executeScalar("select pay_total from payment where pay_id = '16'");
+				if ($jml_kehadiran_hari_ini > 1) {
+					$trftonase = 0;
+				}
 			}
 		}
-
-		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
-		if ($kat_merchant == 'Trial Lapak Jalan') { 
-			$trftonase = executeScalar("select pay_total from payment where pay_id = '16'");
-			if ($jml_kehadiran_hari_ini > 1) {
-				$trftonase = 0;
-			}
-		}
-
+		
 		//update Table weighing
 		$update1 = mysql_query("update weighing 
 								set nopol 				= '".$_POST['nopol']."',

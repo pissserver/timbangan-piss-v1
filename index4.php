@@ -21,6 +21,8 @@
     <meta name="author" content="">
 	<link rel="icon" href="../images/icon.png">
     <link rel="shortcut icon" href="../images/icon.png" />
+	<!-- CSS Search dropdown -->
+	<link href="css/plugins/chosen/chosen.css" rel="stylesheet" />
     <title>Retail | PISS</title>
 	<?php echo headScript(); ?>
 </head>
@@ -173,7 +175,7 @@
 									<div class="col-md-4">
 										<div class="form-group" style="padding:10px; margin-top:-10px;">
 											<label>Barang</label>
-											<select class="form-control" name="goods" id="goods" required>
+											<select class="form-control chzn-select" name="goods" id="goods" required>
 												<option value="">- Pilih Barang -</option>
 												<?php 
 													$sql2 		= mysql_query("select goods_id, goods_name from goods order by goods_name");
@@ -254,6 +256,7 @@
     <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
+	<script src="js/plugins/chosen/chosen.jquery.js"></script>
 	<script type="text/javascript">
     	$(".chzn-select").chosen({"search_contains": true,"width":"100%", "no_results_text":"Hasil tidak ditemukan !"});
     </script>
