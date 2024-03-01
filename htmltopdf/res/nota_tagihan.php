@@ -33,6 +33,7 @@
 			$date_cek	= date("d-m-Y H:i", strtotime($r['date_check']));
 			$nc_weight	= $r['noncommodity'];
 			$kat_merchant = executeScalar("select kat_merchant from merchant where merchant_id = '".$r['merchant_id']."'");
+			$tarif_min		= executeScalar("select pay_total from payment where pay_id = 1");
 			
 			// Periksa apa kah termasuk komoditi khusus
 			$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$r['goods_id']."' AND status_aktif = '1'");
@@ -82,6 +83,21 @@
 			elseif($jenis=='S'&&$r['laborer_sts']=='Ya'){
 				$tarif1	 		= executeScalar("select pay_total from payment where pay_id = '3'");
 				$tarif2	 		= executeScalar("select pay_total from payment where pay_id = '2'");
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+				if ($kat_merchant == 'Trial Lapak') { 
+					$tarif2 = executeScalar("select pay_total from payment where pay_id = '15'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$tarif2 = 0;
+					// }
+				}
+
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+				if ($kat_merchant == 'Trial Lapak Jalan') { 
+					$tarif2 = executeScalar("select pay_total from payment where pay_id = '16'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$tarif2 = 0;
+					// }
+				}
 				$tarif			= intval($tarif1+$tarif2);
 				$biayatonase 	= $r['netto'] * $tarif2;
 				$biayamitra 	= $r['netto'] * $tarif1;
@@ -92,6 +108,21 @@
 			}
 			elseif($jenis=='S'&&$r['laborer_sts']=='Tidak'){
 				$tarif2 		= executeScalar("select pay_total from payment where pay_id = '2'");
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+				if ($kat_merchant == 'Trial Lapak') { 
+					$tarif2 = executeScalar("select pay_total from payment where pay_id = '15'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$tarif2 = 0;
+					// }
+				}
+
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+				if ($kat_merchant == 'Trial Lapak Jalan') { 
+					$tarif2 = executeScalar("select pay_total from payment where pay_id = '16'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$tarif2 = 0;
+					// }
+				}
 				$tarif1 		= 0;
 				$biayatonase 	= $r['netto'] * $tarif2;
 				$biayamitra 	= $r['netto'] * $tarif1;
@@ -163,12 +194,11 @@
 		<tr><td>Berat Keluar		</td><td> : <?php echo format_no($r['weight_out']); ?></td></tr>
 		<tr><td>Berat NonKomoditi	</td><td> : <?php echo $nc_weight; ?></td></tr>
 		<tr><td>Rafaksi (Potongan) 	</td><td> : <?php echo $r['rafaksi']; ?></td></tr>
-		<?php
-			if ($biayatonase > $tarifminim) {
-				echo"<tr><td>Berat Bersih		</td><td> : <b style='font-size: 14px; font-weight: bold;'>";echo format_no($r['netto']);echo"</b></td></tr>";
-			}
-		?>
-		<tr><td>Tarif Tonase  		</td><td> : <?php if ($biayatonase <= $tarifminim && $jenis != 'B') { ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($cost_tonase); ?></b><?php }else{ echo "Rp. ".intval($tarif2)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($cost_tonase); ?></b><?php } ?></td></tr>
+		<tr><td>Berat Bersih		</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_no($r['netto']);?></b></td></tr>
+		<tr><td><?php if ($cost_tonase <= $tarif_min) {
+			echo "Tarif Tonase Dibawah 200 Kg";} else {
+				echo "Tarif Tonase";
+			}?>  		</td><td> : <?php if ($biayatonase <= $tarifminim && $jenis != 'B') { ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($cost_tonase); ?></b><?php }else{ echo "Rp. ".intval($tarif2)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($cost_tonase); ?></b><?php } ?></td></tr>
 		<!-- <tr><td>Tarif Bongkar  		</td><td> : <?php if ($r['laborer_sts'] != "Ya") { echo "-"; }else{ echo "Rp. ".intval($tarif1)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b><?php } ?></td></tr> -->
 		<!-- <tr><td>Total Biaya Tonase 	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayatonase); ?></b></td></tr>
 		<tr><td>Total Biaya Mitra	</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b></td></tr> -->
