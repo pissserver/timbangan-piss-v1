@@ -249,13 +249,13 @@
 														echo '';
 													}
 													elseif($exist>1){
-														if ($kat_merchant != 'Tetap') {
-															echo '';
-														} else {
+														// if ($kat_merchant != 'Tetap') {
+														// 	echo '';
+														// } else {
 															if ($jenis != 'B') {
 																echo '<br /><button onclick="merge()" type="button" class="btn btn-block btn-outline btn-success">Gabung Nota</button>';
 															}
-														}	
+														// }	
 													}
 													else{
 														//echo $daten;
