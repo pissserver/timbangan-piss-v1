@@ -196,7 +196,7 @@
 		<tr><td>Rafaksi (Potongan) 	</td><td> : <?php echo $r['rafaksi']; ?></td></tr>
 		<tr><td>Berat Bersih		</td><td> : <b style="font-size: 14px; font-weight: bold;"><?php echo format_no($r['netto']);?></b></td></tr>
 		<tr><td><?php if ($cost_tonase <= $tarif_min) {
-			echo "Tarif Tonase Dibawah 200 Kg";} else {
+			echo "Tarif Tonase Dibawah 401 Kg";} else {
 				echo "Tarif Tonase";
 			}?>  		</td><td> : <?php if ($biayatonase <= $tarifminim && $jenis != 'B') { ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($cost_tonase); ?></b><?php }else{ echo "Rp. ".intval($tarif2)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($cost_tonase); ?></b><?php } ?></td></tr>
 		<!-- <tr><td>Tarif Bongkar  		</td><td> : <?php if ($r['laborer_sts'] != "Ya") { echo "-"; }else{ echo "Rp. ".intval($tarif1)." /kg = "; ?><b style="font-size: 14px; font-weight: bold;"><?php echo format_rupiah($biayamitra); ?></b><?php } ?></td></tr> -->
