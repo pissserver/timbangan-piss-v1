@@ -837,6 +837,15 @@
 				$trftonase = $tarifmin;
 			}
 		}
+
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+			if ($jml_kehadiran_hari_ini > 1) {
+				$trftonase 		= 0;
+				$trfrealtonase 	= 0;
+				$total1			= 0;
+			}
+		}
 		
 		//jika status pembayaran berubah
 		$ceksts 	= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
