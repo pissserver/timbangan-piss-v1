@@ -713,6 +713,22 @@
 		elseif($jenis=='L'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'"); // Tonase Lainnya
 			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'"); // Mitra Lainnya
+
+			// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+			if ($kat_merchant == 'Trial Lapak') { 
+				$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+				// if ($jml_kehadiran_hari_ini > 1) {
+				// 	$tonase1 = 0;
+				// }
+			}
+
+			// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+			if ($kat_merchant == 'Trial Lapak Jalan') { 
+				$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+				// if ($jml_kehadiran_hari_ini > 1) {
+				// 	$tonase1 = 0;
+				// }
+			}
 		}
 
 		if ($cekseasonalcommodity > 0) { 
