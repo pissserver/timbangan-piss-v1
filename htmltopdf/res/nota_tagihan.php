@@ -134,6 +134,21 @@
 			elseif($jenis=='L'&&$r['laborer_sts']=='Ya'){
 				$tarif1	 	= executeScalar("select pay_total from payment where pay_id = '3'");
 				$tarif2	 	= executeScalar("select pay_total from payment where pay_id = '2'");
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+				if ($kat_merchant == 'Trial Lapak') { 
+					$tarif2 = executeScalar("select pay_total from payment where pay_id = '15'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$tarif2 = 0;
+					// }
+				}
+
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+				if ($kat_merchant == 'Trial Lapak Jalan') { 
+					$tarif2 = executeScalar("select pay_total from payment where pay_id = '16'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$tarif2 = 0;
+					// }
+				}
 				$tarif		= intval($tarif1+$tarif2);
 				$biayatonase 	= $r['netto'] * $tarif2;
 				$biayamitra 	= $r['netto'] * $tarif1;
@@ -143,8 +158,23 @@
 				}
 			} 
 			elseif($jenis=='L'&&$r['laborer_sts']=='Tidak'){
-				$tarif2	 	= executeScalar("select pay_total from payment where pay_id = '2'");
+				$tarif2	 		= executeScalar("select pay_total from payment where pay_id = '2'");
 				$tarif1 		= 0;
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+				if ($kat_merchant == 'Trial Lapak') { 
+					$tarif2 = executeScalar("select pay_total from payment where pay_id = '15'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$tarif2 = 0;
+					// }
+				}
+
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+				if ($kat_merchant == 'Trial Lapak Jalan') { 
+					$tarif2 = executeScalar("select pay_total from payment where pay_id = '16'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$tarif2 = 0;
+					// }
+				}
 				$biayatonase 	= $r['netto'] * $tarif2;
 				$biayamitra 	= $r['netto'] * $tarif1;
 				$tarifminim	 	= executeScalar("select pay_total from payment where pay_id = '1'");
