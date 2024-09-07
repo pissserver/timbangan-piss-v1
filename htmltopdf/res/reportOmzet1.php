@@ -15,24 +15,25 @@
 			LAPORAN OMZET TONASE HARIAN PISS
 		</div>
     </page_header>
-	<table style="margin-bottom: 5px;font-size:10pt; width:250px; margin-left:-5px;" >
+	<table style="margin-bottom: 5px;font-size:10pt; width:250px; margin-left:-25px;" >
 		<tr>
 			<td style="width: 40%;">Tanggal Omzet</td>
 			<td style="width: 60%;">: <?php echo date("d-m-Y", strtotime($date1)); ?></td>
 		</tr>
 	</table>
 	<br />
-	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px; margin-left:-5px; font-size:8pt; width:1000px; margin-right:0px;" id="tableOmzetHarian">
+	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px; margin-left:-25px; font-size:8pt; width:1000px; margin-right:0px;" id="tableOmzetHarian">
 		<tr>
 			<th style="text-align: center;width: 3%; border: solid 1px black;">NO</th>
-			<th style="text-align: center;width: 7%; border: solid 1px black;">TGL TAGIHAN</th>
+			<th style="text-align: center;width: 6%; border: solid 1px black;">TGL TAGIHAN</th>
 			<th style="text-align: center;width: 8%;border: solid 1px black;">NOTA TAGIHAN</th>
-			<th style="text-align: center;width: 7%;border: solid 1px black;">NOPOL</th>
-			<th style="text-align: center;width: 15%;border: solid 1px black;">PEDAGANG</th>
-			<th style="text-align: center;width: 9%;border: solid 1px black;">KOMODITI</th>
-			<th style="text-align: center;width: 6%;border: solid 1px black;">STATUS</th>
-			<th style="text-align: center;width: 6%;border: solid 1px black;">TONASE</th>
-			<th style="text-align: center;width: 7%;border: solid 1px black;">TOTAL</th>
+			<th style="text-align: center;width: 6%;border: solid 1px black;">NOPOL</th>
+			<th style="text-align: center;width: 10%;border: solid 1px black;">PEDAGANG</th>
+			<th style="text-align: center;width: 7%;border: solid 1px black;">JENIS</th>
+			<th style="text-align: center;width: 5%;border: solid 1px black;">KOMODITI</th>
+			<th style="text-align: center;width: 4%;border: solid 1px black;">STS</th>
+			<th style="text-align: center;width: 5%;border: solid 1px black;">TONASE</th>
+			<th style="text-align: center;width: 6%;border: solid 1px black;">TOTAL</th>
 		</tr>
 		<?php
 			if($commodity=='Semua'){
@@ -75,9 +76,10 @@
 			
 			$no 	= 1;
 			while($r= mysql_fetch_array($query)){
-				$name		= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
-				$goods		= executeScalar("select goods_name from goods where goods_id = '".$r['goods_id']."'");
-				//$wid 		= sprintf("%07d", $r['weighing_id']);
+				$name			= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
+				$kat_merchant	= executeScalar("select kat_merchant from merchant where merchant_id = '".$r['merchant_id']."'");
+				$goods			= executeScalar("select goods_name from goods where goods_id = '".$r['goods_id']."'");
+				//$wid 			= sprintf("%07d", $r['weighing_id']);
 				//$year1 		= executeScalar("select date_format(date_in, '%y') from weighing where weighing_id = '".$r['weighing_id']."'");
 		?>
 		<tr>
@@ -86,8 +88,9 @@
 			<td style="text-align: center;border: solid 1px black;"> <?php echo 'TG'.$r['weighing_id']; ?></td>
 			<td style="text-align: center;border: solid 1px black;"> <?php echo $r['nopol']; ?></td>
 			<td style="text-align: left;border: solid 1px black;"> <?php echo $name; ?></td>
+			<td style="text-align: left;border: solid 1px black;"> <?php echo $kat_merchant; ?></td>
 			<td style="text-align: left;border: solid 1px black;"> <?php echo $goods; ?></td>
-			<td style="text-align: left;border: solid 1px black;"> <?php echo $r['weighing_sts']; ?></td>
+			<td style="text-align: center;border: solid 1px black;"> <?php echo $r['weighing_sts']; ?></td>
 			<td style="text-align: right;border: solid 1px black;"> <?php echo format_no($r['netto']); ?></td>
 			<td style="text-align: right;border: solid 1px black;"> <?php echo format_no($r['cost_tonase']); ?></td>
 		</tr>
@@ -99,7 +102,7 @@
 			} 
 		?>
 		<tr>
-			<td style="text-align: right;border: solid 1px black;" colspan="7"><b>TOTAL </b></td>
+			<td style="text-align: center;border: solid 1px black;" colspan="8"><b>TOTAL </b></td>
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($netto); ?></td>
 			<td style="text-align: right;border: solid 1px black;font-weight:bold;"><?php echo format_no($cost); ?></td>
 		</tr>

@@ -153,13 +153,22 @@
 											<select class="form-control chzn-select" name="merchant" id="merchant" required>
 												<option value="">-- Pilih Pedagang --</option>
 												<?php 
-													$sql 	= mysql_query("select merchant_id, merchant_name, merchant_nick
-													from merchant where merchant_status = 'Aktif' and merchant_type != 'Buah' 
-													order by merchant_nick, merchant_name");
+													$sql 	= mysql_query("	select 	merchant_id, 
+																					merchant_name, 
+																					merchant_nick
+																			from 	merchant 
+																			where 	merchant_status = 'Aktif' and 
+																					merchant_type != 'Buah' 
+																			order by 	merchant_nick, 
+																						merchant_name");
 													while($d1 = mysql_fetch_array($sql)){
-														$lpk 	= executeScalar("select l.lapak_name from rent r, lapak l 
-														where r.lapak_id = l.lapak_id and r.merchant_id = '".$d1['merchant_id']."'
-														and r.rent_sts != 'Batal' and r.rent_sts2 != 'Pindah' limit 1");
+														$lpk 	= executeScalar("	select 	l.lapak_name 
+																					from 	rent r, 
+																							lapak l 
+																					where 	r.lapak_id = l.lapak_id and 
+																							r.merchant_id = '".$d1['merchant_id']."' and 
+																							r.rent_sts != 'Batal' and 
+																							r.rent_sts2 != 'Pindah' limit 1");
 														$nick	= $d1['merchant_nick'];
 														if($nick!=''){
 															$nick = $nick.' / ';
