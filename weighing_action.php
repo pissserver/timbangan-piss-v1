@@ -913,6 +913,8 @@
 		$trfbongkar 			= 0;
 		$trftonase 				= 0;
 		$commodity 				= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
+		$id_merchant 			= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$id_merchant."'");
 		$id_komoditi			= $commodity;
 		$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$id_komoditi."' AND status_aktif = '1'");
 		
@@ -943,6 +945,22 @@
 		elseif($jenis=='L'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$tonase1 = 0;
+			// }
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$tonase1 = 0;
+			// }
 		}
 
 		if ($cekseasonalcommodity > 0) { 
@@ -985,23 +1003,24 @@
 		$ada	= executeScalar("select count(weighing_id) from weighing_detail where weighing_id='".$id."'");
 		//Jika data nonkomoditi sudah Ada d database (maka update data)
 		if($ada>0){
-			$update = mysql_query("update weighing_detail set noncommodity1 = '".$_POST['weight1']."',
-															count1			= '".$_POST['count1']."',
-															noncommodity2	= '".$_POST['weight2']."',
-															count2			= '".$_POST['count2']."',
-															noncommodity3	= '".$_POST['weight3']."',
-															count3			= '".$_POST['count3']."',
-															noncommodity4	= '".$_POST['weight4']."',
-															count4			= '".$_POST['count4']."',
-															noncommodity5	= '".$_POST['weight5']."',
-															count5			= '".$_POST['count5']."',
-															noncommodity6	= '".$_POST['weight6']."',
-															count6			= '".$_POST['count6']."',
-															noncommodity7	= '".$_POST['weight7']."',
-															count7			= '".$_POST['count7']."',
-															noncommodity8	= '".$_POST['weight8']."',
-															count8			= '".$_POST['count8']."'
-														where weighing_id 	= '".$id."'");
+			$update = mysql_query("	update 	weighing_detail 
+									set 	noncommodity1 = '".$_POST['weight1']."',
+											count1			= '".$_POST['count1']."',
+											noncommodity2	= '".$_POST['weight2']."',
+											count2			= '".$_POST['count2']."',
+											noncommodity3	= '".$_POST['weight3']."',
+											count3			= '".$_POST['count3']."',
+											noncommodity4	= '".$_POST['weight4']."',
+											count4			= '".$_POST['count4']."',
+											noncommodity5	= '".$_POST['weight5']."',
+											count5			= '".$_POST['count5']."',
+											noncommodity6	= '".$_POST['weight6']."',
+											count6			= '".$_POST['count6']."',
+											noncommodity7	= '".$_POST['weight7']."',
+											count7			= '".$_POST['count7']."',
+											noncommodity8	= '".$_POST['weight8']."',
+											count8			= '".$_POST['count8']."'
+									where 	weighing_id 	= '".$id."'");
 			if($update){
 				//Jika nota telah dipecah
 				$sts = executeScalar("select weighing_sts2 from weighing where weighing_id = '".$id."'");
@@ -1030,24 +1049,30 @@
 					$total2	= $netto*$tonase1;
 				}
 				else{
-					$total1	= $netto*$tonase3;
-					$total2	= $netto*$tonase3;
+					$total1		= $netto*$tonase1;
+					$trfbongkar	= $netto*$tonase2;
+					$total2		= $netto*$tonase1;
 				}
 				
 				//menghitung netto & total bayar
 				//Jika total bayar dibawah 15.000, maka akan dikenakan tarin min (Rp 15.000)
-				if($total1>$tarifmin){
-					$total1 = $total1;
-				}
-				else{
-					$total1 = $tarifmin;
+				if($jenis != 'B'){
+					if($total1>$tarifmin){
+						$total1 = $total1;
+					}
+					else{
+						$total1 = $tarifmin;
+					}
 				}
 
-				$update2 = mysql_query("update weighing set noncommodity = '".$noncommodity."',
-															netto		= '".$netto."',
-															cost		= '".$total1."',
-															cost2		= '".$total2."'
-														where weighing_id = '".$id."'");
+				$update2 = mysql_query("update weighing set noncommodity 		= '".$noncommodity."',
+															netto				= '".$netto."',
+															cost_tonase			= '".$total1."',
+															cost_real_tonase	= '".$total2."',
+															cost_bongkar		= '".$trfbongkar."',
+															cost				= '".$total1."',
+															cost2				= '".$total2."'
+														where weighing_id 		= '".$id."'");
 				if($update2){
 					echo "<script>window.location=('check_edit.php?id=$id')</script>";
 					exit();
@@ -1067,15 +1092,40 @@
 		//Jika data nonkomoditi belum Ada d database (insert data)
 		else{
 			//simpan detail nonkomodity
-			$insert = mysql_query("INSERT INTO `weighing_detail` (`weighing_id`, `noncommodity1`, 
-			`count1`, `noncommodity2`, `count2`, `noncommodity3`, `count3`, `noncommodity4`, `count4`, 
-			`noncommodity5`, `count5`, `noncommodity6`, `count6`, `noncommodity7`, `count7`, 
-			`noncommodity8`, `count8`) 
-			VALUES ('".$id."', '".$_POST['weight1']."', '".$_POST['count1']."', '".$_POST['weight2']."', 
-			'".$_POST['count2']."', '".$_POST['weight3']."', '".$_POST['count3']."', '".$_POST['weight4']."', 
-			'".$_POST['count4']."', '".$_POST['weight5']."', '".$_POST['count5']."', '".$_POST['weight6']."', 
-			'".$_POST['count6']."', '".$_POST['weight7']."', '".$_POST['count7']."', '".$_POST['weight8']."', 
-			'".$_POST['count8']."')");
+			$insert = mysql_query("	INSERT INTO `weighing_detail` (	`weighing_id`, 
+																	`noncommodity1`, 
+																	`count1`, 
+																	`noncommodity2`, 
+																	`count2`, 
+																	`noncommodity3`, 
+																	`count3`, 
+																	`noncommodity4`, 
+																	`count4`, 
+																	`noncommodity5`, 
+																	`count5`, 
+																	`noncommodity6`, 
+																	`count6`, 
+																	`noncommodity7`, 
+																	`count7`, 
+																	`noncommodity8`, 
+																	`count8`) 
+									VALUES ('".$id."', 
+											'".$_POST['weight1']."', 
+											'".$_POST['count1']."', 
+											'".$_POST['weight2']."', 
+											'".$_POST['count2']."', 
+											'".$_POST['weight3']."', 
+											'".$_POST['count3']."', 
+											'".$_POST['weight4']."', 
+											'".$_POST['count4']."', 
+											'".$_POST['weight5']."', 
+											'".$_POST['count5']."', 
+											'".$_POST['weight6']."', 
+											'".$_POST['count6']."', 
+											'".$_POST['weight7']."', 
+											'".$_POST['count7']."', 
+											'".$_POST['weight8']."', 
+											'".$_POST['count8']."')");
 			
 			if($insert){//jika berhasil menyimpan detail nonkomodity
 				//Jika nota telah dipecah
@@ -1108,25 +1158,33 @@
 					$total2	= $netto*$tonase1;
 				}
 				else{
-					$total1	= $netto*$tonase3;
-					$total2	= $netto*$tonase3;
+					$total1		= $netto*$tonase1;
+					$trfbongkar	= $netto*$tonase2;
+					$total2		= $netto*$tonase1;
 				}
 				
 				//menghitung netto & total bayar
-				//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
-				if($total1>$tarifmin){
-					$total1 = $total1;
-				}
-				else{
-					$total1 = $tarifmin;
+				// Jika pedagang yg datang bukan pedagang buah maka ada pengecekan tarif min. 
+				if($jenis != 'B'){
+					//Jika total bayar dibawah tarif min, maka akan dikenakan tarif min
+					if($total1>$tarifmin){
+						$total1 = $total1;
+					}
+					else{
+						$total1 = $tarifmin;
+					}
 				}
 				
 				//Update Tabel detail timbangan
-				$update = mysql_query("update weighing set noncommodity = '".$noncommodity."',
-															netto		= '".$netto."',
-															cost		= '".$total1."',
-															cost2		= '".$total2."'
-													where weighing_id 	= '".$id."'");
+				$update = mysql_query("	update 	weighing 
+										set 	noncommodity 		= '".$noncommodity."',
+												netto				= '".$netto."',
+												cost_tonase			= '".$total1."',
+												cost_real_tonase	= '".$total2."',
+												cost_bongkar		= '".$trfbongkar."',
+												cost				= '".$total1."',
+												cost2				= '".$total2."'
+										where 	weighing_id 		= '".$id."'");
 				if($update){//jika berhasil update
 					echo "<script>window.location=('check_edit.php?id=$id')</script>";
 					exit();
@@ -1175,7 +1233,7 @@
 		$total 					= executeScalar("select sum(cost2) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
 		$cost_bongkar 			= executeScalar("select sum(cost_bongkar) from weighing where merchant_id = '".$merchant."' and weighing_sts = 'Keluar' and DATE(date_check) = '".$daten."'");
 		$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$goods."'");
-
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$merchant."'");
 		//Jika Jenis pedangang sayur / buar harga berbeda
 		$jenis		= mb_substr($merchant, 0, 1, 'utf-8');
 		if($jenis=='B'){
@@ -1192,6 +1250,22 @@
 		elseif($jenis=='L'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$tonase1 = 0;
+			// }
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$tonase1 = 0;
+			// }
 		}
 
 		if ($cekseasonalcommodity > 0) { 
@@ -1275,13 +1349,14 @@
 			//Ambil weighing_id dr query yg dilakukan sebelumnya
 			$wid	= mysql_insert_id();
 			//update status transaksi yg telah digabung
-			$update = mysql_query("update weighing set weighing_sts 	= 'Batal',
-														weighing_sts2 	= 'Digabung',
-														reffer			= '".$wid."'
-													where merchant_id	= '".$merchant."' and
-														weighing_sts 	= 'Keluar' and
-														DATE(date_check)= '".$daten."' and
-														weighing_id		!= '".$wid."'");
+			$update = mysql_query("	update 	weighing 
+									set 	weighing_sts 		= 'Batal',
+											weighing_sts2 		= 'Digabung',
+											reffer				= '".$wid."'
+									where 	merchant_id			= '".$merchant."' and
+											weighing_sts 		= 'Keluar' and
+											DATE(date_check)	= '".$daten."' and
+											weighing_id			!= '".$wid."'");
 			//update laborer_fee_weighing_id nota yg digabung menjadi id nota yg gabungan/terbaru
 			// $update2 = mysql_query("update laborer_fee l, weighing w set l.weighing_id 	= '".$wid."'
 			// 														where l.weighing_id = w.weighing_id and
@@ -1355,16 +1430,16 @@
 				//Jika total berat yg dipecah sesuai dgn batas toleransi
 				if($nettotal>=$netto2&&$nettotal<=$netto){
 					//update status transaksi yg lama
-					$update = mysql_query("	update weighing 
-											set weighing_sts = 'Batal',
-												weighing_sts2 	= 'Dipecah'
-											where weighing_id	= '".$id."'");
+					$update = mysql_query("	update 	weighing 
+											set 	weighing_sts 	= 'Batal',
+													weighing_sts2 	= 'Dipecah'
+											where 	weighing_id		= '".$id."'");
 
 					//update status mitra nota yg dipecah menjadi batal
 					$update2 = mysql_query("update laborer_fee set laborer_fee_sts = 'Batal' where weighing_id = '".$id."'");
 					
 					// Update pembatalan weighing mitra karena nota dipecah
-					$update3 = mysql_query("	update weighing_mitra 
+					$update3 = mysql_query("update weighing_mitra 
 											set weighing_sts 	= 'Batal',
 												weighing_sts2 	= 'Dipecah'
 											where weighing_id	= '".$id."'");
@@ -1395,7 +1470,8 @@
 					$laborer 				= executeScalar("select laborer_sts from weighing where weighing_id = '".$id."'");
 					$rafa	 				= executeScalar("select rafaksi from weighing where weighing_id = '".$id."'");
 					$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$goods."'");
-					
+					$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$merchant."'");
+										
 					//Jika Jenis pedangang sayur / buar harga berbeda
 					$jenis			= mb_substr($merchant, 0, 1, 'utf-8');
 					if($jenis=='B'){
@@ -1412,6 +1488,22 @@
 					elseif($jenis=='L'){
 						$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 						$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
+					}
+
+					// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+					if ($kat_merchant == 'Trial Lapak') { 
+						$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+						// if ($jml_kehadiran_hari_ini > 1) {
+						// 	$tonase1 = 0;
+						// }
+					}
+
+					// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+					if ($kat_merchant == 'Trial Lapak Jalan') { 
+						$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+						// if ($jml_kehadiran_hari_ini > 1) {
+						// 	$tonase1 = 0;
+						// }
 					}
 					
 					if ($cekseasonalcommodity > 0) { 
@@ -1463,17 +1555,17 @@
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 						if ($kat_merchant == 'Trial Lapak') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '15'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 						if ($kat_merchant == 'Trial Lapak Jalan') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '16'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 						// =========================================================================================================================================================================================
 						
@@ -1531,17 +1623,17 @@
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 						if ($kat_merchant == 'Trial Lapak') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '15'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 						if ($kat_merchant == 'Trial Lapak Jalan') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '16'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 						// =========================================================================================================================================================================================
 
@@ -1597,17 +1689,17 @@
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 						if ($kat_merchant == 'Trial Lapak') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '15'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 						if ($kat_merchant == 'Trial Lapak Jalan') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '16'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 						// =========================================================================================================================================================================================
 
@@ -1663,17 +1755,17 @@
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 						if ($kat_merchant == 'Trial Lapak') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '15'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 						if ($kat_merchant == 'Trial Lapak Jalan') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '16'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 						// =========================================================================================================================================================================================
 
@@ -1728,17 +1820,17 @@
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 						if ($kat_merchant == 'Trial Lapak') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '15'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 						if ($kat_merchant == 'Trial Lapak Jalan') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '16'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 						// =========================================================================================================================================================================================
 
@@ -1794,17 +1886,17 @@
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 						if ($kat_merchant == 'Trial Lapak') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '15'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 						if ($kat_merchant == 'Trial Lapak Jalan') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '16'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 						// =========================================================================================================================================================================================
 
@@ -1860,17 +1952,17 @@
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 						if ($kat_merchant == 'Trial Lapak') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '15'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 						if ($kat_merchant == 'Trial Lapak Jalan') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '16'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 						// =========================================================================================================================================================================================
 
@@ -1926,17 +2018,17 @@
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 						if ($kat_merchant == 'Trial Lapak') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '15'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 						if ($kat_merchant == 'Trial Lapak Jalan') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '16'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 						// =========================================================================================================================================================================================
 
@@ -1992,17 +2084,17 @@
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 						if ($kat_merchant == 'Trial Lapak') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '15'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 						if ($kat_merchant == 'Trial Lapak Jalan') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '16'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 						// =========================================================================================================================================================================================
 
@@ -2058,17 +2150,17 @@
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 						if ($kat_merchant == 'Trial Lapak') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '15'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 
 						// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 						if ($kat_merchant == 'Trial Lapak Jalan') { 
 							$cost_tonase = executeScalar("select pay_total from payment where pay_id = '16'");
-							if ($jml_kehadiran_hari_ini > 1) {
-								$cost_tonase = 0;
-							}
+							// if ($jml_kehadiran_hari_ini > 1) {
+							// 	$cost_tonase = 0;
+							// }
 						}
 						// =========================================================================================================================================================================================
 						
