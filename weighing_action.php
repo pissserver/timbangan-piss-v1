@@ -348,7 +348,22 @@
 				$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 				$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 			}
-			
+
+			// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+			if ($kat_merchant == 'Trial Lapak') { 
+				$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+				// if ($jml_kehadiran_hari_ini > 1) {
+				// 	$total1 = 0;
+				// }
+			}
+
+			// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+			if ($kat_merchant == 'Trial Lapak Jalan') { 
+				$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+				// if ($jml_kehadiran_hari_ini > 1) {
+				// 	$total1 = 0;
+				// }
+			}
 			// Pengecekan apabila buah yang dimasukkan termasuk buah khusus
 			if ($cekseasonalcommodity > 0) { 
 				$tonase1 = executeScalar("select pay_total from payment where pay_id = '14'");
@@ -381,22 +396,6 @@
 				else{
 					$total1 = $tarifmin;
 				}	
-			}
-
-			// Pengecekan apabila pedagang merupakan pedagang trial di lapak
-			if ($kat_merchant == 'Trial Lapak') { 
-				$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
-				if ($jml_kehadiran_hari_ini > 1) {
-					$total1 = 0;
-				}
-			}
-
-			// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
-			if ($kat_merchant == 'Trial Lapak Jalan') { 
-				$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
-				if ($jml_kehadiran_hari_ini > 1) {
-					$total1 = 0;
-				}
 			}
 
 			//Jika Berat Keluar = 0
@@ -588,17 +587,17 @@
 			// Pengecekan apabila pedagang merupakan pedagang trial di lapak
 			if ($kat_merchant == 'Trial Lapak') { 
 				$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
-				if ($jml_kehadiran_hari_ini > 1) {
-					$total1 = 0;
-				}
+				// if ($jml_kehadiran_hari_ini > 1) {
+				// 	$total1 = 0;
+				// }
 			}
 
 			// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
 			if ($kat_merchant == 'Trial Lapak Jalan') { 
 				$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
-				if ($jml_kehadiran_hari_ini > 1) {
-					$total1 = 0;
-				}
+				// if ($jml_kehadiran_hari_ini > 1) {
+				// 	$total1 = 0;
+				// }
 			}
 
 			//Cek Berat Keluar
