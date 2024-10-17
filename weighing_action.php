@@ -2467,7 +2467,8 @@
 			$weight_out 		= executeScalar("select weight_out from weighing where weighing_id = '".$id."'");
 			$noncommodity_id 	= executeScalar("select noncommodity_id from weighing where weighing_id = '".$id."'");
 			$noncommodity 		= executeScalar("select noncommodity from weighing where weighing_id = '".$id."'");
-			$netto2 			= intval($weight_in) - intval($weight_out) - intval($noncommodity);
+			// $netto2 			= intval($weight_in) - intval($weight_out) - intval($noncommodity);
+			$netto2 			= executeScalar("select netto from weighing where weighing_id = '".$id."'");;
 			if ($stsnota == 'Pecahan') {
 				// Ambil netto dari nota tonase karena nota dipecah tidak memiliki weight in dan out
 				$netto2 		= executeScalar("select netto from weighing where weighing_id = '".$id."'");

@@ -131,7 +131,7 @@
 						$c 	= executeScalar("select date_check from weighing where weighing_id = '".$id."'");
 						$p2 = executeScalar("select p2 from weighing where weighing_id = '".$id."'");
 						if($c!=''||$c!=null||$p2!=null){
-							echo '';
+							// echo '<button type="submit" class="btn btn-primary btn-block">Simpan <i class="fa fa-angle-double-right fa-lg"></i></button>';
 						}else{
 							echo '<button type="submit" class="btn btn-primary btn-block">Simpan <i class="fa fa-angle-double-right fa-lg"></i></button>';
 						}
